@@ -11,6 +11,19 @@ public abstract class EntityBase: MonoBehaviour
 public abstract class Entity<T>: EntityBase where T : Entity<T>
 {
     public EntityStateManager<T> StateMachine { get; private set; }
+    public Vector3 Velocity { get; set; }
+
+    public Vector3 PlanarVelocity
+    {
+        get { return new Vector3(Velocity.x, 0, Velocity.z); }
+        set { Velocity = new Vector3(value.x, Velocity.y, value.y); }
+    }
+
+    public Vector3 VerticalVelocity
+    {
+        get { return new Vector3(0, Velocity.y, 0); }
+        set { Velocity = new Vector3(Velocity.x, value.y, Velocity.z); }
+    }
 
     protected virtual void Awake()
     {

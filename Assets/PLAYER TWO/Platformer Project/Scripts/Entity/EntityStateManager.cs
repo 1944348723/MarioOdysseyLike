@@ -51,7 +51,7 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
     }
 
     /// <summary>
-    /// 转换至具体状态示例
+    /// 转换至具体状态实例
     /// </summary>
     private void Change(EntityState<T> to)
     {
