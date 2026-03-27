@@ -41,6 +41,6 @@ public class PlayerInputSystem : MonoBehaviour
 
         float remapedLen = (len - deadZone) / (1 - deadZone);
         Vector2 dir = axis / len;
-        return dir * remapedLen;
+        return new Vector3(dir.x * remapedLen, 0, dir.y * remapedLen);
     }
 }
