@@ -17,12 +17,12 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
 
     protected abstract List<EntityState<T>> GetStatesList();
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         entity = GetComponent<T>();
     }
 
-    protected void Start()
+    protected virtual void Start()
     {
         InitializeStates();
     }

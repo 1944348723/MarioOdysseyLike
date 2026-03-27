@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class IdlePlayerState : PlayerState
 {
-    protected override void OnEnter(Player entity)
+    protected override void OnEnter(Player player)
     {
         throw new System.NotImplementedException();
     }
 
-    protected override void OnExit(Player entity)
+    protected override void OnExit(Player player)
     {
         throw new System.NotImplementedException();
     }
 
-    protected override void OnStep(Player entity)
+    protected override void OnStep(Player player)
     {
-        Debug.Log("IdlePlayerState: OnStep");
+        Debug.Log(player.Input.GetMovementDirection());
     }
 }

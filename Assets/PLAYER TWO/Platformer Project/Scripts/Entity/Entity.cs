@@ -12,12 +12,12 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
 {
     protected EntityStateManager<T> stateMachine;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         stateMachine = GetComponent<EntityStateManager<T>>();
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         stateMachine.Step();
     }

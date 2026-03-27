@@ -143,7 +143,7 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "KeyBoard 2D Vector",
                     "id": "23b0fae0-283a-49c3-a232-61836dc54ef2",
                     "path": "2DVector",
                     "interactions": "",

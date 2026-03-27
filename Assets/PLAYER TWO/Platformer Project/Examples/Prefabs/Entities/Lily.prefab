@@ -2185,6 +2185,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6650432633027884459}
+  - component: {fileID: 3328971392170679316}
+  - component: {fileID: 8781868022193014602}
+  - component: {fileID: 8242637588224000856}
   m_Layer: 0
   m_Name: Lily
   m_TagString: Untagged
@@ -2213,6 +2216,47 @@ Transform:
   - {fileID: 494511523524256515}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3328971392170679316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650432633027884458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6888d80d875031045a4b92cfe55b9e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8781868022193014602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650432633027884458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3257a2f9be28efe40b83cf1210ef9e0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  states:
+  - IdlePlayerState
+  - WalkPlayerState
+--- !u!114 &8242637588224000856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650432633027884458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6cf6179f10c24c478b0b11769e2ae75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputActions: {fileID: -944628639613478452, guid: 6b99b82d3ff7bfd4199643130476cdf4,
+    type: 3}
 --- !u!1 &6670180705425501448
 GameObject:
   m_ObjectHideFlags: 0
