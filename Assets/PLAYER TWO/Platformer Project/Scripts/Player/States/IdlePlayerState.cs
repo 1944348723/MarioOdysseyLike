@@ -9,7 +9,7 @@ public class IdlePlayerState : PlayerState
 
     protected override void OnExit(Player player)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("IdlePlayerState Exited");
     }
 
     protected override void OnStep(Player player)

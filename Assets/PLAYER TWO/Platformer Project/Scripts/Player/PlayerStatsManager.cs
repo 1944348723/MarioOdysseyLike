@@ -1,1 +1,8 @@
-public class PlayerStatsManager : EntityStatsManager<PlayerStats> {}
+public class PlayerStatsManager : EntityStatsManager<PlayerStats>
+{
+    
+    void Update()
+    {
+        
+    }
+}

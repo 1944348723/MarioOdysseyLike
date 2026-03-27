@@ -1,8 +1,10 @@
+using UnityEngine;
+
 public class WalkPlayerState : PlayerState
 {
     protected override void OnEnter(Player player)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("WalkPlayerState Entered");
     }
 
     protected override void OnExit(Player player)
@@ -12,6 +14,14 @@ public class WalkPlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
-        throw new System.NotImplementedException();
+        Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
+        if (inputDirection.sqrMagnitude == 0) return;
+
+        // 单位向量点乘得到两向量间夹角的余弦值
+        float cos = Vector3.Dot(inputDirection, player.Velocity.normalized);
+        if (cos >= player.Stats.Current.brakeThreshold)
+        {
+            player.Accelerate(inputDirection);
+        }
     }
 }
