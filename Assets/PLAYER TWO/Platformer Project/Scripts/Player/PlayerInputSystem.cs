@@ -6,7 +6,7 @@ public class PlayerInputSystem : MonoBehaviour
     [SerializeField] private InputActionAsset inputActions;
 
     private InputAction moveAction;
-    private Camera camera;
+    private Camera playerCamera;
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class PlayerInputSystem : MonoBehaviour
         }
         moveAction = inputActions?["Movement"];
 
-        camera = Camera.main;
+        playerCamera = Camera.main;
     }
 
     private void OnEnable()
@@ -42,7 +42,7 @@ public class PlayerInputSystem : MonoBehaviour
 
         // 绕竖直向上方向(y轴)旋转camera的y轴欧拉角那么多
         // 相当于把输入坐标系从世界默认前方转到了相机水平前方
-        var rotation = Quaternion.AngleAxis(this.camera.transform.eulerAngles.y, Vector3.up);
+        var rotation = Quaternion.AngleAxis(this.playerCamera.transform.eulerAngles.y, Vector3.up);
         Vector3 direction = rotation * inputDirection;
         
         direction.Normalize();
