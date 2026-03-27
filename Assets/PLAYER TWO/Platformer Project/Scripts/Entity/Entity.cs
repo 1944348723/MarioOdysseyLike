@@ -10,15 +10,15 @@ public abstract class EntityBase: MonoBehaviour
 // 子类继承时必须把自己作为泛型参数传递给父类
 public abstract class Entity<T>: EntityBase where T : Entity<T>
 {
-    protected EntityStateManager<T> stateMachine;
+    public EntityStateManager<T> StateMachine { get; private set; }
 
     protected virtual void Awake()
     {
-        stateMachine = GetComponent<EntityStateManager<T>>();
+        StateMachine = GetComponent<EntityStateManager<T>>();
     }
 
     protected virtual void Update()
     {
-        stateMachine.Step();
+        StateMachine.Step();
     }
 }

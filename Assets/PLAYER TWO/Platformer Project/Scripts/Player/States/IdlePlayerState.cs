@@ -14,6 +14,6 @@ public class IdlePlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
-        Debug.Log(player.Input.GetMovementDirection());
+        Vector3 inputDirection = player.Input.GetMovementDirection();
     }
 }
