@@ -1,0 +1,1 @@
+public abstract class EntityStatsManager<T> where T : EntityStats<T> {}
