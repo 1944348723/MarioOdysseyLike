@@ -14,6 +14,6 @@ public class Player : Entity<Player>
 
     public void Accelerate(Vector3 direction)
     {
-        Debug.Log("Accelerate");
+        base.Accelerate(direction.normalized, Stats.Current.acceleration, Stats.Current.turningDrag, Stats.Current.maxSpeed);
     }
 }
