@@ -2,6 +2,16 @@ using UnityEngine;
 
 public class PlayerStats : EntityStats<PlayerStats>
 {
+    [Header("General Stats")]
+    public float pushForce = 4f;                    // 推动物体的力
+    public float snapForce = 15f;                   // 将角色贴合到地面的吸附力
+    public float slideForce = 10;                   // 下坡滑动的额外推力
+    public float rotationSpeed = 970f;              // 玩家角色转动速度(°/s)
+    public float gravity = 38f;                     // 普通重力加速度
+    public float fallGravity = 65f;                 // 下落时额外重力加速度
+    public float maxFallingSpeed = 50f;             // 重力作用下的最大下落速度
+
+
     [Header("Motion Stats")]
     public bool applySlopeFactor = true;            // 是否考虑坡度因子
     public float acceleration = 13f;                // 加速度

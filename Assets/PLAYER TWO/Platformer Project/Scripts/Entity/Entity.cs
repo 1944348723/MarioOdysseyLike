@@ -70,4 +70,15 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
 
         PlanarVelocity = newPlanarVelocity;
     }
+
+    public void FaceToDirection(Vector3 direction, float degreesPerSecond)
+    {
+        if (direction == Vector3.zero) return;
+
+        Quaternion currentRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+        Quaternion newRotation = Quaternion.RotateTowards(currentRotation, targetRotation, degreesPerSecond * Time.deltaTime);
+
+        transform.rotation = newRotation;
+    }
 }
