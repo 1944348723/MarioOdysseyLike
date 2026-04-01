@@ -14,7 +14,10 @@ public class Player : Entity<Player>
 
     public void Accelerate(Vector3 direction)
     {
-        base.Accelerate(direction.normalized, Stats.Current.acceleration, Stats.Current.turningDrag, Stats.Current.maxSpeed);
+        float finalAcceleration = Stats.Current.acceleration * AccelerationMultiplier;
+        float finalTurningDrag = Stats.Current.turningDrag * TurningDragMultiplier;
+        float finalMaxSpeed = Stats.Current.maxSpeed * MaxSpeedMultiplier;
+        base.Accelerate(direction.normalized, finalAcceleration, finalTurningDrag, finalMaxSpeed);
     }
 
     public void FaceToDirectionSmoothly(Vector3 direction)

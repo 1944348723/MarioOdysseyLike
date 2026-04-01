@@ -16,7 +16,7 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
     public float AccelerationMultiplier { get; set; } = 1f;
     public float DecelerationMultiplier { get; set; } = 1f;
     public float MaxSpeedMultiplier { get; set; } = 1f;
-    public float TurningGragMultiplier { get; set; } = 1f;
+    public float TurningDragMultiplier { get; set; } = 1f;
     public float GravityMultiplier { get; set; } = 1f;
 
     public Vector3 PlanarVelocity
