@@ -49,7 +49,7 @@ class PlayerCamera : MonoBehaviour
 
     private void Reset()
     {
-        Vector3 initPosition = player.transform.position + Vector3.up * hightOffset;
+        Vector3 initPosition = player.UnsizedPosition + Vector3.up * hightOffset;
         float initYaw = player.transform.eulerAngles.y;
         MoveTarget(initPosition, Quaternion.Euler(initialPitch, initYaw, 0));
 

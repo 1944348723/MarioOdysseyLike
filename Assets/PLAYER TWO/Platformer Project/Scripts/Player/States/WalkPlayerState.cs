@@ -22,7 +22,7 @@ public class WalkPlayerState : PlayerState
         if (cos >= player.Stats.Current.brakeThreshold)
         {
             player.Accelerate(inputDirection);
-            player.FaceToDirectionSmoothly(inputDirection);
+            player.FaceToDirectionSmoothly(player.PlanarVelocity);
         }
     }
 }

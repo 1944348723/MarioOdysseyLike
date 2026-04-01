@@ -3,7 +3,7 @@ using UnityEngine;
 // 继承自MonoBehaviour，为了让所有Entity能够挂载、使用Unity声明周期函数
 public abstract class EntityBase: MonoBehaviour
 {
-
+    public Vector3 UnsizedPosition => transform.position;
 }
 
 // CRTP(Curiously Recurring Template Pattern)
