@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class EntityBase: MonoBehaviour
 {
     public Vector3 UnsizedPosition => transform.position;
+    public bool IsGrounded { get; protected set; } = true;
 }
 
 // CRTP(Curiously Recurring Template Pattern)

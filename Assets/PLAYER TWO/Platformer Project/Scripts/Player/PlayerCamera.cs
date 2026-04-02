@@ -10,6 +10,8 @@ class PlayerCamera : MonoBehaviour
     [Header("Orbit Settings")]
     [SerializeField] private bool allowOrbitByInput = true;  // 是否允许通过输入环绕玩家
     [SerializeField] private float inputOrbitSpeed = 1f;  // 用户输入让相机环绕玩家的速度
+    [SerializeField] private bool allowOrbitWithVelocity = true;  // 是否允许根据玩家速度自动环绕
+    [SerializeField] private float velocityOrbitSpeed = 5f;  // 玩家速度让相机环绕的速度
     [Range(0, 90)]
     [SerializeField] private float maxPitch = 80f;      // 最大俯角
     [Range(-90, 0)]
@@ -40,6 +42,8 @@ class PlayerCamera : MonoBehaviour
 
     private void LateUpdate() {
         OrbitByInput();
+        OrbitWithVelocity();
+
         UpdateTarget();
         UpdateCamera();
     }
@@ -87,5 +91,15 @@ class PlayerCamera : MonoBehaviour
         yaw += lookDelta.x * inputOrbitSpeed * timeFactor;
         pitch -= lookDelta.y * inputOrbitSpeed * timeFactor;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+    }
+
+    private void OrbitWithVelocity() {
+        // 不在地上时不自动环绕，避免空中漂浮时乱转相机
+        if (!allowOrbitWithVelocity || !player.IsGrounded) return;
+
+        // 将玩家的速度从世界空间转换到相机空间
+        // 根据转换后的左右速度(x)来自动环绕
+        Vector3 cameraSpaceVelocity = playerCamera.transform.InverseTransformDirection(player.Velocity);
+        yaw += cameraSpaceVelocity.x * velocityOrbitSpeed * Time.deltaTime;
     }
 }
