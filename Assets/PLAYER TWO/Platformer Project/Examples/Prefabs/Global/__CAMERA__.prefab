@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9005025318998648191}
   - component: {fileID: 7219771299953787655}
   - component: {fileID: 2482555112749306288}
+  - component: {fileID: 8439307432944021256}
   m_Layer: 0
   m_Name: __CAMERA__
   m_TagString: MainCamera
@@ -98,10 +99,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  maxDistance: 15
+  cameraDistance: 15
   initialPitch: 20
   allowOrbitByInput: 1
   inputOrbitSpeed: 1
+  allowOrbitWithVelocity: 1
+  velocityOrbitSpeed: 5
+  maxPitch: 80
+  minPitch: -20
 --- !u!81 &2482555112749306288
 AudioListener:
   m_ObjectHideFlags: 0
@@ -110,3 +115,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4843316741654724385}
   m_Enabled: 1
+--- !u!114 &8439307432944021256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843316741654724385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: def436822251ca549b86d77c4400dbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collideAgainst:
+    serializedVersion: 2
+    m_Bits: 512

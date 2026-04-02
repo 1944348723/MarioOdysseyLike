@@ -51,7 +51,6 @@ class PlayerCamera : MonoBehaviour
     private void InitTarget()
     {
         followTarget = new GameObject(FollowTargetName).transform;
-        followTarget.SetParent(transform);
         followTarget.position = player.transform.position;
     }
 
@@ -93,10 +92,12 @@ class PlayerCamera : MonoBehaviour
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
     }
 
+    // TODO: 手动环绕和自动环绕可能有一定冲突，后续可以在手动环绕时暂时禁用自动环绕，或者抑制自动环绕
     private void OrbitWithVelocity() {
         // 不在地上时不自动环绕，避免空中漂浮时乱转相机
         if (!allowOrbitWithVelocity || !player.IsGrounded) return;
 
+        if (player.Input.GetLookDelta().sqrMagnitude > 0) return;
         // 将玩家的速度从世界空间转换到相机空间
         // 根据转换后的左右速度(x)来自动环绕
         Vector3 cameraSpaceVelocity = playerCamera.transform.InverseTransformDirection(player.Velocity);
