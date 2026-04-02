@@ -39,7 +39,6 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
     protected virtual void Update()
     {
         StateMachine.Step();
-        Debug.Log(Velocity);
         transform.position += Velocity * Time.deltaTime;
     }
 

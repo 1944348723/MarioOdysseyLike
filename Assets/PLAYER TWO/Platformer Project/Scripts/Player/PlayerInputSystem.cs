@@ -5,7 +5,10 @@ public class PlayerInputSystem : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputActions;
 
+    private const string MOUSE_DEVICE_NAME = "Mouse";
+
     private InputAction moveAction;
+    private InputAction lookAction;
     private Camera playerCamera;
 
     private void Awake()
@@ -15,6 +18,7 @@ public class PlayerInputSystem : MonoBehaviour
             Debug.LogError("Input Actions is not assigned", this);
         }
         moveAction = inputActions?["Movement"];
+        lookAction = inputActions?["Look"];
 
         playerCamera = Camera.main;
     }
@@ -49,20 +53,39 @@ public class PlayerInputSystem : MonoBehaviour
         return direction;
     }
 
+    public Vector2 GetLookDelta()
+    {
+        Vector2 input = lookAction.ReadValue<Vector2>();
+        if (IsLookingWithMouse())
+        {
+            return input;
+        } else
+        {
+            return GetAxisWithCrossDeadZone(input);
+        }
+    }
+
+    public bool IsLookingWithMouse()
+    {
+        if (lookAction.activeControl == null) return false;
+        return lookAction.activeControl.device.name.Equals(MOUSE_DEVICE_NAME);
+    }
+
     public Vector3 GetMovementDirection()
     {
         Vector2 inputValue = moveAction.ReadValue<Vector2>();
-        return GetAxisWithCrossDeadZone(inputValue);
+        Vector2 processedInput = GetAxisWithCrossDeadZone(inputValue);
+        return new Vector3(processedInput.x, 0, processedInput.y);
     }
 
-    private Vector3 GetAxisWithCrossDeadZone(Vector2 axis)
+    private Vector2 GetAxisWithCrossDeadZone(Vector2 axis)
     {
         float deadZone = InputSystem.settings.defaultDeadzoneMin;
         float len = axis.magnitude;
-        if (len <= deadZone) return Vector3.zero;
+        if (len <= deadZone) return Vector2.zero;
 
         float remapedLen = (len - deadZone) / (1 - deadZone);
         Vector2 dir = axis / len;
-        return new Vector3(dir.x * remapedLen, 0, dir.y * remapedLen);
+        return dir * remapedLen;
     }
 }
