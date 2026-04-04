@@ -130,3 +130,5 @@ MonoBehaviour:
   collideAgainst:
     serializedVersion: 2
     m_Bits: 512
+  radius: 0.1
+  minDistanceFromTarget: 0.1

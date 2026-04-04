@@ -4,7 +4,7 @@ class PlayerCamera : MonoBehaviour
 {
     [Header("Camera Settings")]
     [SerializeField] private Player player;
-    [SerializeField] float cameraDistance = 15f;   // 相机与目标的距离
+    [SerializeField] float maxDistance = 15f;   // 相机与目标的最大距离
     [SerializeField] float initialPitch = 20f;
 
     [Header("Orbit Settings")]
@@ -20,6 +20,7 @@ class PlayerCamera : MonoBehaviour
     private const string FollowTargetName = "CameraFollowTarget";
 
     private Camera playerCamera;
+    private CameraCollider cameraCollider;
     private Transform followTarget;
     private float yaw;  // 绕y轴旋转的角度
     private float pitch;  // 绕x轴旋转的角度
@@ -31,6 +32,7 @@ class PlayerCamera : MonoBehaviour
             player = FindAnyObjectByType<Player>();
         }
         playerCamera = Camera.main;
+        cameraCollider = playerCamera.GetComponent<CameraCollider>();
     }
 
     private void Start()
@@ -46,6 +48,7 @@ class PlayerCamera : MonoBehaviour
 
         UpdateTarget();
         UpdateCamera();
+        SolveCameraCollision();
     }
 
     private void InitTarget()
@@ -62,7 +65,7 @@ class PlayerCamera : MonoBehaviour
 
     private void UpdateCamera() {
         // 将(0, 0, -distance)绕x轴旋转pitch，绕y轴旋转yaw，得到相机相对玩家的偏移
-        Vector3 backwardOffset = new(0, 0, -cameraDistance);
+        Vector3 backwardOffset = new(0, 0, -maxDistance);
         Quaternion orbitRotation = Quaternion.Euler(pitch, yaw, 0);
         playerCamera.transform.position = followTarget.position + orbitRotation * backwardOffset;
         playerCamera.transform.LookAt(followTarget);
@@ -100,7 +103,15 @@ class PlayerCamera : MonoBehaviour
         if (player.Input.GetLookDelta().sqrMagnitude > 0) return;
         // 将玩家的速度从世界空间转换到相机空间
         // 根据转换后的左右速度(x)来自动环绕
+        // TODO：改成将玩家水平速度向平行于相机水平方向和垂直于水平方向分解，水平分量让相机环绕，垂直分量不影响相机环绕
         Vector3 cameraSpaceVelocity = playerCamera.transform.InverseTransformDirection(player.Velocity);
         yaw += cameraSpaceVelocity.x * velocityOrbitSpeed * Time.deltaTime;
+    }
+
+    private void SolveCameraCollision()
+    {
+        Vector3 cameraPosition = playerCamera.transform.position;
+        cameraCollider.ApplyCollider(ref cameraPosition, followTarget.position, maxDistance);
+        playerCamera.transform.position = cameraPosition;
     }
 }
