@@ -99,13 +99,16 @@ class PlayerCamera : MonoBehaviour
     private void OrbitWithVelocity() {
         // 不在地上时不自动环绕，避免空中漂浮时乱转相机
         if (!allowOrbitWithVelocity || !player.IsGrounded) return;
-
         if (player.Input.GetLookDelta().sqrMagnitude > 0) return;
-        // 将玩家的速度从世界空间转换到相机空间
-        // 根据转换后的左右速度(x)来自动环绕
-        // TODO：改成将玩家水平速度向平行于相机水平方向和垂直于水平方向分解，水平分量让相机环绕，垂直分量不影响相机环绕
-        Vector3 cameraSpaceVelocity = playerCamera.transform.InverseTransformDirection(player.Velocity);
-        yaw += cameraSpaceVelocity.x * velocityOrbitSpeed * Time.deltaTime;
+
+        // 得到玩家水平速度向相机水平方向右边的投影，如果是正的说明玩家向相机右边移动，负的说明玩家向相机左边移动
+        // 根据这个投影调整yaw，让相机环绕玩家，转向玩家移动的方向
+        Vector3 cameraPlanarForward = new Vector3(playerCamera.transform.forward.x, 0, playerCamera.transform.forward.z).normalized;
+        // Unity使用左手定则
+        Vector3 cameraPlanarRight = Vector3.Cross(Vector3.up, cameraPlanarForward).normalized;
+        // 带符号速度
+        float speedAlongCameraPlanarRight = Vector3.Dot(player.PlanarVelocity, cameraPlanarRight);
+        yaw += speedAlongCameraPlanarRight * velocityOrbitSpeed * Time.deltaTime;
     }
 
     private void SolveCameraCollision()
