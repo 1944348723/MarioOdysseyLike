@@ -12,9 +12,12 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
 {
     protected List<EntityState<T>> statesList;
     protected Dictionary<Type, EntityState<T>> statesMap = new();
-    protected EntityState<T> currentState;
-    protected EntityState<T> lastState;
     protected T entity;
+
+    public EntityState<T> CurrentState { get; private set; }
+    public EntityState<T> LastState { get; private set; }
+    public int CurrentStateIndex => statesList.IndexOf(CurrentState);
+    public int LastStateIndex => statesList.IndexOf(LastState);
 
     protected abstract List<EntityState<T>> GetStatesList();
 
@@ -30,9 +33,9 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
 
     public void Step()
     {
-        if (currentState != null && Time.timeScale > 0)
+        if (CurrentState != null && Time.timeScale > 0)
         {
-            currentState.Step(entity);
+            CurrentState.Step(entity);
         }
     }
 
@@ -57,16 +60,16 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
     {
         if (to == null || Time.timeScale == 0) return;
 
-        if (currentState != null)
+        if (CurrentState != null)
         {
-            currentState.Exit(entity);
-            events.Exited?.Invoke(currentState.GetType());
-            lastState = currentState;
+            CurrentState.Exit(entity);
+            events.Exited?.Invoke(CurrentState.GetType());
+            LastState = CurrentState;
         }
 
-        currentState = to;
-        currentState.Enter(entity);
-        events.Entered?.Invoke(currentState.GetType());
+        CurrentState = to;
+        CurrentState.Enter(entity);
+        events.Entered?.Invoke(CurrentState.GetType());
         events.Changed?.Invoke();
     }
 
@@ -96,7 +99,7 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
 
         if (statesList.Count > 0)
         {
-            currentState = statesList[0];
+            CurrentState = statesList[0];
         }
     }
 

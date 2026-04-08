@@ -239,7 +239,7 @@ AnimatorState:
   m_Motion: {fileID: -5219078077612074331, guid: 40e21d8ce79cdf04a9168a06cb1ed52e,
     type: 3}
   m_Tag: 
-  m_SpeedParameter: Lateral Animation Speed
+  m_SpeedParameter: Planar Animation Speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -558,7 +558,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Lateral Speed
     m_Mirror: 0
-  m_BlendParameter: Lateral Speed
+  m_BlendParameter: Planar Speed
   m_BlendParameterY: Lateral Speed
   m_MinThreshold: 0
   m_MaxThreshold: 1
@@ -591,7 +591,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Lateral Speed
     m_Mirror: 0
-  m_BlendParameter: Lateral Speed
+  m_BlendParameter: Planar Speed
   m_BlendParameterY: Lateral Speed
   m_MinThreshold: 0
   m_MaxThreshold: 1
@@ -638,7 +638,7 @@ AnimatorStateTransition:
     m_ConditionEvent: State
     m_EventTreshold: 1
   - m_ConditionMode: 4
-    m_ConditionEvent: Lateral Speed
+    m_ConditionEvent: Planar Speed
     m_EventTreshold: 8
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7583878431990018553}
@@ -1077,7 +1077,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: Lateral Speed
+  - m_Name: Planar Speed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1089,7 +1089,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: Lateral Animation Speed
+  - m_Name: Planar Animation Speed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1225,7 +1225,7 @@ AnimatorState:
   m_Motion: {fileID: -1349405729145267620, guid: 40e21d8ce79cdf04a9168a06cb1ed52e,
     type: 3}
   m_Tag: 
-  m_SpeedParameter: Lateral Animation Speed
+  m_SpeedParameter: Planar Animation Speed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -1293,7 +1293,7 @@ AnimatorStateTransition:
     m_ConditionEvent: State
     m_EventTreshold: 10
   - m_ConditionMode: 3
-    m_ConditionEvent: Lateral Speed
+    m_ConditionEvent: Planar Speed
     m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3590692528263556997}
@@ -1375,7 +1375,7 @@ AnimatorStateTransition:
     m_ConditionEvent: State
     m_EventTreshold: 10
   - m_ConditionMode: 4
-    m_ConditionEvent: Lateral Speed
+    m_ConditionEvent: Planar Speed
     m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1219423379444499589}
@@ -1583,7 +1583,7 @@ AnimatorStateTransition:
     m_ConditionEvent: State
     m_EventTreshold: 1
   - m_ConditionMode: 3
-    m_ConditionEvent: Lateral Speed
+    m_ConditionEvent: Planar Speed
     m_EventTreshold: 8
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 570428088815291891}

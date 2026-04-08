@@ -2189,6 +2189,7 @@ GameObject:
   - component: {fileID: 8781868022193014602}
   - component: {fileID: 8242637588224000856}
   - component: {fileID: 1103058554381505988}
+  - component: {fileID: 366533005304380307}
   m_Layer: 0
   m_Name: Lily
   m_TagString: Untagged
@@ -2282,6 +2283,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
   - {fileID: 11400000, guid: 00bcb4afab4c5b64b839b19378747f53, type: 2}
+--- !u!114 &366533005304380307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650432633027884458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c6104cf44e8b04d8b62cbd5b05b462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minPlanarAnimationSpeed: 0.5
+  forcedTransitions: []
+  animator: {fileID: 301645532738941841}
 --- !u!1 &6670180705425501448
 GameObject:
   m_ObjectHideFlags: 0

@@ -186,3 +186,12 @@ targetPosition + (0, 0, -cameraDistance) * Quaternion.Euler(pitch, yaw, 0)
 * 由于我们是通过yaw、pitch算出camere是在target固定距离的球面上哪一点，而target在每帧开始时都会同步player的位置，所以在计算camera的位置时，用的始终都是player的位置`T`，target此时还没有收到影响。所以相机的`C0->C1->C2`...是始终在player固定距离的球面上连续移动
 * 每次camera移动就会导致target跟着移动`T1->T2->T3`...，并且每次移动都是在`T`的基础上，而不是在`Tn-1`的基础上。camera距离player是有一段距离的，所以yaw、pitch的变化导致Camera每次位移的变化会比较大，而target是跟随Camera移动的，再叠加上camera的旋转也会导致target跟着有较大的位移。也就是每帧都是`T->T1`、`T->T2`这样的位移，并且位移还比较大。
 * 而每帧结束时，camera都是`C1->T1`、`C2->T2`这样的视线，很难说这样的变化会是规律连续的，
+
+# 动画
+## Animator
+本项目的`Animator Controller`中的状态图实现是，通过`AnyState`连接所有状态，`Transition`条件基本都是一个`StateID`，有的相似状态间，如`Walk`、`Run`这类的再通过速度进一步区分。
+
+这样做的好处是状态图很干净简洁，不用考虑各种转换，动画状态机只是单纯的负责动画的播放和切换，不承载任何逻辑，所有的状态切换逻辑都在代码中
+
+## 驱动动画
+本项目驱动动画的方式是，在`PlayerAnimator`中，每帧的`LateUpdate`会将数据更新到`Animator Parameters`中，参数的变化会自然导致动画切换
