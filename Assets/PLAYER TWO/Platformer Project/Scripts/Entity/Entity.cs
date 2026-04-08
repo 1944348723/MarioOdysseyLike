@@ -3,13 +3,18 @@ using UnityEngine;
 // 继承自MonoBehaviour，为了让所有Entity能够挂载、使用Unity声明周期函数
 public abstract class EntityBase: MonoBehaviour
 {
+    [SerializeField] protected CharacterController characterController; 
     public Vector3 UnsizedPosition => transform.position;
     public bool IsGrounded { get; protected set; } = true;
     public bool IsOnSlope { get; protected set; } = false;
+    public float OriginalHeight { get; protected set; }
 }
 
-// CRTP(Curiously Recurring Template Pattern)
-// 子类继承时必须把自己作为泛型参数传递给父类
+/// <summary>
+/// CRTP(Curiously Recurring Template Pattern)
+/// 子类继承时必须把自己作为泛型参数传递给父类
+/// 该类负责提供移动相关功能以及驱动状态机
+/// </summary>
 public abstract class Entity<T>: EntityBase where T : Entity<T>
 {
     public EntityStateManager<T> StateMachine { get; private set; }
@@ -36,12 +41,18 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
     protected virtual void Awake()
     {
         StateMachine = GetComponent<EntityStateManager<T>>();
+        characterController = GetComponent<CharacterController>();
+    }
+
+    protected virtual void Start()
+    {
+        InitializeCharacterController();
     }
 
     protected virtual void Update()
     {
         StateMachine.Step();
-        transform.position += Velocity * Time.deltaTime;
+        Move();
     }
 
     public void Accelerate(Vector3 direction, float acceleration, float turningDrag, float maxSpeed)
@@ -88,5 +99,28 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
     {
         float deltaSpeed = deceleration * DecelerationMultiplier * Time.deltaTime;
         PlanarVelocity = Vector3.MoveTowards(PlanarVelocity, Vector3.zero, deltaSpeed);
+    }
+
+    private void InitializeCharacterController()
+    {
+        if (!characterController)
+        {
+            characterController = gameObject.AddComponent<CharacterController>();
+        }
+
+        characterController.skinWidth = characterController.radius * 0.1f;
+        characterController.minMoveDistance = 0;
+        OriginalHeight = characterController.height;
+    }
+
+    private void Move()
+    {
+        if (characterController.enabled)
+        {
+            characterController.Move(Velocity * Time.deltaTime);
+        } else
+        {
+            transform.position += Velocity * Time.deltaTime;
+        }
     }
 }

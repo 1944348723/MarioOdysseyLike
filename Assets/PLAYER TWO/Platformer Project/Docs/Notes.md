@@ -187,6 +187,10 @@ targetPosition + (0, 0, -cameraDistance) * Quaternion.Euler(pitch, yaw, 0)
 * 每次camera移动就会导致target跟着移动`T1->T2->T3`...，并且每次移动都是在`T`的基础上，而不是在`Tn-1`的基础上。camera距离player是有一段距离的，所以yaw、pitch的变化导致Camera每次位移的变化会比较大，而target是跟随Camera移动的，再叠加上camera的旋转也会导致target跟着有较大的位移。也就是每帧都是`T->T1`、`T->T2`这样的位移，并且位移还比较大。
 * 而每帧结束时，camera都是`C1->T1`、`C2->T2`这样的视线，很难说这样的变化会是规律连续的，
 
+# 角色控制
+## Character Controller
+Unity自带的组件，自带一个胶囊形的碰撞体，但是**不受力也不会施加力**，而是实现**位移受限**，比如站在地板上不会下落、移动时撞墙、上斜坡、上楼梯，只要通过它提供的`Move()`接口来移动就能拥有这些功能。如果想要在碰撞时施加力，可以通过`OnControllerColliderHit()`函数，来与碰撞物体进行交互
+
 # 动画
 ## Animator
 本项目的`Animator Controller`中的状态图实现是，通过`AnyState`连接所有状态，`Transition`条件基本都是一个`StateID`，有的相似状态间，如`Walk`、`Run`这类的再通过速度进一步区分。
