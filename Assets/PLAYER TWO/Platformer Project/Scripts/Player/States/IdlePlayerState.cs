@@ -4,7 +4,7 @@ public class IdlePlayerState : PlayerState
 {
     protected override void OnEnter(Player player)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("IdlePlayerState Entered");
     }
 
     protected override void OnExit(Player player)

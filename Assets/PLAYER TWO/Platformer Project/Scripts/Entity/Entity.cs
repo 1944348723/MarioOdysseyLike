@@ -5,6 +5,7 @@ public abstract class EntityBase: MonoBehaviour
 {
     public Vector3 UnsizedPosition => transform.position;
     public bool IsGrounded { get; protected set; } = true;
+    public bool IsOnSlope { get; protected set; } = false;
 }
 
 // CRTP(Curiously Recurring Template Pattern)
@@ -80,5 +81,11 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         Quaternion newRotation = Quaternion.RotateTowards(currentRotation, targetRotation, degreesPerSecond * Time.deltaTime);
 
         transform.rotation = newRotation;
+    }
+
+    public void Decelerate(float deceleration)
+    {
+        float deltaSpeed = deceleration * Time.deltaTime;
+        PlanarVelocity = Vector3.MoveTowards(PlanarVelocity, Vector3.zero, deltaSpeed);
     }
 }

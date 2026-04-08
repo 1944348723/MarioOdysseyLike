@@ -24,4 +24,22 @@ public class Player : Entity<Player>
     {
         base.FaceToDirection(direction, Stats.Current.rotationSpeed);
     }
+
+    // 主动减速
+    public void Decelerate()
+    {
+        base.Decelerate(Stats.Current.deceleration * DecelerationMultiplier);
+    }
+
+    // 摩擦减速
+    public void Friction()
+    {
+        if (IsOnSlope)
+        {
+            base.Decelerate(Stats.Current.slopeFriction * DecelerationMultiplier);
+        } else
+        {
+            base.Decelerate(Stats.Current.friction * DecelerationMultiplier);
+        }
+    }
 }

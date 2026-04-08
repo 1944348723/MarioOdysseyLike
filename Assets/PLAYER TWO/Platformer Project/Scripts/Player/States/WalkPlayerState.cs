@@ -9,20 +9,34 @@ public class WalkPlayerState : PlayerState
 
     protected override void OnExit(Player player)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("WalkPlayerState Exited");
     }
 
     protected override void OnStep(Player player)
     {
         Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
-        if (inputDirection.sqrMagnitude < 1e-6) return;
 
-        // 单位向量点乘得到两向量间夹角的余弦值
-        float cos = Vector3.Dot(inputDirection, player.PlanarVelocity.normalized);
-        if (cos >= player.Stats.Current.brakeThreshold)
+        if (inputDirection == Vector3.zero)
         {
-            player.Accelerate(inputDirection);
-            player.FaceToDirectionSmoothly(player.PlanarVelocity);
+            player.Friction();
+            if (player.PlanarVelocity.magnitude == 0)
+            {
+                player.StateMachine.Change<IdlePlayerState>();
+            }
+        } else
+        {
+            // 单位向量点乘得到两向量间夹角的余弦值
+            float cos = Vector3.Dot(inputDirection, player.PlanarVelocity.normalized);
+
+            if (cos >= player.Stats.Current.brakeThreshold)
+            {
+                player.Accelerate(inputDirection);
+                player.FaceToDirectionSmoothly(player.PlanarVelocity);
+            } else
+            {
+                player.StateMachine.Change<BrakePlayerState>();
+            }
         }
+
     }
 }

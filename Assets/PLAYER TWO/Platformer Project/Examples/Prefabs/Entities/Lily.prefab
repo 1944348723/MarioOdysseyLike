@@ -2255,6 +2255,7 @@ MonoBehaviour:
   states:
   - IdlePlayerState
   - WalkPlayerState
+  - BrakePlayerState
 --- !u!114 &8242637588224000856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2295,6 +2296,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c6104cf44e8b04d8b62cbd5b05b462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateParameterName: State
+  lastStateParameterName: Last State
+  planarSpeedParameterName: Planar Speed
+  verticalSpeedParameterName: Vertical Speed
+  planarAnimationSpeedParameterName: Planar Animation Speed
+  healthParameterName: Health
+  jumpCounterParameterName: Jump Counter
+  isGroundedParameterName: Is Grounded
+  isHoldingParameterName: Is Holding
+  onStateChangedParameterName: On State Changed
   minPlanarAnimationSpeed: 0.5
   forcedTransitions: []
   animator: {fileID: 301645532738941841}
