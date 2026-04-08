@@ -57,16 +57,17 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         Vector3 turningVelocity = PlanarVelocity - forwardVelocity;
 
         // 沿输入方向加速
-        forwardSpeed += acceleration * Time.deltaTime;
-        forwardSpeed = Mathf.Clamp(forwardSpeed, -maxSpeed, maxSpeed);
+        float finalMaxSpeed = maxSpeed * MaxSpeedMultiplier;
+        forwardSpeed += acceleration * AccelerationMultiplier * Time.deltaTime;
+        forwardSpeed = Mathf.Clamp(forwardSpeed, -finalMaxSpeed, finalMaxSpeed);
 
         // 逐渐消除侧向速度
-        turningVelocity = Vector3.MoveTowards(turningVelocity, Vector3.zero, turningDrag * Time.deltaTime);
+        turningVelocity = Vector3.MoveTowards(turningVelocity, Vector3.zero, turningDrag * TurningDragMultiplier * Time.deltaTime);
 
         // 合成并限速
         Vector3 newPlanarVelocity = forwardSpeed * planarDir + turningVelocity;
-        if (newPlanarVelocity.sqrMagnitude > maxSpeed * maxSpeed) {
-            newPlanarVelocity = newPlanarVelocity.normalized * maxSpeed;
+        if (newPlanarVelocity.sqrMagnitude > finalMaxSpeed * finalMaxSpeed) {
+            newPlanarVelocity = newPlanarVelocity.normalized * finalMaxSpeed;
         }
 
         PlanarVelocity = newPlanarVelocity;
@@ -85,7 +86,7 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
 
     public void Decelerate(float deceleration)
     {
-        float deltaSpeed = deceleration * Time.deltaTime;
+        float deltaSpeed = deceleration * DecelerationMultiplier * Time.deltaTime;
         PlanarVelocity = Vector3.MoveTowards(PlanarVelocity, Vector3.zero, deltaSpeed);
     }
 }

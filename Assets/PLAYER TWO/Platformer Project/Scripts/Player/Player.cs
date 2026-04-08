@@ -14,10 +14,7 @@ public class Player : Entity<Player>
 
     public void Accelerate(Vector3 direction)
     {
-        float finalAcceleration = Stats.Current.acceleration * AccelerationMultiplier;
-        float finalTurningDrag = Stats.Current.turningDrag * TurningDragMultiplier;
-        float finalMaxSpeed = Stats.Current.maxSpeed * MaxSpeedMultiplier;
-        base.Accelerate(direction.normalized, finalAcceleration, finalTurningDrag, finalMaxSpeed);
+        base.Accelerate(direction.normalized, Stats.Current.acceleration, Stats.Current.turningDrag, Stats.Current.maxSpeed);
     }
 
     public void FaceToDirectionSmoothly(Vector3 direction)
@@ -28,7 +25,7 @@ public class Player : Entity<Player>
     // 主动减速
     public void Decelerate()
     {
-        base.Decelerate(Stats.Current.deceleration * DecelerationMultiplier);
+        base.Decelerate(Stats.Current.deceleration);
     }
 
     // 摩擦减速
@@ -36,10 +33,10 @@ public class Player : Entity<Player>
     {
         if (IsOnSlope)
         {
-            base.Decelerate(Stats.Current.slopeFriction * DecelerationMultiplier);
+            base.Decelerate(Stats.Current.slopeFriction);
         } else
         {
-            base.Decelerate(Stats.Current.friction * DecelerationMultiplier);
+            base.Decelerate(Stats.Current.friction);
         }
     }
 }
