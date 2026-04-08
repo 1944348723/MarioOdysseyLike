@@ -13,6 +13,7 @@ public class BrakePlayerState : PlayerState
     }
 
     protected override void OnStep(Player player) {
+        player.Gravity();
         player.Decelerate();
         if (player.PlanarVelocity.sqrMagnitude == 0) {
             player.StateMachine.Change<IdlePlayerState>();

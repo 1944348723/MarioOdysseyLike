@@ -14,6 +14,8 @@ public class IdlePlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
+        player.Gravity();
+
         Vector3 inputDirection = player.Input.GetMovementDirection();
         if (inputDirection.sqrMagnitude > 0 || player.PlanarVelocity.sqrMagnitude > 0)
         {
