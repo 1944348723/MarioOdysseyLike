@@ -24,4 +24,10 @@ public class PlayerStats : EntityStats<PlayerStats>
     public float brakeThreshold = -0.8f;            // 刹车判定阈值
     public float slopUpwordForce = 25f;             // 上坡时的额外推力
     public float slopDownwordForce = 28f;           // 下坡时的额外推力
+
+    [Header("Jump Stats")]
+    public int allowedJumpTimes = 2;                // 允许跳跃次数
+    public float coyoteJumpThreshold = 0.15f;       // 土狼跳判定时间阈值
+    public float maxJumpSpeed = 17f;
+    public float minJumpSpeed = 10f;
 }

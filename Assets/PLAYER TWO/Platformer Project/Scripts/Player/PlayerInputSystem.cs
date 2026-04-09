@@ -4,12 +4,15 @@ using UnityEngine.InputSystem;
 public class PlayerInputSystem : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputActions;
+    [SerializeField] private float jumpBufferTime = 0.15f;
 
     private const string MOUSE_DEVICE_NAME = "Mouse";
 
     private InputAction moveAction;
     private InputAction lookAction;
+    private InputAction jumpAction;
     private Camera playerCamera;
+    private float lastJumpPressedTime = -999f;
 
     private void Awake()
     {
@@ -19,8 +22,19 @@ public class PlayerInputSystem : MonoBehaviour
         }
         moveAction = inputActions?["Movement"];
         lookAction = inputActions?["Look"];
+        jumpAction = inputActions?["Jump"];
 
         playerCamera = Camera.main;
+    }
+
+    private void Start()
+    {
+        jumpAction.started += OnJumpPressed;
+    }
+
+    private void OnDestroy()
+    {
+        jumpAction.started -= OnJumpPressed;
     }
 
     private void OnEnable()
@@ -78,6 +92,19 @@ public class PlayerInputSystem : MonoBehaviour
         return new Vector3(processedInput.x, 0, processedInput.y);
     }
 
+    // 带缓冲
+    public bool HasBufferedJump()
+    {
+        return Time.time - lastJumpPressedTime < jumpBufferTime;
+    }
+
+    public void ConsumeBufferedJump()
+    {
+        lastJumpPressedTime = -999f;
+    }
+
+    public bool IsJumpReleasedThisFrame() => jumpAction.WasReleasedThisFrame();
+
     private Vector2 GetAxisWithCrossDeadZone(Vector2 axis)
     {
         float deadZone = InputSystem.settings.defaultDeadzoneMin;
@@ -87,5 +114,10 @@ public class PlayerInputSystem : MonoBehaviour
         float remapedLen = (len - deadZone) / (1 - deadZone);
         Vector2 dir = axis / len;
         return dir * remapedLen;
+    }
+
+    private void OnJumpPressed(InputAction.CallbackContext context)
+    {
+        lastJumpPressedTime = Time.time;
     }
 }

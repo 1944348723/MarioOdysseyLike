@@ -8,6 +8,7 @@ public abstract class EntityBase: MonoBehaviour
     public bool IsGrounded { get; protected set; } = true;
     public bool IsOnSlope { get; protected set; } = false;
     public float OriginalHeight { get; protected set; }
+    public float LastGoundedTime { get; protected set; }
 }
 
 /// <summary>
