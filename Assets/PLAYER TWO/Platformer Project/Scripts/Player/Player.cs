@@ -68,24 +68,14 @@ public class Player : Entity<Player>
 
     public void HandleJump()
     {
-        bool canCoyoteJump = JumpCouter == 0 && Time.time - LastGoundedTime < Stats.Current.coyoteJumpThreshold;
-        bool canMultiJump = JumpCouter > 0 && JumpCouter < Stats.Current.allowedJumpTimes;
-
         // 在地面上可以跳；还没有跳过但是离地了，如果在土狼跳允许时间内可以跳；已经跳过了但是在允许跳跃次数范围内可以再跳
-        if (IsGrounded || canCoyoteJump || canMultiJump)
+        if (CanJump() && Input.HasBufferedJump())
         {
-            if (Input.HasBufferedJump())
-            {
-                Input.ConsumeBufferedJump();
-                Jump(Stats.Current.maxJumpSpeed);
-            }
+            Input.ConsumeBufferedJump();
+            Jump(Stats.Current.maxJumpSpeed);
         }
 
-        // 跳跃上升中松开跳跃键会跳的比较低
-        if (Input.IsJumpReleasedThisFrame() && (JumpCouter > 0) && (Velocity.y > Stats.Current.minJumpSpeed))
-        {
-            VerticalVelocity = Vector3.up * Stats.Current.minJumpSpeed;
-        }
+        HandleJumpCut();
     }
 
     public void Fall()
@@ -97,12 +87,20 @@ public class Player : Entity<Player>
     }
 
     private void ResetJumps() => JumpCouter = 0;
+    
+    private bool CanJump()
+    {
+        bool canCoyoteJump = JumpCouter == 0 && Time.time - LastGoundedTime < Stats.Current.coyoteJumpThreshold;
+        bool canMultiJump = JumpCouter > 0 && JumpCouter < Stats.Current.allowedJumpTimes;
+        
+        return IsGrounded || canCoyoteJump || canMultiJump;
+    }
 
     private void Jump(float speed)
     {
         if (speed <= 0)
         {
-            Debug.LogWarning("[Player] Jump speed should be above 0");
+            Debug.LogError("[Player] Jump speed should be above 0");
             return;
         }
 
@@ -110,5 +108,14 @@ public class Player : Entity<Player>
         VerticalVelocity = Vector3.up * speed;
         StateMachine.Change<FallPlayerState>();
         playerEvents.Jumped?.Invoke();
+    }
+
+    private void HandleJumpCut()
+    {
+        // 跳跃上升中松开跳跃键会跳的比较低
+        if (Input.IsJumpReleasedThisFrame() && (JumpCouter > 0) && (Velocity.y > Stats.Current.minJumpSpeed))
+        {
+            VerticalVelocity = Vector3.up * Stats.Current.minJumpSpeed;
+        }
     }
 }
