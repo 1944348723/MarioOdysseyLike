@@ -1,14 +1,14 @@
 using UnityEngine;
 
-// 继承自MonoBehaviour，为了让所有Entity能够挂载、使用Unity声明周期函数
 public abstract class EntityBase: MonoBehaviour
 {
-    [SerializeField] protected CharacterController characterController; 
-    public Vector3 UnsizedPosition => transform.position;
-    public bool IsGrounded { get; protected set; } = true;
-    public bool IsOnSlope { get; protected set; } = false;
-    public float OriginalHeight { get; protected set; }
-    public float LastGoundedTime { get; protected set; }
+    public bool IsGrounded => groundDetector.IsGrounded;
+    public bool IsOnSlope => groundDetector.IsOnSlope;
+    public float LastGoundedTime => groundDetector.LastGoundedTime;
+
+    public EntityEvents entityEvents;
+
+    protected GroundDetector groundDetector;
 }
 
 /// <summary>
@@ -20,40 +20,45 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
 {
     public EntityStateManager<T> StateMachine { get; private set; }
     public Vector3 Velocity { get; set; }
+    public Vector3 PlanarVelocity
+    {
+        get { return new Vector3(Velocity.x, 0, Velocity.z); }
+        set { Velocity = new Vector3(value.x, Velocity.y, value.z); }
+    }
+    public Vector3 VerticalVelocity
+    {
+        get { return new Vector3(0, Velocity.y, 0); }
+        set { Velocity = new Vector3(Velocity.x, value.y, Velocity.z); }
+    }
+    public Vector3 UnsizedPosition => transform.position;
+    public float OriginalHeight { get; protected set; }
     // 倍率
     public float AccelerationMultiplier { get; set; } = 1f;
     public float DecelerationMultiplier { get; set; } = 1f;
     public float MaxSpeedMultiplier { get; set; } = 1f;
     public float TurningDragMultiplier { get; set; } = 1f;
     public float GravityMultiplier { get; set; } = 1f;
-
-    public Vector3 PlanarVelocity
-    {
-        get { return new Vector3(Velocity.x, 0, Velocity.z); }
-        set { Velocity = new Vector3(value.x, Velocity.y, value.z); }
-    }
-
-    public Vector3 VerticalVelocity
-    {
-        get { return new Vector3(0, Velocity.y, 0); }
-        set { Velocity = new Vector3(Velocity.x, value.y, Velocity.z); }
-    }
+    
+    protected CharacterController characterController; 
 
     protected virtual void Awake()
     {
         StateMachine = GetComponent<EntityStateManager<T>>();
         characterController = GetComponent<CharacterController>();
+        groundDetector = GetComponent<GroundDetector>();
     }
 
     protected virtual void Start()
     {
         InitializeCharacterController();
+        InitializeGroundDetector();
     }
 
     protected virtual void Update()
     {
         StateMachine.Step();
         Move();
+        groundDetector.Tick(transform.position + characterController.center, Velocity.y <= 0);
     }
 
     public void Accelerate(Vector3 direction, float acceleration, float turningDrag, float maxSpeed)
@@ -102,6 +107,15 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         PlanarVelocity = Vector3.MoveTowards(PlanarVelocity, Vector3.zero, deltaSpeed);
     }
 
+    public void SnapToGround(float speed)
+    {
+        // 防止影响到跳跃或者离地瞬间
+        if (IsGrounded && Velocity.y <= 0)
+        {
+            VerticalVelocity = Vector3.down * speed;
+        }
+    }
+
     private void InitializeCharacterController()
     {
         if (!characterController)
@@ -114,6 +128,23 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         OriginalHeight = characterController.height;
     }
 
+    private void InitializeGroundDetector()
+    {
+        if (!groundDetector)
+        {
+            groundDetector = gameObject.AddComponent<GroundDetector>();
+        }
+        groundDetector.Init(
+            characterController.height,
+            characterController.radius,
+            0.1f,
+            characterController.slopeLimit,
+            characterController.stepOffset
+        );
+        groundDetector.GroundEntered += OnGroundEntered;
+        groundDetector.GroundExited += OnGroundExited;
+    }
+
     private void Move()
     {
         if (characterController.enabled)
@@ -124,4 +155,17 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
             transform.position += Velocity * Time.deltaTime;
         }
     }
+
+    protected void OnGroundEntered()
+    {
+        entityEvents.EnterGround?.Invoke();
+    }
+
+    protected void OnGroundExited()
+    {
+        // 在地面上时会有贴地处理，如果离地时有向下的贴地速度，就将其清除，
+        VerticalVelocity = Vector3.Max(VerticalVelocity, Vector3.zero);
+        entityEvents.ExitGround?.Invoke();
+    }
+
 }

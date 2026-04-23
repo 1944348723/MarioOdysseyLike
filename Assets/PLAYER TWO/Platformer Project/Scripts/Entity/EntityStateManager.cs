@@ -60,6 +60,9 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
     {
         if (to == null || Time.timeScale == 0) return;
 
+        // TODO: 教程里可以重入状态，我改成了不能，后续如果哪里除了问题可以去掉试试
+        if (to.Equals(CurrentState)) return;
+
         if (CurrentState != null)
         {
             CurrentState.Exit(entity);

@@ -1,22 +1,31 @@
 using UnityEngine;
 
+// TODO: 当前在很陡的坡面上虽然判定为离地，但是不会往下掉，后续记得处理下
 public class Player : Entity<Player>
 {
     public PlayerInputSystem Input { get; protected set; }
     public PlayerStatsManager Stats { get; protected set; }
     public int JumpCouter { get; protected set; } = 0;
-    public PlayerEvents Events;
+    public PlayerEvents playerEvents;
 
     protected override void Awake()
     {
         base.Awake();
         Input = GetComponent<PlayerInputSystem>();
         Stats = GetComponent<PlayerStatsManager>();
+
+        entityEvents.EnterGround.AddListener(ResetJumps);
     }
 
     public void Accelerate(Vector3 direction)
     {
         base.Accelerate(direction.normalized, Stats.Current.acceleration, Stats.Current.turningDrag, Stats.Current.maxSpeed);
+    }
+
+    public void AccelerateToInputDirection()
+    {
+        Vector3 direction = Input.GetMoveDirectionBasedOnCamera();
+        Accelerate(direction);
     }
 
     public void FaceToDirectionSmoothly(Vector3 direction)
@@ -44,8 +53,6 @@ public class Player : Entity<Player>
 
     public void Gravity()
     {
-        // TODO: 去除IsGrounded状态写死
-        IsGrounded = false;
         if (!IsGrounded && Velocity.y > -Stats.Current.maxFallingSpeed)
         {
             float speed = Velocity.y;
@@ -57,10 +64,10 @@ public class Player : Entity<Player>
         }
     }
 
+    public void SnapToGround() => SnapToGround(Stats.Current.snapSpeed);
+
     public void HandleJump()
     {
-        // TODO: 去除IsGrounded写死
-        IsGrounded = true;
         bool canCoyoteJump = JumpCouter == 0 && Time.time - LastGoundedTime < Stats.Current.coyoteJumpThreshold;
         bool canMultiJump = JumpCouter > 0 && JumpCouter < Stats.Current.allowedJumpTimes;
 
@@ -81,6 +88,16 @@ public class Player : Entity<Player>
         }
     }
 
+    public void Fall()
+    {
+        if (!IsGrounded)
+        {
+            StateMachine.Change<FallPlayerState>();
+        }
+    }
+
+    private void ResetJumps() => JumpCouter = 0;
+
     private void Jump(float speed)
     {
         if (speed <= 0)
@@ -92,6 +109,6 @@ public class Player : Entity<Player>
         ++JumpCouter;
         VerticalVelocity = Vector3.up * speed;
         StateMachine.Change<FallPlayerState>();
-        Events.Jumped?.Invoke();
+        playerEvents.Jumped?.Invoke();
     }
 }

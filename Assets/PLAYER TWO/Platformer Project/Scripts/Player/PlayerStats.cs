@@ -4,7 +4,7 @@ public class PlayerStats : EntityStats<PlayerStats>
 {
     [Header("General Stats")]
     public float pushForce = 4f;                    // 推动物体的力
-    public float snapForce = 15f;                   // 将角色贴合到地面的吸附力
+    public float snapSpeed = 15f;                   // 将角色贴合到地面的速度
     public float slideForce = 10;                   // 下坡滑动的额外推力
     public float rotationSpeed = 970f;              // 玩家角色转动速度(°/s)
     public float gravity = 38f;                     // 普通重力加速度
