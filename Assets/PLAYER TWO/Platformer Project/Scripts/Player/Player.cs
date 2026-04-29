@@ -8,13 +8,17 @@ public class Player : Entity<Player>
     public int JumpCouter { get; protected set; } = 0;
     public PlayerEvents playerEvents;
 
+    protected DamageReceiver damageReceiver;
+
     protected override void Awake()
     {
         base.Awake();
         Input = GetComponent<PlayerInputSystem>();
         Stats = GetComponent<PlayerStatsManager>();
+        damageReceiver = GetComponent<DamageReceiver>();
 
         entityEvents.EnterGround.AddListener(ResetJumps);
+        damageReceiver.Damaged += OnDamaged;
     }
 
     public void Accelerate(Vector3 direction)
@@ -117,5 +121,10 @@ public class Player : Entity<Player>
         {
             VerticalVelocity = Vector3.up * Stats.Current.minJumpSpeed;
         }
+    }
+
+    private void OnDamaged(DamageInfo info)
+    {
+        Debug.Log("Dameged");
     }
 }
