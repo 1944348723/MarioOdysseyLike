@@ -2250,6 +2250,9 @@ MonoBehaviour:
     Jumped:
       m_PersistentCalls:
         m_Calls: []
+    Hurt:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8781868022193014602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2277,6 +2280,7 @@ MonoBehaviour:
   - WalkPlayerState
   - BrakePlayerState
   - FallPlayerState
+  - HurtPlayerState
 --- !u!114 &8242637588224000856
 MonoBehaviour:
   m_ObjectHideFlags: 0

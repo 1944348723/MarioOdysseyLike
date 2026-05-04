@@ -5,10 +5,14 @@ public class Player : Entity<Player>
 {
     public PlayerInputSystem Input { get; protected set; }
     public PlayerStatsManager Stats { get; protected set; }
-    public int JumpCouter { get; protected set; } = 0;
+    public bool IsDead { get { return health.IsDead; }}
+    public bool IsInWater { get; protected set; } = false;
+
     public PlayerEvents playerEvents;
 
-    protected DamageReceiver damageReceiver;
+    private DamageReceiver damageReceiver;
+    private Health health;
+    private int jumpCouter = 0;
 
     protected override void Awake()
     {
@@ -16,6 +20,7 @@ public class Player : Entity<Player>
         Input = GetComponent<PlayerInputSystem>();
         Stats = GetComponent<PlayerStatsManager>();
         damageReceiver = GetComponent<DamageReceiver>();
+        health = GetComponent<Health>();
 
         entityEvents.EnterGround.AddListener(ResetJumps);
         damageReceiver.Damaged += OnDamaged;
@@ -90,12 +95,12 @@ public class Player : Entity<Player>
         }
     }
 
-    private void ResetJumps() => JumpCouter = 0;
+    private void ResetJumps() => jumpCouter = 0;
     
     private bool CanJump()
     {
-        bool canCoyoteJump = JumpCouter == 0 && Time.time - LastGoundedTime < Stats.Current.coyoteJumpThreshold;
-        bool canMultiJump = JumpCouter > 0 && JumpCouter < Stats.Current.allowedJumpTimes;
+        bool canCoyoteJump = jumpCouter == 0 && Time.time - LastGoundedTime < Stats.Current.coyoteJumpThreshold;
+        bool canMultiJump = jumpCouter > 0 && jumpCouter < Stats.Current.allowedJumpTimes;
         
         return IsGrounded || canCoyoteJump || canMultiJump;
     }
@@ -108,7 +113,7 @@ public class Player : Entity<Player>
             return;
         }
 
-        ++JumpCouter;
+        ++jumpCouter;
         VerticalVelocity = Vector3.up * speed;
         StateMachine.Change<FallPlayerState>();
         playerEvents.Jumped?.Invoke();
@@ -117,7 +122,7 @@ public class Player : Entity<Player>
     private void HandleJumpCut()
     {
         // 跳跃上升中松开跳跃键会跳的比较低
-        if (Input.IsJumpReleasedThisFrame() && (JumpCouter > 0) && (Velocity.y > Stats.Current.minJumpSpeed))
+        if (Input.IsJumpReleasedThisFrame() && (jumpCouter > 0) && (Velocity.y > Stats.Current.minJumpSpeed))
         {
             VerticalVelocity = Vector3.up * Stats.Current.minJumpSpeed;
         }
@@ -125,6 +130,18 @@ public class Player : Entity<Player>
 
     private void OnDamaged(DamageInfo info)
     {
-        Debug.Log("Dameged");
+        Vector3 dirToDamageSource = info.sourcePosition - transform.position;
+        Vector3 planarDirToDamageSource = new(dirToDamageSource.x, 0, dirToDamageSource.z);
+        planarDirToDamageSource.Normalize();
+
+        transform.LookAt(transform.position + planarDirToDamageSource);
+        PlanarVelocity = -planarDirToDamageSource * Stats.Current.hurtBackwardSpeed;
+        if (!IsInWater)
+        {
+            VerticalVelocity = Vector3.up * Stats.Current.hurtUpwardSpeed;
+            StateMachine.Change<HurtPlayerState>();
+        }
+
+        playerEvents.Hurt?.Invoke();
     }
 }

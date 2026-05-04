@@ -5,4 +5,5 @@ using UnityEngine.Events;
 public class PlayerEvents
 {
     public UnityEvent Jumped;
+    public UnityEvent Hurt;
 }
