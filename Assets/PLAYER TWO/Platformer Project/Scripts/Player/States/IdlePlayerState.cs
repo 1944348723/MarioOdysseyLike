@@ -20,7 +20,10 @@ public class IdlePlayerState : PlayerState
         player.Fall();
 
         Vector3 inputDirection = player.Input.GetMovementDirection();
-        if (inputDirection.sqrMagnitude > 0 || player.PlanarVelocity.sqrMagnitude > 0)
+        if (player.Input.IsCrouchAndCrawlPressed())
+        {
+            player.StateMachine.Change<CrouchPlayerState>();
+        } else if (inputDirection.sqrMagnitude > 0 || player.PlanarVelocity.sqrMagnitude > 0)
         {
             player.StateMachine.Change<WalkPlayerState>();
         }

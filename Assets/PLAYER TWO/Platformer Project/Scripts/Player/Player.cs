@@ -95,6 +95,16 @@ public class Player : Entity<Player>
         }
     }
 
+    public bool CanStandUp()
+    {
+        return !Physics.SphereCast(
+            transform.position + characterController.center,
+            characterController.radius,
+            Vector3.up,
+            out _,
+            characterController.height / 2);
+    }
+
     private void ResetJumps() => jumpCouter = 0;
     
     private bool CanJump()

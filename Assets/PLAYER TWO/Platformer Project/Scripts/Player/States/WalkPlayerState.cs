@@ -43,5 +43,9 @@ public class WalkPlayerState : PlayerState
             }
         }
 
+        if (player.Input.IsCrouchAndCrawlPressed())
+        {
+            player.StateMachine.Change<CrouchPlayerState>();
+        }
     }
 }

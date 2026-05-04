@@ -116,6 +116,14 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         }
     }
 
+    public void ResizeColliderHeight(float height)
+    {
+        float delta = height - characterController.height;
+        characterController.height = height;
+        characterController.center += 0.5f * delta * Vector3.up;
+        groundDetector.Height = height;
+    }
+
     private void InitializeCharacterController()
     {
         if (!characterController)

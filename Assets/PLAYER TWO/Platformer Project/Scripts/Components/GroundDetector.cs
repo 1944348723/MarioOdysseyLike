@@ -25,6 +25,17 @@ public class GroundDetector : MonoBehaviour
     public bool IsGrounded { get; private set; }
     public bool IsOnSlope { get; private set; }
     public float LastGoundedTime { get; private set; }
+    public float Height
+    {
+        get => height;
+        set
+        {
+            if (value > 0)
+            {
+                height = value;
+            }
+        }
+    }
 
     public Action GroundEntered;
     public Action GroundExited;
