@@ -15,5 +15,10 @@ public class DiePlayerState : PlayerState
     protected override void OnStep(Player player) {
         player.Gravity();
         player.SnapToGround();
+
+        if (player.IsGrounded && player.Velocity.y <= 0)
+        {
+            player.PlanarVelocity = Vector3.zero;
+        }
     }
 }

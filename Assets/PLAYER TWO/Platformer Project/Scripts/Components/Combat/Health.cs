@@ -57,7 +57,7 @@ public class Health : MonoBehaviour
 
         int prev = Current;
         Current -= value;
-        if (Current < 0) {
+        if (Current <= 0) {
             Current = 0;
             IsDead = true;
         }
