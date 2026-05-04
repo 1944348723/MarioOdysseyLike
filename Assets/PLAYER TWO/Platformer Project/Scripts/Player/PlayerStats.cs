@@ -38,4 +38,10 @@ public class PlayerStats : EntityStats<PlayerStats>
     [Header("Crouch Stats")]
     public float crouchHeight = 1f;
     public float crouchFriction = 10f;
+
+    [Header("Crawl Stats")]
+    public float crawlAcceleration = 8f;
+    public float crawlFriction = 32f;
+    public float crawlMaxSpeed = 2.5f;
+    public float crawlTurningSpeed = 3f;
 }

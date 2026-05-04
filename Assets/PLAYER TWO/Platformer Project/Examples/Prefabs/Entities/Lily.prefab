@@ -2286,6 +2286,7 @@ MonoBehaviour:
   - IdlePlayerState
   - IdlePlayerState
   - CrouchPlayerState
+  - CrawlPlayerState
 --- !u!114 &8242637588224000856
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class CrouchPlayerState : PlayerState
         Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
         if (inputDirection != Vector3.zero && player.PlanarVelocity == Vector3.zero)
         {
-            // player.StateMachine.Change<CrawlPlayerState>();
+            player.StateMachine.Change<CrawlPlayerState>();
         }
     }
 }
