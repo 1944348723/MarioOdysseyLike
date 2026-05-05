@@ -2253,6 +2253,9 @@ MonoBehaviour:
     Hurt:
       m_PersistentCalls:
         m_Calls: []
+    Backfliped:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8781868022193014602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2287,6 +2290,12 @@ MonoBehaviour:
   - IdlePlayerState
   - CrouchPlayerState
   - CrawlPlayerState
+  - IdlePlayerState
+  - IdlePlayerState
+  - IdlePlayerState
+  - IdlePlayerState
+  - IdlePlayerState
+  - BackflipPlayerState
 --- !u!114 &8242637588224000856
 MonoBehaviour:
   m_ObjectHideFlags: 0

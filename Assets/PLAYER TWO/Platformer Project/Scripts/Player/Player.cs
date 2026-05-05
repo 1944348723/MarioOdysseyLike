@@ -73,6 +73,17 @@ public class Player : Entity<Player>
         }
     }
 
+    public void Gravity(float gravity)
+    {
+        if (gravity <= 0) return;
+
+        if (!IsGrounded)
+        {
+            Debug.Log("Gravity");
+            VerticalVelocity += gravity * GravityMultiplier * Time.deltaTime * Vector3.down;
+        }
+    }
+
     public void SnapToGround() => SnapToGround(Stats.Current.snapSpeed);
 
     public void HandleJump()
@@ -103,6 +114,19 @@ public class Player : Entity<Player>
             Vector3.up,
             out _,
             characterController.height / 2);
+    }
+
+    public void BackFlip()
+    {
+        if (Stats.Current.canBackFlip)
+        {
+            VerticalVelocity = Vector3.up * Stats.Current.backflipUpwardSpeed;
+            PlanarVelocity = -transform.forward * Stats.Current.backflipBackwardSpeed;
+            --jumpCouter;
+            StateMachine.Change<BackflipPlayerState>();
+            playerEvents.Jumped?.Invoke();
+            playerEvents.Backfliped?.Invoke();
+        }
     }
 
     private void ResetJumps() => jumpCouter = 0;

@@ -6,6 +6,8 @@ public class PlayerInputSystem : MonoBehaviour
     [SerializeField] private InputActionAsset inputActions;
     [SerializeField] private float jumpBufferTime = 0.15f;
 
+    public bool MoveLocked { get; set; } = false;
+
     private const string MOUSE_DEVICE_NAME = "Mouse";
 
     private InputAction moveAction;
@@ -59,7 +61,7 @@ public class PlayerInputSystem : MonoBehaviour
     public Vector3 GetMoveDirectionBasedOnCamera()
     {
         Vector3 inputDirection = GetMovementDirection();
-        if (inputDirection.sqrMagnitude == 0) return inputDirection;
+        if (inputDirection == Vector3.zero) return inputDirection;
 
         // 绕竖直向上方向(y轴)旋转camera的y轴欧拉角那么多
         // 相当于把输入坐标系从世界默认前方转到了相机水平前方
@@ -68,6 +70,15 @@ public class PlayerInputSystem : MonoBehaviour
         
         direction.Normalize();
         return direction;
+    }
+
+    public Vector3 GetMovementDirection()
+    {
+        if (MoveLocked) return Vector3.zero;
+        
+        Vector2 inputValue = moveAction.ReadValue<Vector2>();
+        Vector2 processedInput = GetAxisWithCrossDeadZone(inputValue);
+        return new Vector3(processedInput.x, 0, processedInput.y);
     }
 
     public Vector2 GetLookDelta()
@@ -86,13 +97,6 @@ public class PlayerInputSystem : MonoBehaviour
     {
         if (lookAction.activeControl == null) return false;
         return lookAction.activeControl.device.name.Equals(MOUSE_DEVICE_NAME);
-    }
-
-    public Vector3 GetMovementDirection()
-    {
-        Vector2 inputValue = moveAction.ReadValue<Vector2>();
-        Vector2 processedInput = GetAxisWithCrossDeadZone(inputValue);
-        return new Vector3(processedInput.x, 0, processedInput.y);
     }
 
     // 带缓冲

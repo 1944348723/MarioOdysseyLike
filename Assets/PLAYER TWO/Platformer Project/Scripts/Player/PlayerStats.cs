@@ -11,7 +11,6 @@ public class PlayerStats : EntityStats<PlayerStats>
     public float fallGravity = 65f;                 // 下落时额外重力加速度
     public float maxFallingSpeed = 50f;             // 重力作用下的最大下落速度
 
-
     [Header("Motion Stats")]
     public bool applySlopeFactor = true;            // 是否考虑坡度因子
     public float acceleration = 13f;                // 加速度
@@ -44,4 +43,14 @@ public class PlayerStats : EntityStats<PlayerStats>
     public float crawlFriction = 32f;
     public float crawlMaxSpeed = 2.5f;
     public float crawlTurningSpeed = 3f;
+
+    [Header("Backflip Stats")]
+    public bool canBackFlip = true;
+    public bool lockMovementDuringBackflip = true;
+    public float backflipUpwardSpeed = 23f;
+    public float backflipBackwardSpeed = 4f;
+    public float backflipGravity = 35f;
+    public float backflipAirAcceleration = 12f;
+    public float backflipAirTurningSpeed = 2.5f;
+    public float backflipAirMaxSpeed = 7.5f;
 }

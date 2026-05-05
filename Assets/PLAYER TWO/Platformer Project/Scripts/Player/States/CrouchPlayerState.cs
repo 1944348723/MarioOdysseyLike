@@ -36,6 +36,9 @@ public class CrouchPlayerState : PlayerState
         if (inputDirection != Vector3.zero && player.PlanarVelocity == Vector3.zero)
         {
             player.StateMachine.Change<CrawlPlayerState>();
+        } else if (player.Input.HasBufferedJump())
+        {
+            player.BackFlip();
         }
     }
 }
