@@ -14,6 +14,7 @@ public class PlayerInputSystem : MonoBehaviour
     private InputAction lookAction;
     private InputAction jumpAction;
     private InputAction crouchAndCrawlAction;
+    private InputAction dashAction;
 
     private Camera playerCamera;
     private float lastJumpPressedTime = -999f;
@@ -28,6 +29,7 @@ public class PlayerInputSystem : MonoBehaviour
         lookAction = inputActions?["Look"];
         jumpAction = inputActions?["Jump"];
         crouchAndCrawlAction = inputActions?["Crouch"];
+        dashAction = inputActions?["Dash"];
 
         playerCamera = Camera.main;
     }
@@ -75,7 +77,7 @@ public class PlayerInputSystem : MonoBehaviour
     public Vector3 GetMovementDirection()
     {
         if (MoveLocked) return Vector3.zero;
-        
+
         Vector2 inputValue = moveAction.ReadValue<Vector2>();
         Vector2 processedInput = GetAxisWithCrossDeadZone(inputValue);
         return new Vector3(processedInput.x, 0, processedInput.y);
@@ -112,6 +114,7 @@ public class PlayerInputSystem : MonoBehaviour
 
     public bool IsJumpReleasedThisFrame() => jumpAction.WasReleasedThisFrame();
     public bool IsCrouchAndCrawlPressed() => crouchAndCrawlAction.IsPressed();
+    public bool IsDashPressedThisFrame() => dashAction.WasPressedThisFrame();
 
     private Vector2 GetAxisWithCrossDeadZone(Vector2 axis)
     {
@@ -128,4 +131,5 @@ public class PlayerInputSystem : MonoBehaviour
     {
         lastJumpPressedTime = Time.time;
     }
+
 }

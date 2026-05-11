@@ -18,6 +18,11 @@ public class WalkPlayerState : PlayerState
         player.SnapToGround();
         player.HandleJump();
         player.Fall();
+        if (player.ShouldDash())
+        {
+            player.Dash();
+            return;
+        }
         
         Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
 

@@ -2256,6 +2256,12 @@ MonoBehaviour:
     Backfliped:
       m_PersistentCalls:
         m_Calls: []
+    DashStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    DashEnded:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8781868022193014602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2296,6 +2302,8 @@ MonoBehaviour:
   - IdlePlayerState
   - IdlePlayerState
   - BackflipPlayerState
+  - IdlePlayerState
+  - DashPlayerState
 --- !u!114 &8242637588224000856
 MonoBehaviour:
   m_ObjectHideFlags: 0

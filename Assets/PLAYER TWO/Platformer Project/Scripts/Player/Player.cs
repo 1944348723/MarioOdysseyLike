@@ -13,6 +13,7 @@ public class Player : Entity<Player>
     private DamageReceiver damageReceiver;
     private Health health;
     private int jumpCouter = 0;
+    private float lastDashTime = 0f;
 
     protected override void Awake()
     {
@@ -127,6 +128,23 @@ public class Player : Entity<Player>
             playerEvents.Jumped?.Invoke();
             playerEvents.Backfliped?.Invoke();
         }
+    }
+
+    public bool ShouldDash()
+    {
+        bool canGroundDash = IsGrounded
+            && Stats.Current.canGroundDash
+            && Time.time - lastDashTime >= Stats.Current.dashCoolDown;
+        bool canAirDash = !IsGrounded
+            && Stats.Current.canAirDash
+            && Time.time - lastDashTime >= Stats.Current.dashCoolDown;
+        return Input.IsDashPressedThisFrame() && (canGroundDash || canAirDash);
+    }
+
+    public void Dash()
+    {
+        lastDashTime = Time.time;
+        StateMachine.Change<DashPlayerState>();
     }
 
     private void ResetJumps() => jumpCouter = 0;

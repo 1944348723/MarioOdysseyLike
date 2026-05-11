@@ -14,7 +14,11 @@ public class FallPlayerState : PlayerState
         player.HandleJump();
         player.FaceToDirectionSmoothly(player.PlanarVelocity);
         player.AccelerateToInputDirection();
-        player.Fall();
+        if (player.ShouldDash())
+        {
+            player.Dash();
+            return;
+        }
 
         if (player.IsGrounded)
         {

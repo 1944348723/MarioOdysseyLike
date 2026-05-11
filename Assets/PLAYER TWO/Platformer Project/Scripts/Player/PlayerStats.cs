@@ -53,4 +53,11 @@ public class PlayerStats : EntityStats<PlayerStats>
     public float backflipAirAcceleration = 12f;
     public float backflipAirTurningSpeed = 2.5f;
     public float backflipAirMaxSpeed = 7.5f;
+
+    [Header("Dash Stats")]
+    public bool canGroundDash = true;
+    public bool canAirDash = true;
+    public float dashSpeed = 25f;
+    public float dashDuration = 0.3f;
+    public float dashCoolDown = 0.5f;
 }
