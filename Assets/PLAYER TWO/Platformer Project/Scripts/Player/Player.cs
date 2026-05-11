@@ -7,12 +7,12 @@ public class Player : Entity<Player>
     public PlayerStatsManager Stats { get; protected set; }
     public bool IsDead { get { return health.IsDead; }}
     public bool IsInWater { get; protected set; } = false;
+    public int JumpCouter { get; protected set; } = 0;
 
     public PlayerEvents playerEvents;
 
     private DamageReceiver damageReceiver;
     private Health health;
-    private int jumpCouter = 0;
     private float lastDashTime = 0f;
 
     protected override void Awake()
@@ -80,23 +80,18 @@ public class Player : Entity<Player>
 
         if (!IsGrounded)
         {
-            Debug.Log("Gravity");
             VerticalVelocity += gravity * GravityMultiplier * Time.deltaTime * Vector3.down;
         }
     }
 
     public void SnapToGround() => SnapToGround(Stats.Current.snapSpeed);
 
-    public void HandleJump()
+    public bool TryJump()
     {
-        // 在地面上可以跳；还没有跳过但是离地了，如果在土狼跳允许时间内可以跳；已经跳过了但是在允许跳跃次数范围内可以再跳
-        if (CanJump() && Input.HasBufferedJump())
-        {
-            Input.ConsumeBufferedJump();
-            Jump(Stats.Current.maxJumpSpeed);
-        }
-
-        HandleJumpCut();
+        if (!Input.HasBufferedJump() || !CanJump()) return false;
+        Input.ConsumeBufferedJump();
+        Jump(Stats.Current.maxJumpSpeed);
+        return true;
     }
 
     public void Fall()
@@ -123,7 +118,7 @@ public class Player : Entity<Player>
         {
             VerticalVelocity = Vector3.up * Stats.Current.backflipUpwardSpeed;
             PlanarVelocity = -transform.forward * Stats.Current.backflipBackwardSpeed;
-            --jumpCouter;
+            --JumpCouter;
             StateMachine.Change<BackflipPlayerState>();
             playerEvents.Jumped?.Invoke();
             playerEvents.Backfliped?.Invoke();
@@ -147,12 +142,12 @@ public class Player : Entity<Player>
         StateMachine.Change<DashPlayerState>();
     }
 
-    private void ResetJumps() => jumpCouter = 0;
+    private void ResetJumps() => JumpCouter = 0;
     
     private bool CanJump()
     {
-        bool canCoyoteJump = jumpCouter == 0 && Time.time - LastGoundedTime < Stats.Current.coyoteJumpThreshold;
-        bool canMultiJump = jumpCouter > 0 && jumpCouter < Stats.Current.allowedJumpTimes;
+        bool canCoyoteJump = JumpCouter == 0 && Time.time - LastGoundedTime < Stats.Current.coyoteJumpThreshold;
+        bool canMultiJump = JumpCouter > 0 && JumpCouter < Stats.Current.allowedJumpTimes;
         
         return IsGrounded || canCoyoteJump || canMultiJump;
     }
@@ -165,19 +160,10 @@ public class Player : Entity<Player>
             return;
         }
 
-        ++jumpCouter;
+        ++JumpCouter;
         VerticalVelocity = Vector3.up * speed;
         StateMachine.Change<FallPlayerState>();
         playerEvents.Jumped?.Invoke();
-    }
-
-    private void HandleJumpCut()
-    {
-        // 跳跃上升中松开跳跃键会跳的比较低
-        if (Input.IsJumpReleasedThisFrame() && (jumpCouter > 0) && (Velocity.y > Stats.Current.minJumpSpeed))
-        {
-            VerticalVelocity = Vector3.up * Stats.Current.minJumpSpeed;
-        }
     }
 
     private void OnDamaged(DamageInfo info)

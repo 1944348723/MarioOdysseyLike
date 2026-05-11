@@ -14,9 +14,8 @@ public class WalkPlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
-        player.Gravity();
         player.SnapToGround();
-        player.HandleJump();
+        if (player.TryJump()) return;
         player.Fall();
         if (player.ShouldDash())
         {

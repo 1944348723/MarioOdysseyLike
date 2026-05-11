@@ -11,7 +11,8 @@ public class FallPlayerState : PlayerState
     protected override void OnStep(Player player)
     {
         player.Gravity();
-        player.HandleJump();
+        HandleJumpCut(player);
+        if (player.TryJump()) return;
         player.FaceToDirectionSmoothly(player.PlanarVelocity);
         player.AccelerateToInputDirection();
         if (player.ShouldDash())
@@ -35,5 +36,16 @@ public class FallPlayerState : PlayerState
     protected override void OnExit(Player player)
     {
         Debug.Log("FallPlayerState Exited");
+    }
+    
+    private void HandleJumpCut(Player player)
+    {
+        // 跳跃上升中松开跳跃键会跳的比较低
+        if (player.Input.IsJumpReleasedThisFrame()
+            && player.JumpCouter > 0
+            && player.Velocity.y > player.Stats.Current.minJumpSpeed)
+        {
+            player.VerticalVelocity = Vector3.up * player.Stats.Current.minJumpSpeed;
+        }
     }
 }

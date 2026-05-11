@@ -7,8 +7,8 @@ public class DashPlayerState : PlayerState
     {
         player.PlanarVelocity = player.transform.forward * player.Stats.Current.dashSpeed;
         player.VerticalVelocity = Vector3.zero;
-        player.playerEvents.DashStarted?.Invoke();
         timer = 0;
+        player.playerEvents.DashStarted?.Invoke();
     }
 
     protected override void OnExit(Player player) {
