@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 // TODO: 当前在很陡的坡面上虽然判定为离地，但是不会往下掉，后续记得处理下
@@ -119,6 +120,17 @@ public class Player : Entity<Player>
         return true;
     }
 
+    public bool TryBackFlip()
+    {
+        if (Input.HasBufferedJump() && Stats.Current.canBackFlip)
+        {
+            --JumpCouter;
+            StateMachine.Change<BackflipPlayerState>();
+            return true;
+        }
+        return false;
+    }
+
     public bool CanStandUp()
     {
         return !Physics.SphereCast(
@@ -129,18 +141,6 @@ public class Player : Entity<Player>
             characterController.height / 2);
     }
 
-    public void BackFlip()
-    {
-        if (Stats.Current.canBackFlip)
-        {
-            VerticalVelocity = Vector3.up * Stats.Current.backflipUpwardSpeed;
-            PlanarVelocity = -transform.forward * Stats.Current.backflipBackwardSpeed;
-            --JumpCouter;
-            StateMachine.Change<BackflipPlayerState>();
-            playerEvents.Jumped?.Invoke();
-            playerEvents.Backfliped?.Invoke();
-        }
-    }
 
     public bool CanDash()
     {

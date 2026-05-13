@@ -4,10 +4,14 @@ public class BackflipPlayerState : PlayerState
 {
     protected override void OnEnter(Player player)
     {
+        player.VerticalVelocity = Vector3.up * player.Stats.Current.backflipUpwardSpeed;
+        player.PlanarVelocity = -player.transform.forward * player.Stats.Current.backflipBackwardSpeed;
         if (player.Stats.Current.lockMovementDuringBackflip)
         {
             player.Input.MoveLocked = true;
         }
+        player.playerEvents.Jumped?.Invoke();
+        player.playerEvents.Backfliped?.Invoke();
     }
 
     protected override void OnExit(Player player) {

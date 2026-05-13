@@ -14,6 +14,7 @@ public class CrouchPlayerState : PlayerState
 
     protected override void OnStep(Player player) {
         if (player.TryFall()) return;
+        if (player.TryBackFlip()) return;
 
         player.SnapToGround();
         player.Decelerate(player.Stats.Current.crouchFriction);
@@ -36,9 +37,6 @@ public class CrouchPlayerState : PlayerState
         if (inputDirection != Vector3.zero && player.PlanarVelocity == Vector3.zero)
         {
             player.StateMachine.Change<CrawlPlayerState>();
-        } else if (player.Input.HasBufferedJump())
-        {
-            player.BackFlip();
         }
     }
 }
