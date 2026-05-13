@@ -104,9 +104,18 @@ public class Player : Entity<Player>
 
     public bool TryCrouch()
     {
-        if (!IsGrounded || !Input.IsCrouchPressedThisFrame()) return false;
+        // 检测式，不需要是这一帧按下的，这样在空中就可以一直按住下蹲键，落地就会直接蹲下
+        if (!IsGrounded || !Input.IsCrouchPressed()) return false;
         
         StateMachine.Change<CrouchPlayerState>();
+        return true;
+    }
+    public bool TryDash()
+    {
+        if (!Input.IsDashPressedThisFrame() || !CanDash()) return false;
+
+        lastDashTime = Time.time;
+        StateMachine.Change<DashPlayerState>();
         return true;
     }
 
@@ -144,14 +153,6 @@ public class Player : Entity<Player>
         return canGroundDash || canAirDash;
     }
 
-    public bool TryDash()
-    {
-        if (!Input.IsDashPressedThisFrame() || !CanDash()) return false;
-
-        lastDashTime = Time.time;
-        StateMachine.Change<DashPlayerState>();
-        return true;
-    }
 
     private void ResetJumps() => JumpCouter = 0;
     
