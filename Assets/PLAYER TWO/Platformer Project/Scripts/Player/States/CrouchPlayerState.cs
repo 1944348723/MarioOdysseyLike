@@ -13,9 +13,9 @@ public class CrouchPlayerState : PlayerState
     }
 
     protected override void OnStep(Player player) {
-        player.Gravity();
+        if (player.TryFall()) return;
+
         player.SnapToGround();
-        player.Fall();
         player.Decelerate(player.Stats.Current.crouchFriction);
 
         // 站起来

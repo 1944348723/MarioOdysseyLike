@@ -14,14 +14,16 @@ public class WalkPlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
-        player.SnapToGround();
         if (player.TryJump()) return;
-        player.Fall();
-        if (player.ShouldDash())
+        if (player.TryDash()) return;
+        if (player.TryFall()) return;
+        if (player.Input.IsCrouchAndCrawlPressed())
         {
-            player.Dash();
+            player.StateMachine.Change<CrouchPlayerState>();
             return;
         }
+
+        player.SnapToGround();
         
         Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
 
@@ -47,9 +49,5 @@ public class WalkPlayerState : PlayerState
             }
         }
 
-        if (player.Input.IsCrouchAndCrawlPressed())
-        {
-            player.StateMachine.Change<CrouchPlayerState>();
-        }
     }
 }

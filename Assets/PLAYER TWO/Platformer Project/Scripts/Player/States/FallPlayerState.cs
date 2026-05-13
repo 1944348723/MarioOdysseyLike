@@ -10,16 +10,13 @@ public class FallPlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
-        player.Gravity();
         HandleJumpCut(player);
         if (player.TryJump()) return;
-        player.FaceToDirectionSmoothly(player.PlanarVelocity);
+        if (player.TryDash()) return;
+
+        player.Gravity();
         player.AccelerateToInputDirection();
-        if (player.ShouldDash())
-        {
-            player.Dash();
-            return;
-        }
+        player.FaceToDirectionSmoothly(player.PlanarVelocity);
 
         if (player.IsGrounded)
         {

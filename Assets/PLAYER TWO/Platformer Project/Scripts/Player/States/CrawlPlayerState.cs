@@ -13,10 +13,10 @@ public class CrawlPlayerState : PlayerState
     }
 
     protected override void OnStep(Player player) {
-        player.Gravity();
-        player.SnapToGround();
         if (player.TryJump()) return;
-        player.Fall();
+        if (player.TryFall()) return;
+
+        player.SnapToGround();
 
         Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
 

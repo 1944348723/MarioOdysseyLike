@@ -25,10 +25,10 @@ public class BrakePlayerState : PlayerState
                 player.Gravity();
                 player.SnapToGround();
                 player.Decelerate();
-                player.Fall();
+                if (player.TryFall()) return;
 
                 // 防止进入掉落状态后这里又进到了Idle状态
-                if (player.StateMachine.CurrentState.Equals(this) && player.PlanarVelocity == Vector3.zero)
+                if (player.PlanarVelocity == Vector3.zero)
                 {
                     player.StateMachine.Change<IdlePlayerState>();
                 }

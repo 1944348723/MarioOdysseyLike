@@ -14,10 +14,10 @@ public class IdlePlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
-        player.SnapToGround();
-
         if (player.TryJump()) return;
-        player.Fall();
+        if (player.TryFall()) return;
+
+        player.SnapToGround();
 
         Vector3 inputDirection = player.Input.GetMovementDirection();
         if (player.Input.IsCrouchAndCrawlPressed())

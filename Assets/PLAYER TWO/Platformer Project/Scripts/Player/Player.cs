@@ -94,12 +94,12 @@ public class Player : Entity<Player>
         return true;
     }
 
-    public void Fall()
+    public bool TryFall()
     {
-        if (!IsGrounded)
-        {
-            StateMachine.Change<FallPlayerState>();
-        }
+        if (IsGrounded) return false;
+
+        StateMachine.Change<FallPlayerState>();
+        return true;
     }
 
     public bool CanStandUp()
@@ -125,7 +125,7 @@ public class Player : Entity<Player>
         }
     }
 
-    public bool ShouldDash()
+    public bool CanDash()
     {
         bool canGroundDash = IsGrounded
             && Stats.Current.canGroundDash
@@ -133,13 +133,16 @@ public class Player : Entity<Player>
         bool canAirDash = !IsGrounded
             && Stats.Current.canAirDash
             && Time.time - lastDashTime >= Stats.Current.dashCoolDown;
-        return Input.IsDashPressedThisFrame() && (canGroundDash || canAirDash);
+        return canGroundDash || canAirDash;
     }
 
-    public void Dash()
+    public bool TryDash()
     {
+        if (!Input.IsDashPressedThisFrame() || !CanDash()) return false;
+
         lastDashTime = Time.time;
         StateMachine.Change<DashPlayerState>();
+        return true;
     }
 
     private void ResetJumps() => JumpCouter = 0;
