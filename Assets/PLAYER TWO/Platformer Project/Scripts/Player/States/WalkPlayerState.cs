@@ -17,11 +17,7 @@ public class WalkPlayerState : PlayerState
         if (player.TryJump()) return;
         if (player.TryDash()) return;
         if (player.TryFall()) return;
-        if (player.Input.IsCrouchAndCrawlPressed())
-        {
-            player.StateMachine.Change<CrouchPlayerState>();
-            return;
-        }
+        if (player.TryCrouch()) return;
 
         player.SnapToGround();
         

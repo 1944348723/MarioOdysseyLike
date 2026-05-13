@@ -102,6 +102,14 @@ public class Player : Entity<Player>
         return true;
     }
 
+    public bool TryCrouch()
+    {
+        if (!IsGrounded || !Input.IsCrouchPressedThisFrame()) return false;
+        
+        StateMachine.Change<CrouchPlayerState>();
+        return true;
+    }
+
     public bool CanStandUp()
     {
         return !Physics.SphereCast(

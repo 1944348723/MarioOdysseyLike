@@ -16,14 +16,12 @@ public class IdlePlayerState : PlayerState
     {
         if (player.TryJump()) return;
         if (player.TryFall()) return;
+        if (player.TryCrouch()) return;
 
         player.SnapToGround();
 
         Vector3 inputDirection = player.Input.GetMovementDirection();
-        if (player.Input.IsCrouchAndCrawlPressed())
-        {
-            player.StateMachine.Change<CrouchPlayerState>();
-        } else if (inputDirection.sqrMagnitude > 0 || player.PlanarVelocity.sqrMagnitude > 0)
+        if (inputDirection != Vector3.zero)
         {
             player.StateMachine.Change<WalkPlayerState>();
         }

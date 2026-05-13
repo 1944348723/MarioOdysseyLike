@@ -114,6 +114,7 @@ public class PlayerInputSystem : MonoBehaviour
 
     public bool IsJumpReleasedThisFrame() => jumpAction.WasReleasedThisFrame();
     public bool IsCrouchAndCrawlPressed() => crouchAndCrawlAction.IsPressed();
+    public bool IsCrouchPressedThisFrame() => crouchAndCrawlAction.WasPressedThisFrame();
     public bool IsDashPressedThisFrame() => dashAction.WasPressedThisFrame();
 
     private Vector2 GetAxisWithCrossDeadZone(Vector2 axis)
