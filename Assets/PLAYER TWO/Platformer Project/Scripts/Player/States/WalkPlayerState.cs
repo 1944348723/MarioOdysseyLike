@@ -18,6 +18,7 @@ public class WalkPlayerState : PlayerState
         if (player.TryDash()) return;
         if (player.TryFall()) return;
         if (player.TryCrouch()) return;
+        if (player.TrySpin()) return;
 
         player.SnapToGround();
         

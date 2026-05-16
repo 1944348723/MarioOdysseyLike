@@ -67,4 +67,11 @@ public class PlayerStats : EntityStats<PlayerStats>
     public float stompRecoveryDuration = 0.5f;
     public float stompDownSpeed = 50f;
     public float stompBounceSpeed = 10f;
+
+    [Header("Spin Stats")]
+    public bool canSpin = true;
+    public bool canAirSpin = true;
+    public float spinDuration = 0.5f;
+    public float airSpinUpwardSpeed = 10f;
+    public int allowedAirSpinTimes = 1;
 }

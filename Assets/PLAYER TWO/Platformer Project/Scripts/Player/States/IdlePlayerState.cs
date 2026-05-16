@@ -18,6 +18,7 @@ public class IdlePlayerState : PlayerState
         if (player.TryJump()) return;
         if (player.TryFall()) return;
         if (player.TryCrouch()) return;
+        if (player.TrySpin()) return;
 
         player.SnapToGround();
 

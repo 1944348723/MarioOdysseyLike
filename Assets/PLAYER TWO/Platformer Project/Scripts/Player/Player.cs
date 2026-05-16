@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 // TODO: 当前在很陡的坡面上虽然判定为离地，但是不会往下掉，后续记得处理下
@@ -15,6 +14,7 @@ public class Player : Entity<Player>
     private DamageReceiver damageReceiver;
     private Health health;
     private float lastDashTime = 0f;
+    private int airSpinCounter = 0;
 
     protected override void Awake()
     {
@@ -25,6 +25,7 @@ public class Player : Entity<Player>
         health = GetComponent<Health>();
 
         entityEvents.EnterGround.AddListener(ResetJumps);
+        entityEvents.EnterGround.AddListener(ResetAirSpinCounter);
         damageReceiver.Damaged += OnDamaged;
     }
 
@@ -141,6 +142,24 @@ public class Player : Entity<Player>
         return false;
     }
 
+    public bool TrySpin()
+    {
+        if (!Input.IsSpinPressedThisFrame() || !Stats.Current.canSpin) return false;
+
+        bool canGroundSpin = IsGrounded;
+        bool canAirSpin = !IsGrounded
+            && Stats.Current.canAirSpin
+            && airSpinCounter < Stats.Current.allowedAirSpinTimes;
+        if (canGroundSpin || canAirSpin)
+        {
+            ++airSpinCounter;
+            StateMachine.Change<SpinPlayerState>();
+            return true;
+        }
+
+        return false;
+    }
+
     public bool CanStandUp()
     {
         return !Physics.SphereCast(
@@ -165,6 +184,7 @@ public class Player : Entity<Player>
 
 
     private void ResetJumps() => JumpCouter = 0;
+    private void ResetAirSpinCounter() => airSpinCounter = 0;
     
     private bool CanJump()
     {

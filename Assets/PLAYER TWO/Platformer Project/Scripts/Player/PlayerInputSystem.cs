@@ -16,6 +16,7 @@ public class PlayerInputSystem : MonoBehaviour
     private InputAction crouchAndCrawlAction;
     private InputAction dashAction;
     private InputAction stompAction;
+    private InputAction spinAction;
 
     private Camera playerCamera;
     private float lastJumpPressedTime = -999f;
@@ -32,6 +33,7 @@ public class PlayerInputSystem : MonoBehaviour
         crouchAndCrawlAction = inputActions?["Crouch"];
         dashAction = inputActions?["Dash"];
         stompAction = inputActions?["Stomp"];
+        spinAction = inputActions?["Spin"];
 
         playerCamera = Camera.main;
     }
@@ -119,6 +121,7 @@ public class PlayerInputSystem : MonoBehaviour
     public bool IsCrouchPressed() => crouchAndCrawlAction.IsPressed();
     public bool IsDashPressedThisFrame() => dashAction.WasPressedThisFrame();
     public bool IsStompPressedThisFrame() => stompAction.WasPressedThisFrame();
+    public bool IsSpinPressedThisFrame() => spinAction.WasPressedThisFrame();
 
     private Vector2 GetAxisWithCrossDeadZone(Vector2 axis)
     {

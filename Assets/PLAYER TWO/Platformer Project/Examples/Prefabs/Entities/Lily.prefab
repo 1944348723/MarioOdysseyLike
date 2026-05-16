@@ -2268,6 +2268,9 @@ MonoBehaviour:
     StompEnded:
       m_PersistentCalls:
         m_Calls: []
+    Spun:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8781868022193014602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2302,7 +2305,7 @@ MonoBehaviour:
   - IdlePlayerState
   - CrouchPlayerState
   - CrawlPlayerState
-  - IdlePlayerState
+  - SpinPlayerState
   - IdlePlayerState
   - StompPlayerState
   - IdlePlayerState
