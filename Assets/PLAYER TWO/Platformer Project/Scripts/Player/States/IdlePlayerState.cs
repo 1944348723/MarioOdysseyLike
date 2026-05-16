@@ -5,6 +5,7 @@ public class IdlePlayerState : PlayerState
     protected override void OnEnter(Player player)
     {
         Debug.Log("IdlePlayerState Entered");
+        player.PlanarVelocity = Vector3.zero;
     }
 
     protected override void OnExit(Player player)
