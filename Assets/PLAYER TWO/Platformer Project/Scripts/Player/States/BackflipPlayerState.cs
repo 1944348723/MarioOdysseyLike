@@ -23,6 +23,12 @@ public class BackflipPlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
+        if (player.IsGrounded && player.VerticalVelocity.y <= 0)
+        {
+            player.PlanarVelocity = Vector3.zero;
+            player.StateMachine.Change<IdlePlayerState>();
+        }
+
         player.Gravity(player.Stats.Current.backflipGravity);
         Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
         if (inputDirection != Vector3.zero)
@@ -36,10 +42,5 @@ public class BackflipPlayerState : PlayerState
             player.FaceToDirectionSmoothly(player.PlanarVelocity);
         }
 
-        if (player.IsGrounded)
-        {
-            player.PlanarVelocity = Vector3.zero;
-            player.StateMachine.Change<IdlePlayerState>();
-        }
     }
 }

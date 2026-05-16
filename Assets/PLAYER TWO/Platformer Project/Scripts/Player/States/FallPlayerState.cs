@@ -8,6 +8,11 @@ public class FallPlayerState : PlayerState
         Debug.Log("FallPlayerState Entered");
     }
 
+    protected override void OnExit(Player player)
+    {
+        Debug.Log("FallPlayerState Exited");
+    }
+    
     protected override void OnStep(Player player)
     {
         HandleJumpCut(player);
@@ -18,9 +23,9 @@ public class FallPlayerState : PlayerState
         player.AccelerateToInputDirection();
         player.FaceToDirectionSmoothly(player.PlanarVelocity);
 
-        if (player.IsGrounded)
+        if (player.IsGrounded && player.VerticalVelocity.y <= 0)
         {
-            if (player.PlanarVelocity.sqrMagnitude > 0)
+            if (player.PlanarVelocity != Vector3.zero)
             {
                 player.StateMachine.Change<WalkPlayerState>();
             } else
@@ -30,10 +35,6 @@ public class FallPlayerState : PlayerState
         }
     }
 
-    protected override void OnExit(Player player)
-    {
-        Debug.Log("FallPlayerState Exited");
-    }
     
     private void HandleJumpCut(Player player)
     {

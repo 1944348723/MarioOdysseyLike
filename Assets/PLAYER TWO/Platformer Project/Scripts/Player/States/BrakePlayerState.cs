@@ -14,6 +14,11 @@ public class BrakePlayerState : PlayerState
     protected override void OnStep(Player player) {
         if (player.TryBackFlip()) return;
         if (player.TryFall()) return;
+        if (player.PlanarVelocity == Vector3.zero)
+        {
+            player.StateMachine.Change<IdlePlayerState>();
+            return;
+        }
 
         Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
         float cos = Vector3.Dot(inputDirection, player.PlanarVelocity.normalized);
@@ -23,18 +28,8 @@ public class BrakePlayerState : PlayerState
             player.Gravity();
             player.SnapToGround();
             player.Decelerate();
-
-            if (player.PlanarVelocity == Vector3.zero)
-            {
-                player.StateMachine.Change<IdlePlayerState>();
-            }
         } else {
-            if (player.PlanarVelocity == Vector3.zero) {
-                player.StateMachine.Change<IdlePlayerState>();
-            } else
-            {
-                player.StateMachine.Change<WalkPlayerState>();
-            }
+            player.StateMachine.Change<WalkPlayerState>();
         }
     }
 }
