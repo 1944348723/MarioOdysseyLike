@@ -2262,6 +2262,12 @@ MonoBehaviour:
     DashEnded:
       m_PersistentCalls:
         m_Calls: []
+    StompStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    StompEnded:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8781868022193014602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2298,7 +2304,7 @@ MonoBehaviour:
   - CrawlPlayerState
   - IdlePlayerState
   - IdlePlayerState
-  - IdlePlayerState
+  - StompPlayerState
   - IdlePlayerState
   - IdlePlayerState
   - BackflipPlayerState

@@ -9,4 +9,6 @@ public class PlayerEvents
     public UnityEvent Backfliped;
     public UnityEvent DashStarted;
     public UnityEvent DashEnded;
+    public UnityEvent StompStarted;
+    public UnityEvent StompEnded;
 }

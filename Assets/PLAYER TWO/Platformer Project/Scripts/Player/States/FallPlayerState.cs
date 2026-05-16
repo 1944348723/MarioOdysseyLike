@@ -12,12 +12,13 @@ public class FallPlayerState : PlayerState
     {
         Debug.Log("FallPlayerState Exited");
     }
-    
+
     protected override void OnStep(Player player)
     {
         HandleJumpCut(player);
         if (player.TryJump()) return;
         if (player.TryDash()) return;
+        if (player.TryStomp()) return;
 
         player.Gravity();
         player.AccelerateToInputDirection();

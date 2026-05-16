@@ -34,3 +34,29 @@ MonoBehaviour:
   coyoteJumpThreshold: 0.15
   maxJumpSpeed: 17
   minJumpSpeed: 10
+  hurtBackwardSpeed: 5
+  hurtUpwardSpeed: 10
+  crouchHeight: 1
+  crouchFriction: 10
+  crawlAcceleration: 8
+  crawlFriction: 32
+  crawlMaxSpeed: 2.5
+  crawlTurningSpeed: 3
+  canBackFlip: 1
+  lockMovementDuringBackflip: 1
+  backflipUpwardSpeed: 23
+  backflipBackwardSpeed: 4
+  backflipGravity: 35
+  backflipAirAcceleration: 12
+  backflipAirTurningSpeed: 2.5
+  backflipAirMaxSpeed: 7.5
+  canGroundDash: 1
+  canAirDash: 1
+  dashSpeed: 25
+  dashDuration: 0.3
+  dashCoolDown: 0.5
+  canStompAttack: 1
+  stompHoverDuration: 0.8
+  stompRecoveryDuration: 0.5
+  stompDownSpeed: 50
+  stompBounceSpeed: 10

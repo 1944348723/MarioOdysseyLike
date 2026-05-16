@@ -131,6 +131,16 @@ public class Player : Entity<Player>
         return false;
     }
 
+    public bool TryStomp()
+    {
+        if (Input.IsStompPressedThisFrame() && !IsGrounded)
+        {
+            StateMachine.Change<StompPlayerState>();
+            return true;
+        }
+        return false;
+    }
+
     public bool CanStandUp()
     {
         return !Physics.SphereCast(

@@ -60,4 +60,11 @@ public class PlayerStats : EntityStats<PlayerStats>
     public float dashSpeed = 25f;
     public float dashDuration = 0.3f;
     public float dashCoolDown = 0.5f;
+
+    [Header("Stomp Attack Stats")]
+    public bool canStompAttack = true;
+    public float stompHoverDuration = 0.8f;
+    public float stompRecoveryDuration = 0.5f;
+    public float stompDownSpeed = 50f;
+    public float stompBounceSpeed = 10f;
 }

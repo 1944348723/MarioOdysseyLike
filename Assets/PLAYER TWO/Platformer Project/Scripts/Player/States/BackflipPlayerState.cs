@@ -23,6 +23,8 @@ public class BackflipPlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
+        if (player.TryStomp()) return;
+
         if (player.IsGrounded && player.VerticalVelocity.y <= 0)
         {
             player.PlanarVelocity = Vector3.zero;
