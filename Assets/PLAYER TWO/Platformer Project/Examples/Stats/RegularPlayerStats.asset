@@ -60,3 +60,11 @@ MonoBehaviour:
   stompRecoveryDuration: 0.5
   stompDownSpeed: 50
   stompBounceSpeed: 10
+  canSpin: 1
+  canAirSpin: 1
+  spinDuration: 0.5
+  airSpinUpwardSpeed: 10
+  allowedAirSpinTimes: 1
+  canAirDive: 1
+  airDiveForwardSpeed: 16
+  airDiveRecoveryDuration: 0.2

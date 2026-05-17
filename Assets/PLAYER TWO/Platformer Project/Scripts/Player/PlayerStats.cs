@@ -74,4 +74,9 @@ public class PlayerStats : EntityStats<PlayerStats>
     public float spinDuration = 0.5f;
     public float airSpinUpwardSpeed = 10f;
     public int allowedAirSpinTimes = 1;
+
+    [Header("Air Dive Stats")]
+    public bool canAirDive = true;
+    public float airDiveForwardSpeed = 16f;
+    public float airDiveFriction = 32f;
 }

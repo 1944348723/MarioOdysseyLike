@@ -2306,7 +2306,7 @@ MonoBehaviour:
   - CrouchPlayerState
   - CrawlPlayerState
   - SpinPlayerState
-  - IdlePlayerState
+  - AirDivePlayerState
   - StompPlayerState
   - IdlePlayerState
   - IdlePlayerState

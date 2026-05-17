@@ -17,6 +17,7 @@ public class PlayerInputSystem : MonoBehaviour
     private InputAction dashAction;
     private InputAction stompAction;
     private InputAction spinAction;
+    private InputAction airDiveAction;
 
     private Camera playerCamera;
     private float lastJumpPressedTime = -999f;
@@ -34,6 +35,7 @@ public class PlayerInputSystem : MonoBehaviour
         dashAction = inputActions?["Dash"];
         stompAction = inputActions?["Stomp"];
         spinAction = inputActions?["Spin"];
+        airDiveAction = inputActions?["AirDive"];
 
         playerCamera = Camera.main;
     }
@@ -122,6 +124,7 @@ public class PlayerInputSystem : MonoBehaviour
     public bool IsDashPressedThisFrame() => dashAction.WasPressedThisFrame();
     public bool IsStompPressedThisFrame() => stompAction.WasPressedThisFrame();
     public bool IsSpinPressedThisFrame() => spinAction.WasPressedThisFrame();
+    public bool IsAirDivePressedThisFrame() => airDiveAction.WasPressedThisFrame();
 
     private Vector2 GetAxisWithCrossDeadZone(Vector2 axis)
     {

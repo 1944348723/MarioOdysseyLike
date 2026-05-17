@@ -160,6 +160,16 @@ public class Player : Entity<Player>
         return false;
     }
 
+    public bool TryAirDive()
+    {
+        if (Input.IsAirDivePressedThisFrame() && Stats.Current.canAirDive && !IsGrounded)
+        {
+            StateMachine.Change<AirDivePlayerState>();
+            return true;
+        }
+        return false;
+    }
+
     public bool CanStandUp()
     {
         return !Physics.SphereCast(

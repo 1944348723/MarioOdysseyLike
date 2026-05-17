@@ -12,4 +12,5 @@ public class PlayerEvents
     public UnityEvent StompStarted;
     public UnityEvent StompEnded;
     public UnityEvent Spun;
+    public UnityEvent Dived;
 }
