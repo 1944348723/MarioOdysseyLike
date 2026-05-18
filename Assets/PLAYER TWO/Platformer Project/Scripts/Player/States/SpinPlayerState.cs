@@ -12,12 +12,13 @@ public class SpinPlayerState : PlayerState
             player.VerticalVelocity = new(0, player.Stats.Current.airSpinUpwardSpeed, 0);
         }
         timer = 0f;
-        player.playerEvents.Spun?.Invoke();
+        player.playerEvents.SpinStarted?.Invoke();
     }
 
     protected override void OnExit(Player player)
     {
         Debug.Log("SpinPlayerState Exited");
+        player.playerEvents.SpinEnded?.Invoke();
     }
 
     protected override void OnStep(Player player)
@@ -44,5 +45,9 @@ public class SpinPlayerState : PlayerState
         player.Gravity();
         player.SnapToGround();
         player.AccelerateToInputDirection();
+        if (player.Input.GetMoveDirectionBasedOnCamera() == Vector3.zero)
+        {
+            player.Friction();
+        }
     }
 }

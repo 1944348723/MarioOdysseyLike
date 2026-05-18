@@ -3,6 +3,7 @@ using UnityEngine;
 public class HurtBox : MonoBehaviour
 {
     [SerializeField] private DamageReceiver damageReceiver;
+    [SerializeField] private HitResponseType hitResponseType = HitResponseType.None;
 
     private void Awake()
     {
@@ -12,8 +13,9 @@ public class HurtBox : MonoBehaviour
         }
     }
 
-    public void ReceiveHit(DamageInfo info)
+    public HitResponseType ReceiveHit(DamageInfo info)
     {
-        damageReceiver.TakeDamage(info);
+        if (damageReceiver) damageReceiver.TakeDamage(info);
+        return hitResponseType;
     }
 }

@@ -65,6 +65,7 @@ MonoBehaviour:
   spinDuration: 0.5
   airSpinUpwardSpeed: 10
   allowedAirSpinTimes: 1
+  spinBounceSpeed: 10
   canAirDive: 1
   airDiveForwardSpeed: 16
-  airDiveRecoveryDuration: 0.2
+  airDiveFriction: 32

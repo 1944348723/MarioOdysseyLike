@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // TODO: 当前在很陡的坡面上虽然判定为离地，但是不会往下掉，后续记得处理下
 public class Player : Entity<Player>
 {
+    [SerializeField] private HitBox spinHitBox;
+
     public PlayerInputSystem Input { get; protected set; }
     public PlayerStatsManager Stats { get; protected set; }
     public bool IsDead { get { return health.IsDead; }}
@@ -27,6 +30,9 @@ public class Player : Entity<Player>
         entityEvents.EnterGround.AddListener(ResetJumps);
         entityEvents.EnterGround.AddListener(ResetAirSpinCounter);
         damageReceiver.Damaged += OnDamaged;
+        if (spinHitBox) spinHitBox.hit += OnSpinHit;
+        playerEvents.SpinStarted.AddListener(EnableSpinHitBox);
+        playerEvents.SpinEnded.AddListener(DisableSpinHitBox);
     }
 
     public void Accelerate(Vector3 direction)
@@ -234,4 +240,17 @@ public class Player : Entity<Player>
 
         playerEvents.Hurt?.Invoke();
     }
+
+    private void OnSpinHit(HitResponseType hitResponseType, Vector3 targetPosition)
+    {
+        Debug.Log("Hit");
+        if (hitResponseType == HitResponseType.Bounce)
+        {
+            Vector3 dirToTarget = (targetPosition - transform.position).normalized;
+            PlanarVelocity = -dirToTarget * Stats.Current.spinBounceSpeed;
+        }
+    }
+
+    private void EnableSpinHitBox() => spinHitBox?.gameObject.SetActive(true);
+    private void DisableSpinHitBox() => spinHitBox?.gameObject.SetActive(false);
 }

@@ -30,10 +30,10 @@ TagManager:
   - Ignore Ledge Climbing
   - Unstable Surface
   - Ignore Wall Sliding
-  - 
-  - 
-  - 
-  - 
+  - Player Hit Box
+  - Player Hurt Box
+  - Enemy Hit Box
+  - Enemy Hurt Box
   - 
   - 
   - 

@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 public class HitBox : MonoBehaviour
 {
     [SerializeField] private int damage;
     [SerializeField] private Collider hitCollider;
+
+    public event Action<HitResponseType, Vector3> hit;
 
     private void OnValidate()
     {
@@ -16,6 +19,7 @@ public class HitBox : MonoBehaviour
         {
             hitCollider = GetComponent<Collider>();
         }
+        hitCollider.isTrigger = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +36,7 @@ public class HitBox : MonoBehaviour
             value = damage,
             sourcePosition = transform.position
         };
-        hurtBox.ReceiveHit(info);
+        HitResponseType hitResponseType = hurtBox.ReceiveHit(info);
+        hit?.Invoke(hitResponseType, other.transform.position);
     }
 }

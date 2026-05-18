@@ -11,6 +11,7 @@ public class PlayerEvents
     public UnityEvent DashEnded;
     public UnityEvent StompStarted;
     public UnityEvent StompEnded;
-    public UnityEvent Spun;
+    public UnityEvent SpinStarted;
+    public UnityEvent SpinEnded;
     public UnityEvent Dived;
 }
