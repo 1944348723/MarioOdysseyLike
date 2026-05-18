@@ -30,7 +30,7 @@ public class HitBox : MonoBehaviour
         DamageInfo info = new()
         {
             value = damage,
-            sourcePosition = other.transform.position
+            sourcePosition = transform.position
         };
         hurtBox.ReceiveHit(info);
     }
