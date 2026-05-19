@@ -69,3 +69,18 @@ MonoBehaviour:
   canAirDive: 1
   airDiveForwardSpeed: 16
   airDiveFriction: 32
+  swimEnterThreshold: 1.2
+  swimExitThreshold: 0.8
+  swimAcceleration: 4
+  swimTurningDrag: 2.5
+  swimMaxSpeed: 4
+  swimDeceleration: 3
+  swimJumpSpeed: 15
+  swimUpwardAcceleration: 2
+  swimUpwardMaxSpeed: 4
+  swimDiveAcceleration: 1
+  swimDiveMaxSpeed: 2.5
+  canGlide: 1
+  glideGravity: 10
+  glideMaxFallingSpeed: 2
+  glideTurningDrag: 8

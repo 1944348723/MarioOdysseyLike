@@ -2280,6 +2280,12 @@ MonoBehaviour:
     Dived:
       m_PersistentCalls:
         m_Calls: []
+    GlideStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    GlideEnded:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8781868022193014602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2320,7 +2326,7 @@ MonoBehaviour:
   - IdlePlayerState
   - IdlePlayerState
   - BackflipPlayerState
-  - IdlePlayerState
+  - GlidePlayerState
   - DashPlayerState
 --- !u!114 &8242637588224000856
 MonoBehaviour:

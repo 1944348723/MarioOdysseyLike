@@ -54,7 +54,7 @@ public class SwimPlayerState : PlayerState
         // 下潜
         if (player.Input.IsDivePressed())
         {
-            player.VerticalVelocity += Vector3.down * player.Stats.Current.swimDiveAcceleration;
+            player.VerticalVelocity += player.Stats.Current.swimDiveAcceleration * Time.deltaTime * Vector3.down;
             if (player.VerticalVelocity.y < player.Stats.Current.swimDiveMaxSpeed)
             {
                 player.VerticalVelocity = Vector3.down * player.Stats.Current.swimDiveMaxSpeed;
@@ -65,9 +65,13 @@ public class SwimPlayerState : PlayerState
             }
         } else  // 上浮
         {
+            if (player.IsGrounded && player.VerticalVelocity.y < 0)
+            {
+                player.VerticalVelocity = Vector3.zero;
+            }
             if (player.transform.position.y < player.PlayerWaterDetector.CurrentWater.SurfaceY)
             {
-                player.VerticalVelocity += Vector3.up * player.Stats.Current.swimUpwardAcceleration;
+                player.VerticalVelocity += player.Stats.Current.swimUpwardAcceleration * Time.deltaTime * Vector3.up;
                 if (player.VerticalVelocity.y > player.Stats.Current.swimUpwardMaxSpeed)
                 {
                     player.VerticalVelocity = Vector3.up * player.Stats.Current.swimUpwardMaxSpeed;

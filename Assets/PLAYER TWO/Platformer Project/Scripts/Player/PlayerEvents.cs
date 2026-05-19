@@ -14,4 +14,6 @@ public class PlayerEvents
     public UnityEvent SpinStarted;
     public UnityEvent SpinEnded;
     public UnityEvent Dived;
+    public UnityEvent GlideStarted;
+    public UnityEvent GlideEnded;
 }

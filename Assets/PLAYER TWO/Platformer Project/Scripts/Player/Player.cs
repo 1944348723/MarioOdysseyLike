@@ -185,6 +185,16 @@ public class Player : Entity<Player>
         return false;
     }
 
+    public bool TryGlide()
+    {
+        if (Input.IsGlidePressed() && Stats.Current.canGlide && !IsGrounded)
+        {
+            StateMachine.Change<GlidePlayerState>();
+            return true;
+        }
+        return false;
+    }
+
     public bool CanStandUp()
     {
         return !Physics.SphereCast(

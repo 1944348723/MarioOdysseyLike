@@ -19,6 +19,7 @@ public class PlayerInputSystem : MonoBehaviour
     private InputAction spinAction;
     private InputAction airDiveAction;
     private InputAction diveAction;
+    private InputAction glideAction;
 
     private Camera playerCamera;
     private float lastJumpPressedTime = -999f;
@@ -38,6 +39,7 @@ public class PlayerInputSystem : MonoBehaviour
         spinAction = inputActions?["Spin"];
         airDiveAction = inputActions?["AirDive"];
         diveAction = inputActions?["Dive"];
+        glideAction = inputActions?["Glide"];
 
         playerCamera = Camera.main;
     }
@@ -128,6 +130,7 @@ public class PlayerInputSystem : MonoBehaviour
     public bool IsSpinPressedThisFrame() => spinAction.WasPressedThisFrame();
     public bool IsAirDivePressedThisFrame() => airDiveAction.WasPressedThisFrame();
     public bool IsDivePressed() => diveAction.IsPressed();
+    public bool IsGlidePressed() => glideAction.IsPressed();
 
     private Vector2 GetAxisWithCrossDeadZone(Vector2 axis)
     {

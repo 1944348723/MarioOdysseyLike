@@ -89,8 +89,14 @@ public class PlayerStats : EntityStats<PlayerStats>
     public float swimMaxSpeed = 4f;
     public float swimDeceleration = 3f;
     public float swimJumpSpeed = 15f;
-    public float swimUpwardAcceleration = 1f;
+    public float swimUpwardAcceleration = 2f;
     public float swimUpwardMaxSpeed = 4f;
-    public float swimDiveAcceleration = 0.5f;
+    public float swimDiveAcceleration = 1f;
     public float swimDiveMaxSpeed = 2.5f;
+
+    [Header("Glide Stats")]
+    public bool canGlide = true;
+    public float glideGravity = 10f;
+    public float glideMaxFallingSpeed = 2f;
+    public float glideTurningDrag = 8f;
 }
