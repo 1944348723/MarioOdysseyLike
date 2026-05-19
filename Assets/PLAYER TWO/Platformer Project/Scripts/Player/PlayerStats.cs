@@ -82,8 +82,7 @@ public class PlayerStats : EntityStats<PlayerStats>
     public float airDiveFriction = 32f;
     
     [Header("Swim Stats")]
-    public float swimEnterThreshold = 1.2f;
-    public float swimExitThreshold = 0.8f;
+    public float swimEnterThreshold = 0f;
     public float swimAcceleration = 4f;
     public float swimTurningDrag = 2.5f;
     public float swimMaxSpeed = 4f;

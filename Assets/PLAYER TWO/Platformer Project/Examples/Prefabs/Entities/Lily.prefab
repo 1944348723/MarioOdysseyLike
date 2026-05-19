@@ -2434,6 +2434,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enterWaterClip: {fileID: 8300000, guid: d054d36892d86444d998d48d52ebf5fd, type: 3}
   exitWaterClip: {fileID: 8300000, guid: 2d25a7387036df94c98c381b35d5a05f, type: 3}
+  glideStartedClip: {fileID: 8300000, guid: 5731886b24a083d4b96f52451958df11, type: 3}
+  glideEndedClip: {fileID: 8300000, guid: c5c638c18ba02a04fa51ad14b3f318e3, type: 3}
 --- !u!1 &6670180705425501448
 GameObject:
   m_ObjectHideFlags: 0

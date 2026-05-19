@@ -18,6 +18,8 @@ public class GlidePlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
+        if (player.TrySwim()) return;
+        
         if (!player.Input.IsGlidePressed())
         {
             player.StateMachine.Change<FallPlayerState>();
