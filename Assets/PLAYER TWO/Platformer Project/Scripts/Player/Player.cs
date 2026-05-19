@@ -187,7 +187,7 @@ public class Player : Entity<Player>
 
     public bool TryGlide()
     {
-        if (Input.IsGlidePressed() && Stats.Current.canGlide && !IsGrounded)
+        if (Input.IsGlidePressed() && Stats.Current.canGlide && !IsGrounded && Velocity.y <= 0)
         {
             StateMachine.Change<GlidePlayerState>();
             return true;
