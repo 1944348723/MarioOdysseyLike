@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7007976115395210952}
   - component: {fileID: 1859181595850690949}
   - component: {fileID: 9206226303642158664}
+  - component: {fileID: 157087736427868487}
   m_Layer: 6
   m_Name: Body
   m_TagString: Volume/Water
@@ -134,7 +135,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -157,3 +158,15 @@ MonoBehaviour:
   blendDistance: 0.1
   weight: 1
   priority: 0
+--- !u!114 &157087736427868487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3412474596665875111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be88099a6e4c8074b8c254c51f8e90ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -23,6 +23,8 @@ public class StompPlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
+        if (player.TrySwim()) return;
+        
         switch (state)
         {
             case StompState.HOVER: 

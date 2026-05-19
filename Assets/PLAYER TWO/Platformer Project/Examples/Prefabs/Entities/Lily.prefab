@@ -2192,6 +2192,8 @@ GameObject:
   - component: {fileID: 366533005304380307}
   - component: {fileID: 4976374141811709760}
   - component: {fileID: 7667990122837610678}
+  - component: {fileID: 1402120652201112515}
+  - component: {fileID: 3524208002686878910}
   m_Layer: 0
   m_Name: Lily
   m_TagString: Untagged
@@ -2309,7 +2311,7 @@ MonoBehaviour:
   - DiePlayerState
   - IdlePlayerState
   - IdlePlayerState
-  - IdlePlayerState
+  - SwimPlayerState
   - CrouchPlayerState
   - CrawlPlayerState
   - SpinPlayerState
@@ -2400,6 +2402,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673af8f253823a24190ace64b8878061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1402120652201112515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650432633027884458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d99ecf5a6e1d63459974f2bf4245317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3524208002686878910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650432633027884458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262e0455e2729324dbcfe39fb81e0d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterWaterClip: {fileID: 8300000, guid: d054d36892d86444d998d48d52ebf5fd, type: 3}
+  exitWaterClip: {fileID: 8300000, guid: 2d25a7387036df94c98c381b35d5a05f, type: 3}
 --- !u!1 &6670180705425501448
 GameObject:
   m_ObjectHideFlags: 0

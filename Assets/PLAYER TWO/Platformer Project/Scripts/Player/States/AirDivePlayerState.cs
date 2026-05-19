@@ -17,6 +17,8 @@ public class AirDivePlayerState : PlayerState
 
     protected override void OnStep(Player player)
     {
+        if (player.TrySwim()) return;
+        
         if (player.IsGrounded)
         {
             if (player.PlanarVelocity == Vector3.zero)

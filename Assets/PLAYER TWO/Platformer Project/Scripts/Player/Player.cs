@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 // TODO: 当前在很陡的坡面上虽然判定为离地，但是不会往下掉，后续记得处理下
@@ -8,8 +7,8 @@ public class Player : Entity<Player>
 
     public PlayerInputSystem Input { get; protected set; }
     public PlayerStatsManager Stats { get; protected set; }
+    public WaterDetector PlayerWaterDetector { get; protected set; }
     public bool IsDead { get { return health.IsDead; }}
-    public bool IsInWater { get; protected set; } = false;
     public int JumpCouter { get; protected set; } = 0;
 
     public PlayerEvents playerEvents;
@@ -26,6 +25,7 @@ public class Player : Entity<Player>
         Stats = GetComponent<PlayerStatsManager>();
         damageReceiver = GetComponent<DamageReceiver>();
         health = GetComponent<Health>();
+        PlayerWaterDetector = GetComponent<WaterDetector>();
 
         entityEvents.EnterGround.AddListener(ResetJumps);
         entityEvents.EnterGround.AddListener(ResetAirSpinCounter);
@@ -97,7 +97,6 @@ public class Player : Entity<Player>
     public bool TryJump()
     {
         if (!Input.HasBufferedJump() || !CanJump()) return false;
-        Input.ConsumeBufferedJump();
         Jump(Stats.Current.maxJumpSpeed);
         return true;
     }
@@ -176,6 +175,16 @@ public class Player : Entity<Player>
         return false;
     }
 
+    public bool TrySwim()
+    {
+        if (PlayerWaterDetector.IsInWater && PlayerWaterDetector.DepthBelowSurface >= Stats.Current.swimEnterThreshold)
+        {
+            StateMachine.Change<SwimPlayerState>();
+            return true;
+        }
+        return false;
+    }
+
     public bool CanStandUp()
     {
         return !Physics.SphereCast(
@@ -198,6 +207,20 @@ public class Player : Entity<Player>
         return canGroundDash || canAirDash;
     }
 
+    public void Jump(float speed)
+    {
+        if (speed <= 0)
+        {
+            Debug.LogError("[Player] Jump speed should be above 0");
+            return;
+        }
+
+        Input.ConsumeBufferedJump();
+        ++JumpCouter;
+        VerticalVelocity = Vector3.up * speed;
+        StateMachine.Change<FallPlayerState>();
+        playerEvents.Jumped?.Invoke();
+    }
 
     private void ResetJumps() => JumpCouter = 0;
     private void ResetAirSpinCounter() => airSpinCounter = 0;
@@ -210,20 +233,6 @@ public class Player : Entity<Player>
         return IsGrounded || canCoyoteJump || canMultiJump;
     }
 
-    private void Jump(float speed)
-    {
-        if (speed <= 0)
-        {
-            Debug.LogError("[Player] Jump speed should be above 0");
-            return;
-        }
-
-        ++JumpCouter;
-        VerticalVelocity = Vector3.up * speed;
-        StateMachine.Change<FallPlayerState>();
-        playerEvents.Jumped?.Invoke();
-    }
-
     private void OnDamaged(DamageInfo info)
     {
         Vector3 dirToDamageSource = info.sourcePosition - transform.position;
@@ -232,7 +241,7 @@ public class Player : Entity<Player>
 
         transform.LookAt(transform.position + planarDirToDamageSource);
         PlanarVelocity = -planarDirToDamageSource * Stats.Current.hurtBackwardSpeed;
-        if (!IsInWater)
+        if (!PlayerWaterDetector.IsInWater)
         {
             VerticalVelocity = Vector3.up * Stats.Current.hurtUpwardSpeed;
             StateMachine.Change<HurtPlayerState>();

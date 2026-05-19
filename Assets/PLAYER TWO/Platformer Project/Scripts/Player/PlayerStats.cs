@@ -80,4 +80,17 @@ public class PlayerStats : EntityStats<PlayerStats>
     public bool canAirDive = true;
     public float airDiveForwardSpeed = 16f;
     public float airDiveFriction = 32f;
+    
+    [Header("Swim Stats")]
+    public float swimEnterThreshold = 1.2f;
+    public float swimExitThreshold = 0.8f;
+    public float swimAcceleration = 4f;
+    public float swimTurningDrag = 2.5f;
+    public float swimMaxSpeed = 4f;
+    public float swimDeceleration = 3f;
+    public float swimJumpSpeed = 15f;
+    public float swimUpwardAcceleration = 1f;
+    public float swimUpwardMaxSpeed = 4f;
+    public float swimDiveAcceleration = 0.5f;
+    public float swimDiveMaxSpeed = 2.5f;
 }

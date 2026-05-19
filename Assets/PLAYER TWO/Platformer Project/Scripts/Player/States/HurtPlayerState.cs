@@ -13,6 +13,8 @@ public class HurtPlayerState : PlayerState
     }
 
     protected override void OnStep(Player player) {
+        if (player.TrySwim()) return;
+
         player.Gravity();
         
         if (player.IsGrounded && player.Velocity.y <= 0)
