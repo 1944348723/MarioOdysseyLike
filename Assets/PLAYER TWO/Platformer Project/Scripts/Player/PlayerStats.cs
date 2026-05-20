@@ -98,4 +98,7 @@ public class PlayerStats : EntityStats<PlayerStats>
     public float glideGravity = 10f;
     public float glideMaxFallingSpeed = 2f;
     public float glideTurningDrag = 8f;
+
+    [Header("Wall Slide Stats")]
+    public bool canWallSlide = true;
 }

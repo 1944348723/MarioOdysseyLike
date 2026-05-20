@@ -15,6 +15,7 @@ public class Player : Entity<Player>
 
     private DamageReceiver damageReceiver;
     private Health health;
+    private WallDetector wallDetector;
     private float lastDashTime = 0f;
     private int airSpinCounter = 0;
 
@@ -26,6 +27,7 @@ public class Player : Entity<Player>
         damageReceiver = GetComponent<DamageReceiver>();
         health = GetComponent<Health>();
         PlayerWaterDetector = GetComponent<WaterDetector>();
+        wallDetector = GetComponent<WallDetector>();
 
         entityEvents.EnterGround.AddListener(ResetJumps);
         entityEvents.EnterGround.AddListener(ResetAirSpinCounter);
@@ -33,6 +35,12 @@ public class Player : Entity<Player>
         if (spinHitBox) spinHitBox.hit += OnSpinHit;
         playerEvents.SpinStarted.AddListener(EnableSpinHitBox);
         playerEvents.SpinEnded.AddListener(DisableSpinHitBox);
+    }
+
+    protected override void Update()
+    {
+        wallDetector.Check(transform.forward);
+        base.Update();
     }
 
     public void Accelerate(Vector3 direction)

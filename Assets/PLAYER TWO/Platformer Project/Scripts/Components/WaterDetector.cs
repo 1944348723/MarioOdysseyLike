@@ -16,7 +16,6 @@ public class WaterDetector : MonoBehaviour
     {
         if (other.TryGetComponent<WaterVolume>(out WaterVolume water))
         {
-            Debug.Log("Enter Water----------");
             CurrentWater = water;
             EnteredWater?.Invoke(CurrentWater);
         }
@@ -26,7 +25,6 @@ public class WaterDetector : MonoBehaviour
     {
         if (other.TryGetComponent<WaterVolume>(out WaterVolume water) && water == CurrentWater)
         {
-            Debug.Log("Exit Water---------");
             ExitedWater?.Invoke(CurrentWater);
             CurrentWater = null;
         }

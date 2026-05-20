@@ -2192,8 +2192,9 @@ GameObject:
   - component: {fileID: 366533005304380307}
   - component: {fileID: 4976374141811709760}
   - component: {fileID: 7667990122837610678}
-  - component: {fileID: 1402120652201112515}
   - component: {fileID: 3524208002686878910}
+  - component: {fileID: 1402120652201112515}
+  - component: {fileID: 3217527921189329986}
   m_Layer: 0
   m_Name: Lily
   m_TagString: Untagged
@@ -2408,18 +2409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673af8f253823a24190ace64b8878061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1402120652201112515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6650432633027884458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d99ecf5a6e1d63459974f2bf4245317, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3524208002686878910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2436,6 +2425,37 @@ MonoBehaviour:
   exitWaterClip: {fileID: 8300000, guid: 2d25a7387036df94c98c381b35d5a05f, type: 3}
   glideStartedClip: {fileID: 8300000, guid: 5731886b24a083d4b96f52451958df11, type: 3}
   glideEndedClip: {fileID: 8300000, guid: c5c638c18ba02a04fa51ad14b3f318e3, type: 3}
+--- !u!114 &1402120652201112515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650432633027884458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d99ecf5a6e1d63459974f2bf4245317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3217527921189329986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650432633027884458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf6fc3f8eeb18540ab2ba49170ddb4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  heightOffset: 0
+  radius: 0.5
+  detectDistance: 0.3
+  maxNormalYAbs: 0.1
 --- !u!1 &6670180705425501448
 GameObject:
   m_ObjectHideFlags: 0
@@ -3639,6 +3659,56 @@ MonoBehaviour:
   player: {fileID: 3328971392170679316}
   glider: {fileID: 6977625090669139336}
   trails: {fileID: 3635521274388641977}
+  openDuration: 0.2
+  closeDuration: 0.15
+  openCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  closeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &842584420741695674
 PrefabInstance:
   m_ObjectHideFlags: 0
