@@ -101,4 +101,7 @@ public class PlayerStats : EntityStats<PlayerStats>
 
     [Header("Wall Slide Stats")]
     public bool canWallSlide = true;
+    public float wallSlideSpeed = 6f;
+    public float wallJumpVerticalSpeed = 15f;
+    public float wallJumpPlanarSpeed = 8f;
 }

@@ -19,6 +19,7 @@ public abstract class EntityBase: MonoBehaviour
 public abstract class Entity<T>: EntityBase where T : Entity<T>
 {
     public EntityStateManager<T> StateMachine { get; private set; }
+    public CharacterController CharacterController { get; private set; }
     public Vector3 Velocity { get; set; }
     public Vector3 PlanarVelocity
     {
@@ -39,12 +40,11 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
     public float TurningDragMultiplier { get; set; } = 1f;
     public float GravityMultiplier { get; set; } = 1f;
     
-    protected CharacterController characterController; 
 
     protected virtual void Awake()
     {
         StateMachine = GetComponent<EntityStateManager<T>>();
-        characterController = GetComponent<CharacterController>();
+        CharacterController = GetComponent<CharacterController>();
         groundDetector = GetComponent<GroundDetector>();
     }
 
@@ -58,7 +58,7 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
     {
         StateMachine.Step();
         Move();
-        groundDetector.Tick(transform.position + characterController.center, Velocity.y <= 0);
+        groundDetector.Tick(transform.position + CharacterController.center, Velocity.y <= 0);
     }
 
     public void Accelerate(Vector3 direction, float acceleration, float turningDrag, float maxSpeed)
@@ -118,22 +118,22 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
 
     public void ResizeColliderHeight(float height)
     {
-        float delta = height - characterController.height;
-        characterController.height = height;
-        characterController.center += 0.5f * delta * Vector3.up;
+        float delta = height - CharacterController.height;
+        CharacterController.height = height;
+        CharacterController.center += 0.5f * delta * Vector3.up;
         groundDetector.Height = height;
     }
 
     private void InitializeCharacterController()
     {
-        if (!characterController)
+        if (!CharacterController)
         {
-            characterController = gameObject.AddComponent<CharacterController>();
+            CharacterController = gameObject.AddComponent<CharacterController>();
         }
 
-        characterController.skinWidth = characterController.radius * 0.1f;
-        characterController.minMoveDistance = 0;
-        OriginalHeight = characterController.height;
+        CharacterController.skinWidth = CharacterController.radius * 0.1f;
+        CharacterController.minMoveDistance = 0;
+        OriginalHeight = CharacterController.height;
     }
 
     private void InitializeGroundDetector()
@@ -143,11 +143,11 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
             groundDetector = gameObject.AddComponent<GroundDetector>();
         }
         groundDetector.Init(
-            characterController.height,
-            characterController.radius,
+            CharacterController.height,
+            CharacterController.radius,
             0.1f,
-            characterController.slopeLimit,
-            characterController.stepOffset
+            CharacterController.slopeLimit,
+            CharacterController.stepOffset
         );
         groundDetector.GroundEntered += OnGroundEntered;
         groundDetector.GroundExited += OnGroundExited;
@@ -155,9 +155,9 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
 
     private void Move()
     {
-        if (characterController.enabled)
+        if (CharacterController.enabled)
         {
-            characterController.Move(Velocity * Time.deltaTime);
+            CharacterController.Move(Velocity * Time.deltaTime);
         } else
         {
             transform.position += Velocity * Time.deltaTime;

@@ -83,3 +83,5 @@ MonoBehaviour:
   glideGravity: 10
   glideMaxFallingSpeed: 2
   glideTurningDrag: 8
+  canWallSlide: 1
+  wallSlideSpeed: 6

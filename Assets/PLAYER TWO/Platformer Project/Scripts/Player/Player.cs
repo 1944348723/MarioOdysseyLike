@@ -8,6 +8,7 @@ public class Player : Entity<Player>
     public PlayerInputSystem Input { get; protected set; }
     public PlayerStatsManager Stats { get; protected set; }
     public WaterDetector PlayerWaterDetector { get; protected set; }
+    public WallDetector WallDetector { get; protected set; }
     public bool IsDead { get { return health.IsDead; }}
     public int JumpCouter { get; protected set; } = 0;
 
@@ -15,7 +16,6 @@ public class Player : Entity<Player>
 
     private DamageReceiver damageReceiver;
     private Health health;
-    private WallDetector wallDetector;
     private float lastDashTime = 0f;
     private int airSpinCounter = 0;
 
@@ -27,7 +27,7 @@ public class Player : Entity<Player>
         damageReceiver = GetComponent<DamageReceiver>();
         health = GetComponent<Health>();
         PlayerWaterDetector = GetComponent<WaterDetector>();
-        wallDetector = GetComponent<WallDetector>();
+        WallDetector = GetComponent<WallDetector>();
 
         entityEvents.EnterGround.AddListener(ResetJumps);
         entityEvents.EnterGround.AddListener(ResetAirSpinCounter);
@@ -39,7 +39,7 @@ public class Player : Entity<Player>
 
     protected override void Update()
     {
-        wallDetector.Check(transform.forward);
+        WallDetector.Check(transform.forward);
         base.Update();
     }
 
@@ -107,6 +107,17 @@ public class Player : Entity<Player>
         if (!Input.HasBufferedJump() || !CanJump()) return false;
         Jump(Stats.Current.maxJumpSpeed);
         return true;
+    }
+
+    public bool TryWallJump()
+    {
+        if (Input.HasBufferedJump() && StateMachine.CurrentState is WallSlidePlayerState)
+        {
+            PlanarVelocity = WallDetector.WallNormal.normalized * Stats.Current.wallJumpPlanarSpeed;
+            Jump(Stats.Current.wallJumpVerticalSpeed);
+            return true;
+        }
+        return false;
     }
 
     public bool TryFall()
@@ -203,14 +214,30 @@ public class Player : Entity<Player>
         return false;
     }
 
+    public bool TryWallSlide()
+    {
+        if (!WallDetector.HasWall || !Stats.Current.canWallSlide || IsGrounded || Velocity.y > 0) return false;
+
+        Vector3 inputDirection = Input.GetMoveDirectionBasedOnCamera();
+        if (inputDirection == Vector3.zero) return false;
+
+        if (WallDetector.IsDirectionTowardWall(inputDirection))
+        {
+            StateMachine.Change<WallSlidePlayerState>();
+            return true;
+        }
+
+        return false;
+    }
+
     public bool CanStandUp()
     {
         return !Physics.SphereCast(
-            transform.position + characterController.center,
-            characterController.radius,
+            transform.position + CharacterController.center,
+            CharacterController.radius,
             Vector3.up,
             out _,
-            characterController.height / 2);
+            CharacterController.height / 2);
     }
 
 
@@ -240,7 +267,7 @@ public class Player : Entity<Player>
         playerEvents.Jumped?.Invoke();
     }
 
-    private void ResetJumps() => JumpCouter = 0;
+    public void ResetJumps() => JumpCouter = 0;
     private void ResetAirSpinCounter() => airSpinCounter = 0;
     
     private bool CanJump()
@@ -270,7 +297,6 @@ public class Player : Entity<Player>
 
     private void OnSpinHit(HitResponseType hitResponseType, Vector3 targetPosition)
     {
-        Debug.Log("Hit");
         if (hitResponseType == HitResponseType.Bounce)
         {
             Vector3 dirToTarget = (targetPosition - transform.position).normalized;

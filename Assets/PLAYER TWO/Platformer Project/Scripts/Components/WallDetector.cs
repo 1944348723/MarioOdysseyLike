@@ -9,6 +9,7 @@ public class WallDetector : MonoBehaviour {
 
     public bool HasWall { get; private set; }
     public Vector3 WallNormal { get; private set; }
+    public Vector3 WallPoint { get; private set; }
 
     private void OnValidate()
     {
@@ -34,12 +35,22 @@ public class WallDetector : MonoBehaviour {
 
         HasWall = false;
         WallNormal = Vector3.zero;
+        WallPoint = Vector3.zero;
         if (hitWall && IsValid(hit.normal))
         {
-            Debug.Log("Has Wall ------------");
             HasWall = true;
             WallNormal = hit.normal;
+            WallPoint = hit.point;
         }
+    }
+    
+    public bool IsDirectionTowardWall(Vector3 direction)
+    {
+        if (!HasWall) return false;
+
+        direction.Normalize();
+        float cos = Vector3.Dot(direction, WallNormal.normalized);
+        return cos < 0;
     }
 
     private bool IsValid(Vector3 normal)
