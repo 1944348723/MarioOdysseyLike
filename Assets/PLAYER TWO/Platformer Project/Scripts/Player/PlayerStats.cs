@@ -104,4 +104,13 @@ public class PlayerStats : EntityStats<PlayerStats>
     public float wallSlideSpeed = 6f;
     public float wallJumpVerticalSpeed = 15f;
     public float wallJumpPlanarSpeed = 8f;
+
+    [Header("Pole Climb Stats")]
+    public bool canPoleClimb = true;
+    public float poleClimbRegrabCoolDown = 0.1f;
+    public float poleClimbUpSpeed = 3f;
+    public float poleClimbDownSpeed = 8f;
+    public float poleClimbRatationSpeed = 2f;
+    public float poleClimbJumpVerticalSpeed = 15f;
+    public float poleClimbJumpPlanarSpeed = 8f;
 }

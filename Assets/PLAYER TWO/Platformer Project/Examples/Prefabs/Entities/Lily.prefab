@@ -2251,6 +2251,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   spinHitBox: {fileID: 8492177029495699459}
+  poleDetector: {fileID: 6884215784599556990}
   playerEvents:
     Jumped:
       m_PersistentCalls:
@@ -2318,7 +2319,7 @@ MonoBehaviour:
   - HurtPlayerState
   - DiePlayerState
   - WallSlidePlayerState
-  - IdlePlayerState
+  - PoleClimbingPlayerState
   - SwimPlayerState
   - CrouchPlayerState
   - CrawlPlayerState
@@ -3133,8 +3134,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6391061900569596733}
   - component: {fileID: 3553266627303261128}
-  - component: {fileID: 6884215784599556990}
   - component: {fileID: 8074890106556251444}
+  - component: {fileID: 6884215784599556990}
   m_Layer: 0
   m_Name: PoleDetector
   m_TagString: Untagged
@@ -3180,19 +3181,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0.08}
---- !u!114 &6884215784599556990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7664366574464912774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e0d7dbaff57e86419c074be9b840a75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectCollider: {fileID: 0}
 --- !u!54 &8074890106556251444
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3220,6 +3208,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6884215784599556990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664366574464912774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0d7dbaff57e86419c074be9b840a75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectCollider: {fileID: 0}
 --- !u!1 &7735155869555872898
 GameObject:
   m_ObjectHideFlags: 0

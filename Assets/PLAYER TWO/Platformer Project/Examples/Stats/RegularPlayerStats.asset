@@ -85,3 +85,9 @@ MonoBehaviour:
   glideTurningDrag: 8
   canWallSlide: 1
   wallSlideSpeed: 6
+  wallJumpVerticalSpeed: 15
+  wallJumpPlanarSpeed: 8
+  canPoleClimb: 1
+  poleClimbUpSpeed: 3
+  poleClimbDownSpeed: 8
+  poleClimbRatationSpeed: 2

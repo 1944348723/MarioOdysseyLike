@@ -4,13 +4,16 @@ using UnityEngine;
 public class Player : Entity<Player>
 {
     [SerializeField] private HitBox spinHitBox;
+    [SerializeField] private PoleDetector poleDetector;
 
     public PlayerInputSystem Input { get; protected set; }
     public PlayerStatsManager Stats { get; protected set; }
     public WaterDetector PlayerWaterDetector { get; protected set; }
     public WallDetector WallDetector { get; protected set; }
+    public PoleDetector PoleDetector => poleDetector;
     public bool IsDead { get { return health.IsDead; }}
     public int JumpCouter { get; protected set; } = 0;
+    public float LastPoleExitTime { get; protected set; } = 0f;
 
     public PlayerEvents playerEvents;
 
@@ -109,12 +112,14 @@ public class Player : Entity<Player>
         return true;
     }
 
-    public bool TryWallJump()
+    public bool TryDirectionalJump(Vector3 dir, float verticalSpeed, float planarSpeed)
     {
-        if (Input.HasBufferedJump() && StateMachine.CurrentState is WallSlidePlayerState)
+        dir.Normalize();
+        if (Input.HasBufferedJump() && JumpCouter < Stats.Current.allowedJumpTimes)
         {
-            PlanarVelocity = WallDetector.WallNormal.normalized * Stats.Current.wallJumpPlanarSpeed;
-            Jump(Stats.Current.wallJumpVerticalSpeed);
+            transform.forward = dir;
+            PlanarVelocity = dir * planarSpeed;
+            Jump(verticalSpeed);
             return true;
         }
         return false;
@@ -230,6 +235,17 @@ public class Player : Entity<Player>
         return false;
     }
 
+    public bool TryClimbPole()
+    {
+        if (Stats.Current.canPoleClimb && PoleDetector.CurrentPole && !IsGrounded
+            && Time.time - LastPoleExitTime >= Stats.Current.poleClimbRegrabCoolDown)
+        {
+            StateMachine.Change<PoleClimbingPlayerState>();
+            return true;
+        }
+        return false;
+    }
+
     public bool CanStandUp()
     {
         return !Physics.SphereCast(
@@ -265,6 +281,11 @@ public class Player : Entity<Player>
         VerticalVelocity = Vector3.up * speed;
         StateMachine.Change<FallPlayerState>();
         playerEvents.Jumped?.Invoke();
+    }
+
+    public void RecordPoleExit()
+    {
+        LastPoleExitTime = Time.time;
     }
 
     public void ResetJumps() => JumpCouter = 0;

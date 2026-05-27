@@ -24,6 +24,7 @@ public class FallPlayerState : PlayerState
         if (player.TrySwim()) return;
         if (player.TryGlide()) return;
         if (player.TryWallSlide()) return;
+        if (player.TryClimbPole()) return;
 
         player.Gravity();
         player.AccelerateToInputDirection();

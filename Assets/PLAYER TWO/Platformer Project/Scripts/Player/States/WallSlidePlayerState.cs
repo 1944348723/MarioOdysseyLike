@@ -44,7 +44,7 @@ public class WallSlidePlayerState : PlayerState
             return;
         }
 
-        player.TryWallJump();
+        TryWallJump(player);
     }
 
     private bool AreDirectionsOnSameSide(Vector3 direction1, Vector3 direction2)
@@ -59,5 +59,13 @@ public class WallSlidePlayerState : PlayerState
         Vector3 movement = wallPoint - player.transform.position;
         movement.y = 0;
         player.CharacterController.Move(movement);
+    }
+
+    private bool TryWallJump(Player player)
+    {
+        return player.TryDirectionalJump(wallNormal,
+            player.Stats.Current.wallJumpVerticalSpeed,
+            player.Stats.Current.wallJumpPlanarSpeed
+        );
     }
 }
