@@ -46,7 +46,7 @@ public class FallPlayerState : PlayerState
     private void HandleJumpCut(Player player)
     {
         // 跳跃上升中松开跳跃键会跳的比较低
-        if (player.Input.IsJumpReleasedThisFrame()
+        if (GameInputSystem.Instance.IsJumpReleasedThisFrame()
             && player.JumpCouter > 0
             && player.Velocity.y > player.Stats.Current.minJumpSpeed)
         {

@@ -23,7 +23,7 @@ public class SwimPlayerState : PlayerState
     private bool TryJump(Player player)
     {
         if (player.transform.position.y >= player.PlayerWaterDetector.CurrentWater.SurfaceY
-            && player.Input.HasBufferedJump()
+            && GameInputSystem.Instance.HasBufferedJump()
         )
         {
             player.Jump(player.Stats.Current.swimJumpSpeed);
@@ -34,7 +34,7 @@ public class SwimPlayerState : PlayerState
 
     private void HandlePlanarVerlocity(Player player)
     {
-        Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMoveDirectionBasedOnCamera();
         if (inputDirection != Vector3.zero)
         {
             player.Accelerate(
@@ -52,7 +52,7 @@ public class SwimPlayerState : PlayerState
     private void HandleVerticalVelocity(Player player)
     {
         // 下潜
-        if (player.Input.IsDivePressed())
+        if (GameInputSystem.Instance.IsDivePressed())
         {
             player.VerticalVelocity += player.Stats.Current.swimDiveAcceleration * Time.deltaTime * Vector3.down;
             if (player.VerticalVelocity.y < player.Stats.Current.swimDiveMaxSpeed)

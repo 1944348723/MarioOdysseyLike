@@ -55,7 +55,7 @@ public class PoleClimbingPlayerState : PlayerState
 
     private void HandleVerticalVelocity(Player player)
     {
-        Vector3 inputDirection = player.Input.GetMovementDirection();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMovementDirection();
         if (inputDirection.z > 0)
         {
             player.VerticalVelocity = Vector3.up * player.Stats.Current.poleClimbUpSpeed;
@@ -70,7 +70,7 @@ public class PoleClimbingPlayerState : PlayerState
 
     private void HandlePlanarVelocity(Player player)
     {
-        Vector3 inputDirection = player.Input.GetMovementDirection();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMovementDirection();
         if (inputDirection.x == 0) {
             player.PlanarVelocity = Vector3.zero;
             return;

@@ -18,9 +18,9 @@ public class CrawlPlayerState : PlayerState
 
         player.SnapToGround();
 
-        Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMoveDirectionBasedOnCamera();
 
-        if (!player.Input.IsCrouchAndCrawlPressed() && player.CanStandUp())
+        if (!GameInputSystem.Instance.IsCrouchAndCrawlPressed() && player.CanStandUp())
         {
             if (player.PlanarVelocity != Vector3.zero)
             {

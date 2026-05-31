@@ -22,7 +22,7 @@ public class WalkPlayerState : PlayerState
 
         player.SnapToGround();
         
-        Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMoveDirectionBasedOnCamera();
 
         if (inputDirection == Vector3.zero)
         {

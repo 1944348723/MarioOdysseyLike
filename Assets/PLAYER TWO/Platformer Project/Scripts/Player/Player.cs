@@ -6,7 +6,6 @@ public class Player : Entity<Player>
     [SerializeField] private HitBox spinHitBox;
     [SerializeField] private PoleDetector poleDetector;
 
-    public PlayerInputSystem Input { get; protected set; }
     public PlayerStatsManager Stats { get; protected set; }
     public WaterDetector PlayerWaterDetector { get; protected set; }
     public WallDetector WallDetector { get; protected set; }
@@ -25,7 +24,6 @@ public class Player : Entity<Player>
     protected override void Awake()
     {
         base.Awake();
-        Input = GetComponent<PlayerInputSystem>();
         Stats = GetComponent<PlayerStatsManager>();
         damageReceiver = GetComponent<DamageReceiver>();
         health = GetComponent<Health>();
@@ -53,7 +51,7 @@ public class Player : Entity<Player>
 
     public void AccelerateToInputDirection()
     {
-        Vector3 direction = Input.GetMoveDirectionBasedOnCamera();
+        Vector3 direction = GameInputSystem.Instance.GetMoveDirectionBasedOnCamera();
         Accelerate(direction);
     }
 
@@ -107,7 +105,7 @@ public class Player : Entity<Player>
 
     public bool TryJump()
     {
-        if (!Input.HasBufferedJump() || !CanJump()) return false;
+        if (!GameInputSystem.Instance.HasBufferedJump() || !CanJump()) return false;
         Jump(Stats.Current.maxJumpSpeed);
         return true;
     }
@@ -115,7 +113,7 @@ public class Player : Entity<Player>
     public bool TryDirectionalJump(Vector3 dir, float verticalSpeed, float planarSpeed)
     {
         dir.Normalize();
-        if (Input.HasBufferedJump() && JumpCouter < Stats.Current.allowedJumpTimes)
+        if (GameInputSystem.Instance.HasBufferedJump() && JumpCouter < Stats.Current.allowedJumpTimes)
         {
             transform.forward = dir;
             PlanarVelocity = dir * planarSpeed;
@@ -136,14 +134,14 @@ public class Player : Entity<Player>
     public bool TryCrouch()
     {
         // 检测式，不需要是这一帧按下的，这样在空中就可以一直按住下蹲键，落地就会直接蹲下
-        if (!IsGrounded || !Input.IsCrouchPressed()) return false;
+        if (!IsGrounded || !GameInputSystem.Instance.IsCrouchPressed()) return false;
         
         StateMachine.Change<CrouchPlayerState>();
         return true;
     }
     public bool TryDash()
     {
-        if (!Input.IsDashPressedThisFrame() || !CanDash()) return false;
+        if (!GameInputSystem.Instance.IsDashPressedThisFrame() || !CanDash()) return false;
 
         lastDashTime = Time.time;
         StateMachine.Change<DashPlayerState>();
@@ -152,7 +150,7 @@ public class Player : Entity<Player>
 
     public bool TryBackFlip()
     {
-        if (Input.HasBufferedJump() && Stats.Current.canBackFlip)
+        if (GameInputSystem.Instance.HasBufferedJump() && Stats.Current.canBackFlip)
         {
             --JumpCouter;
             StateMachine.Change<BackflipPlayerState>();
@@ -163,7 +161,7 @@ public class Player : Entity<Player>
 
     public bool TryStomp()
     {
-        if (Input.IsStompPressedThisFrame() && !IsGrounded)
+        if (GameInputSystem.Instance.IsStompPressedThisFrame() && !IsGrounded)
         {
             StateMachine.Change<StompPlayerState>();
             return true;
@@ -173,7 +171,7 @@ public class Player : Entity<Player>
 
     public bool TrySpin()
     {
-        if (!Input.IsSpinPressedThisFrame() || !Stats.Current.canSpin) return false;
+        if (!GameInputSystem.Instance.IsSpinPressedThisFrame() || !Stats.Current.canSpin) return false;
 
         bool canGroundSpin = IsGrounded;
         bool canAirSpin = !IsGrounded
@@ -191,7 +189,7 @@ public class Player : Entity<Player>
 
     public bool TryAirDive()
     {
-        if (Input.IsAirDivePressedThisFrame() && Stats.Current.canAirDive && !IsGrounded)
+        if (GameInputSystem.Instance.IsAirDivePressedThisFrame() && Stats.Current.canAirDive && !IsGrounded)
         {
             StateMachine.Change<AirDivePlayerState>();
             return true;
@@ -211,7 +209,7 @@ public class Player : Entity<Player>
 
     public bool TryGlide()
     {
-        if (Input.IsGlidePressed() && Stats.Current.canGlide && !IsGrounded && Velocity.y <= 0)
+        if (GameInputSystem.Instance.IsGlidePressed() && Stats.Current.canGlide && !IsGrounded && Velocity.y <= 0)
         {
             StateMachine.Change<GlidePlayerState>();
             return true;
@@ -223,7 +221,7 @@ public class Player : Entity<Player>
     {
         if (!WallDetector.HasWall || !Stats.Current.canWallSlide || IsGrounded || Velocity.y > 0) return false;
 
-        Vector3 inputDirection = Input.GetMoveDirectionBasedOnCamera();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMoveDirectionBasedOnCamera();
         if (inputDirection == Vector3.zero) return false;
 
         if (WallDetector.IsDirectionTowardWall(inputDirection))
@@ -276,7 +274,7 @@ public class Player : Entity<Player>
             return;
         }
 
-        Input.ConsumeBufferedJump();
+        GameInputSystem.Instance.ConsumeBufferedJump();
         ++JumpCouter;
         VerticalVelocity = Vector3.up * speed;
         StateMachine.Change<FallPlayerState>();

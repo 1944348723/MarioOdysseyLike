@@ -8,7 +8,7 @@ public class BackflipPlayerState : PlayerState
         player.PlanarVelocity = -player.transform.forward * player.Stats.Current.backflipBackwardSpeed;
         if (player.Stats.Current.lockMovementDuringBackflip)
         {
-            player.Input.MoveLocked = true;
+            GameInputSystem.Instance.MoveLocked = true;
         }
         player.playerEvents.Jumped?.Invoke();
         player.playerEvents.Backfliped?.Invoke();
@@ -17,7 +17,7 @@ public class BackflipPlayerState : PlayerState
     protected override void OnExit(Player player) {
         if (player.Stats.Current.lockMovementDuringBackflip)
         {
-            player.Input.MoveLocked = false;
+            GameInputSystem.Instance.MoveLocked = false;
         }
     }
 
@@ -33,7 +33,7 @@ public class BackflipPlayerState : PlayerState
         }
 
         player.Gravity(player.Stats.Current.backflipGravity);
-        Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMoveDirectionBasedOnCamera();
         if (inputDirection != Vector3.zero)
         {
             player.Accelerate(

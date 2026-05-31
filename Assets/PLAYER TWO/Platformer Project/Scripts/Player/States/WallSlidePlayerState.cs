@@ -36,7 +36,7 @@ public class WallSlidePlayerState : PlayerState
             return;
         }
 
-        Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMoveDirectionBasedOnCamera();
         bool isInputDirectionAwayFromWall = AreDirectionsOnSameSide(inputDirection, wallNormal);
         if (inputDirection == Vector3.zero || isInputDirectionAwayFromWall)
         {

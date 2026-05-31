@@ -83,10 +83,10 @@ class PlayerCamera : MonoBehaviour
     {
         if (!allowOrbitByInput) return;
 
-        Vector2 lookDelta = player.Input.GetLookDelta();
+        Vector2 lookDelta = GameInputSystem.Instance.GetLookDelta();
         if (lookDelta == Vector2.zero) return;
 
-        bool usingMouse = player.Input.IsLookingWithMouse();
+        bool usingMouse = GameInputSystem.Instance.IsLookingWithMouse();
         // 鼠标输入跟帧率无关，用户一帧内输入多少就是多少
         // 手柄输入是每帧根据偏移大小给出数值，帧率越大相同时间内得到的delta总和就越大，所以乘以Time.deltaTime让它跟帧率无关
         float timeFactor = usingMouse ? 1: Time.deltaTime;
@@ -99,7 +99,7 @@ class PlayerCamera : MonoBehaviour
     private void OrbitWithVelocity() {
         // 不在地上时不自动环绕，避免空中漂浮时乱转相机
         if (!allowOrbitWithVelocity || !player.IsGrounded) return;
-        if (player.Input.GetLookDelta().sqrMagnitude > 0) return;
+        if (GameInputSystem.Instance.GetLookDelta().sqrMagnitude > 0) return;
 
         // 得到玩家水平速度向相机水平方向右边的投影，如果是正的说明玩家向相机右边移动，负的说明玩家向相机左边移动
         // 根据这个投影调整yaw，让相机环绕玩家，转向玩家移动的方向

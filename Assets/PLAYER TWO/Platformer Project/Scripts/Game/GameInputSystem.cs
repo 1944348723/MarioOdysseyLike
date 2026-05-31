@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputSystem : MonoBehaviour
+public class GameInputSystem : Singleton<GameInputSystem>
 {
     [SerializeField] private InputActionAsset inputActions;
     [SerializeField] private float jumpBufferTime = 0.15f;
@@ -20,12 +20,14 @@ public class PlayerInputSystem : MonoBehaviour
     private InputAction airDiveAction;
     private InputAction diveAction;
     private InputAction glideAction;
+    private InputAction pauseAction;
 
     private Camera playerCamera;
     private float lastJumpPressedTime = -999f;
 
-    private void Awake()
+    override protected void Awake()
     {
+        base.Awake();
         if (inputActions == null)
         {
             Debug.LogError("Input Actions is not assigned", this);
@@ -40,6 +42,7 @@ public class PlayerInputSystem : MonoBehaviour
         airDiveAction = inputActions?["AirDive"];
         diveAction = inputActions?["Dive"];
         glideAction = inputActions?["Glide"];
+        pauseAction = inputActions?["Pause"];
 
         playerCamera = Camera.main;
     }
@@ -49,8 +52,9 @@ public class PlayerInputSystem : MonoBehaviour
         jumpAction.started += OnJumpPressed;
     }
 
-    private void OnDestroy()
+    override protected void OnDestroy()
     {
+        base.OnDestroy();
         jumpAction.started -= OnJumpPressed;
     }
 
@@ -131,6 +135,7 @@ public class PlayerInputSystem : MonoBehaviour
     public bool IsAirDivePressedThisFrame() => airDiveAction.WasPressedThisFrame();
     public bool IsDivePressed() => diveAction.IsPressed();
     public bool IsGlidePressed() => glideAction.IsPressed();
+    public bool IsPausePressedThisFrame() => pauseAction.WasPressedThisFrame();
 
     private Vector2 GetAxisWithCrossDeadZone(Vector2 axis)
     {

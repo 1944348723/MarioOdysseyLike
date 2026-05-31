@@ -45,7 +45,7 @@ public class SpinPlayerState : PlayerState
         player.Gravity();
         player.SnapToGround();
         player.AccelerateToInputDirection();
-        if (player.Input.GetMoveDirectionBasedOnCamera() == Vector3.zero)
+        if (GameInputSystem.Instance.GetMoveDirectionBasedOnCamera() == Vector3.zero)
         {
             player.Friction();
         }

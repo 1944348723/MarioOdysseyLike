@@ -2187,7 +2187,6 @@ GameObject:
   - component: {fileID: 6650432633027884459}
   - component: {fileID: 3328971392170679316}
   - component: {fileID: 8781868022193014602}
-  - component: {fileID: 8242637588224000856}
   - component: {fileID: 1103058554381505988}
   - component: {fileID: 366533005304380307}
   - component: {fileID: 4976374141811709760}
@@ -2331,21 +2330,6 @@ MonoBehaviour:
   - BackflipPlayerState
   - GlidePlayerState
   - DashPlayerState
---- !u!114 &8242637588224000856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6650432633027884458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6cf6179f10c24c478b0b11769e2ae75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputActions: {fileID: -944628639613478452, guid: 6b99b82d3ff7bfd4199643130476cdf4,
-    type: 3}
-  jumpBufferTime: 0.15
 --- !u!114 &1103058554381505988
 MonoBehaviour:
   m_ObjectHideFlags: 0

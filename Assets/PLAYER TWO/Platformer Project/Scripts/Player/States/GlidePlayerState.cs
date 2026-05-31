@@ -20,7 +20,7 @@ public class GlidePlayerState : PlayerState
     {
         if (player.TrySwim()) return;
         
-        if (!player.Input.IsGlidePressed())
+        if (!GameInputSystem.Instance.IsGlidePressed())
         {
             player.StateMachine.Change<FallPlayerState>();
             return;
@@ -31,7 +31,7 @@ public class GlidePlayerState : PlayerState
         }
         
         // 平面速度
-        Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMoveDirectionBasedOnCamera();
         player.Accelerate(
             inputDirection,
             player.Stats.Current.airAcceleration,

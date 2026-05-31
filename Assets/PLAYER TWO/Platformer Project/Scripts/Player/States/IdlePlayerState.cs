@@ -22,7 +22,7 @@ public class IdlePlayerState : PlayerState
 
         player.SnapToGround();
 
-        Vector3 inputDirection = player.Input.GetMovementDirection();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMovementDirection();
         if (inputDirection != Vector3.zero)
         {
             player.StateMachine.Change<WalkPlayerState>();

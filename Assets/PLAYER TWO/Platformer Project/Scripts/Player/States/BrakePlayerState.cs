@@ -20,7 +20,7 @@ public class BrakePlayerState : PlayerState
             return;
         }
 
-        Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMoveDirectionBasedOnCamera();
         float cos = Vector3.Dot(inputDirection, player.PlanarVelocity.normalized);
 
         if (inputDirection != Vector3.zero && cos < 0)

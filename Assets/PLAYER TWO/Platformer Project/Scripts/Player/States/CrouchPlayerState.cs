@@ -20,7 +20,7 @@ public class CrouchPlayerState : PlayerState
         player.Decelerate(player.Stats.Current.crouchFriction);
 
         // 站起来
-        if (!player.Input.IsCrouchAndCrawlPressed() && player.CanStandUp())
+        if (!GameInputSystem.Instance.IsCrouchAndCrawlPressed() && player.CanStandUp())
         {
             if (player.VerticalVelocity != Vector3.zero)
             {
@@ -33,7 +33,7 @@ public class CrouchPlayerState : PlayerState
         }
 
         // 有输入方向且速度为0则爬行
-        Vector3 inputDirection = player.Input.GetMoveDirectionBasedOnCamera();
+        Vector3 inputDirection = GameInputSystem.Instance.GetMoveDirectionBasedOnCamera();
         if (inputDirection != Vector3.zero && player.PlanarVelocity == Vector3.zero)
         {
             player.StateMachine.Change<CrawlPlayerState>();
