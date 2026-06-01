@@ -126,6 +126,16 @@ public class GameInputSystem : Singleton<GameInputSystem>
         lastJumpPressedTime = -999f;
     }
 
+    public void LockCamera()
+    {
+        lookAction?.Disable();
+    }
+
+    public void UnlockCamera()
+    {
+        lookAction?.Enable();
+    }
+
     public bool IsJumpReleasedThisFrame() => jumpAction.WasReleasedThisFrame();
     public bool IsCrouchAndCrawlPressed() => crouchAndCrawlAction.IsPressed();
     public bool IsCrouchPressed() => crouchAndCrawlAction.IsPressed();
