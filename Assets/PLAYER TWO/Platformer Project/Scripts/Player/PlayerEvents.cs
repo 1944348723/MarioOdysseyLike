@@ -16,4 +16,6 @@ public class PlayerEvents
     public UnityEvent Dived;
     public UnityEvent GlideStarted;
     public UnityEvent GlideEnded;
+    public UnityEvent WalkStarted;
+    public UnityEvent WalkEnded;
 }

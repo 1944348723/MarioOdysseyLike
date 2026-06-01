@@ -10,11 +10,13 @@ public class WalkPlayerState : PlayerState
     protected override void OnEnter(Player player)
     {
         Debug.Log("WalkPlayerState Entered");
+        player.playerEvents.WalkStarted?.Invoke();
     }
 
     protected override void OnExit(Player player)
     {
         Debug.Log("WalkPlayerState Exited");
+        player.playerEvents.WalkEnded?.Invoke();
     }
 
     protected override void OnStep(Player player)
