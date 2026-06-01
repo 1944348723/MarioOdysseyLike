@@ -52,6 +52,9 @@ public abstract class EntityStateManager<T> : EntityStateManager where T : Entit
             Change(statesMap[type]);
         }
     }
+    protected void OnControllerColliderHit(ControllerColliderHit hit) {
+        CurrentState.Contact(entity, hit);
+    }
 
     /// <summary>
     /// 转换至具体状态实例

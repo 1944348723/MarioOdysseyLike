@@ -3,6 +3,11 @@ using UnityEngine;
 public class WallSlidePlayerState : PlayerState
 {
     private Vector3 wallNormal;
+
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+    }
+
     protected override void OnEnter(Player player)
     {
         Debug.Log("WallSlidePlayerState Entered");

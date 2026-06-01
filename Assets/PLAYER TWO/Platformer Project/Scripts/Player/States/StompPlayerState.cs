@@ -7,6 +7,10 @@ public class StompPlayerState : PlayerState
     private float hoverTimer = 0f;
     private float recoverTimer = 0f;
 
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+    }
+
     protected override void OnEnter(Player player)
     {
         state = StompState.HOVER;
@@ -51,4 +55,5 @@ public class StompPlayerState : PlayerState
                 break;
         }
     }
+
 }

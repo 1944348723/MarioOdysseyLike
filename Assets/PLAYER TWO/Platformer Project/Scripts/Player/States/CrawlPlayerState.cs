@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class CrawlPlayerState : PlayerState
 {
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+        player.PushRigidBody(hit);
+    }
+
     protected override void OnEnter(Player player)
     {
         player.ResizeColliderHeight(player.Stats.Current.crouchHeight);

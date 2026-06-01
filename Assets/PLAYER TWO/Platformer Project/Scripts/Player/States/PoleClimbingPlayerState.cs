@@ -5,6 +5,10 @@ public class PoleClimbingPlayerState : PlayerState
     private float distanceToPole = 0f;
     private readonly float heightOffsetToPolePeak = 0.3f;
 
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+    }
+
     protected override void OnEnter(Player player)
     {
         Debug.Log("PoleClimbingPlayerState Entered");

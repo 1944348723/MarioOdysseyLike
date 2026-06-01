@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class BackflipPlayerState : PlayerState
 {
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+    }
+
     protected override void OnEnter(Player player)
     {
         player.VerticalVelocity = Vector3.up * player.Stats.Current.backflipUpwardSpeed;

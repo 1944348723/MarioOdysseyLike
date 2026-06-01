@@ -175,5 +175,4 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         VerticalVelocity = Vector3.Max(VerticalVelocity, Vector3.zero);
         entityEvents.ExitGround?.Invoke();
     }
-
 }

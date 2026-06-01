@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class HurtPlayerState : PlayerState
 {
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+    }
+
     protected override void OnEnter(Player player)
     {
         Debug.Log("HurtPlayerState Entered");

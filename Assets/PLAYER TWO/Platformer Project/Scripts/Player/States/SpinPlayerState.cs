@@ -4,6 +4,11 @@ public class SpinPlayerState : PlayerState
 {
     private float timer = 0f;
 
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+        player.PushRigidBody(hit);
+    }
+
     protected override void OnEnter(Player player)
     {
         Debug.Log("SpinPlayerState Entered");

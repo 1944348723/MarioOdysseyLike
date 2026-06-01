@@ -3,6 +3,12 @@ using UnityEngine;
 public class DashPlayerState : PlayerState
 {
     private float timer;
+
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+        player.PushRigidBody(hit);
+    }
+
     protected override void OnEnter(Player player)
     {
         player.PlanarVelocity = player.transform.forward * player.Stats.Current.dashSpeed;

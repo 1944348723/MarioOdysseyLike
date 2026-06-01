@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class DiePlayerState : PlayerState
 {
+    protected override void OnContact(Player entity, ControllerColliderHit hit)
+    {
+    }
+
     protected override void OnEnter(Player player)
     {
         Debug.Log("DiePlayerState Entered");

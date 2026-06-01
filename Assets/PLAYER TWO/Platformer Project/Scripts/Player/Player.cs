@@ -281,6 +281,16 @@ public class Player : Entity<Player>
         playerEvents.Jumped?.Invoke();
     }
 
+    public void PushRigidBody(ControllerColliderHit hit)
+    {
+        Rigidbody rb = hit.collider.attachedRigidbody;
+        if (rb && !rb.isKinematic)
+        {
+            Vector3 force = PlanarVelocity * Stats.Current.pushForce;
+            rb.velocity += force / rb.mass * Time.deltaTime;
+        }
+    }
+
     public void RecordPoleExit()
     {
         LastPoleExitTime = Time.time;

@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class FallPlayerState : PlayerState
 {
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+        player.PushRigidBody(hit);
+    }
+
     protected override void OnEnter(Player player)
     {
         Debug.Log("FallPlayerState Entered");

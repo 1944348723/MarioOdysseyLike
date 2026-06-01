@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class CrouchPlayerState : PlayerState
 {
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+    }
+
     protected override void OnEnter(Player player)
     {
         player.ResizeColliderHeight(player.Stats.Current.crouchHeight);

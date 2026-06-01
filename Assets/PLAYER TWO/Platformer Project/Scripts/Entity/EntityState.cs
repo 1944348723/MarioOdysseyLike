@@ -59,7 +59,13 @@ public abstract class EntityState<T> where T : Entity<T>
         OnExit(entity);
     }
 
+    public void Contact(T entity, ControllerColliderHit hit)
+    {
+        OnContact(entity, hit);
+    }
+
     protected abstract void OnEnter(T entity);
     protected abstract void OnStep(T entity);
     protected abstract void OnExit(T entity);
+    protected abstract void OnContact(T entity, ControllerColliderHit hit);
 }

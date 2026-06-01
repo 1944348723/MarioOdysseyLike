@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class WalkPlayerState : PlayerState
 {
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+        player.PushRigidBody(hit);
+    }
+
     protected override void OnEnter(Player player)
     {
         Debug.Log("WalkPlayerState Entered");

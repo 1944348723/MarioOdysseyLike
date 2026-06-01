@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class IdlePlayerState : PlayerState
 {
+    protected override void OnContact(Player player, ControllerColliderHit hit)
+    {
+    }
+
     protected override void OnEnter(Player player)
     {
         Debug.Log("IdlePlayerState Entered");
