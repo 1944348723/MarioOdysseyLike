@@ -5,10 +5,11 @@ public abstract class EntityBase: MonoBehaviour
     public bool IsGrounded => groundDetector.IsGrounded;
     public bool IsOnSlope => groundDetector.IsOnSlope;
     public float LastGoundedTime => groundDetector.LastGoundedTime;
+    public RaycastHit GroundHit => groundDetector.GroundHit;
 
     public EntityEvents entityEvents;
 
-    protected GroundDetector groundDetector;
+    public GroundDetector groundDetector;
 }
 
 /// <summary>

@@ -36,6 +36,7 @@ public class GroundDetector : MonoBehaviour
             }
         }
     }
+    public RaycastHit GroundHit => groundHit;
 
     public Action GroundEntered;
     public Action GroundExited;
