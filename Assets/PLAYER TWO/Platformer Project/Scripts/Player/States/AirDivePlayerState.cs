@@ -11,7 +11,7 @@ public class AirDivePlayerState : PlayerState
         Debug.Log("AirDivePlayerState Entered");
         player.VerticalVelocity = Vector3.zero;
         player.PlanarVelocity = player.transform.forward * player.Stats.Current.airDiveForwardSpeed;
-        player.playerEvents.Dived?.Invoke();
+        player.playerEvents.AirDived?.Invoke();
     }
 
     protected override void OnExit(Player player)

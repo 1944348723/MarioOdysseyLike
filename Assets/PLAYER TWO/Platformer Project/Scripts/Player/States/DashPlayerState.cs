@@ -11,6 +11,7 @@ public class DashPlayerState : PlayerState
 
     protected override void OnEnter(Player player)
     {
+        Debug.Log("DashPlayerState Entered");
         player.PlanarVelocity = player.transform.forward * player.Stats.Current.dashSpeed;
         player.VerticalVelocity = Vector3.zero;
         timer = 0;
@@ -18,6 +19,7 @@ public class DashPlayerState : PlayerState
     }
 
     protected override void OnExit(Player player) {
+        Debug.Log("DashPlayerState Exited");
         player.PlanarVelocity = Vector3.ClampMagnitude(player.PlanarVelocity, player.Stats.Current.maxSpeed);
         player.playerEvents.DashEnded?.Invoke();
     }

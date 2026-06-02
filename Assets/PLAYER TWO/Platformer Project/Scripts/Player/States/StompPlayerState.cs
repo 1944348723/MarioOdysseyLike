@@ -43,6 +43,7 @@ public class StompPlayerState : PlayerState
                 if (player.IsGrounded)
                 {
                     state = StompState.RECOVER;
+                    player.playerEvents.StompLanded?.Invoke();
                 }
                 break;
             case StompState.RECOVER:

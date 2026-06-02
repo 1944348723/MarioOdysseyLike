@@ -1037,6 +1037,7 @@ GameObject:
   - component: {fileID: 6536025195572348964}
   - component: {fileID: 1252285950965311353}
   - component: {fileID: 8395141469825127382}
+  - component: {fileID: 1697185715769691184}
   m_Layer: 0
   m_Name: Audios
   m_TagString: Untagged
@@ -1199,6 +1200,63 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 62beeddcf3aaeb1408518db5d8b64251, type: 3}
   defaultLandings:
   - {fileID: 8300000, guid: b22f97dba0813824594b5c08639894df, type: 3}
+--- !u!114 &1697185715769691184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652337146481211905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262e0455e2729324dbcfe39fb81e0d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 3328971392170679316}
+  jump:
+  - {fileID: 8300000, guid: 05a2c990c2c35c847ab81322bc72c161, type: 3}
+  - {fileID: 8300000, guid: 55e721f1dfaef5246b02e46c56af95b8, type: 3}
+  - {fileID: 8300000, guid: 119550d83c92fca47916f66a9edd70fd, type: 3}
+  - {fileID: 8300000, guid: 6ddd2a11d84a7ef4db5280d0e8c34f90, type: 3}
+  - {fileID: 8300000, guid: 5d943caf3edecad4289608dc4bd37004, type: 3}
+  hurt:
+  - {fileID: 8300000, guid: 91ca9eae86b8eb64c81d77383b4d1345, type: 3}
+  - {fileID: 8300000, guid: b31d3b4cf0c150b488c1b459fde24d14, type: 3}
+  - {fileID: 8300000, guid: 6f6dba85ef6f86e4fb638b0b40c9dfde, type: 3}
+  - {fileID: 8300000, guid: 2db5b203c93cf7e43b05a11c015d79d8, type: 3}
+  - {fileID: 8300000, guid: 8f1cee5a09de2534b987be28b6d0ae40, type: 3}
+  attack:
+  - {fileID: 8300000, guid: 377f7b96502b63644a7d0e812b59ef0c, type: 3}
+  - {fileID: 8300000, guid: 1ec35638e81eca945b1187a0b34a223e, type: 3}
+  - {fileID: 8300000, guid: 59b2b5fd30c91514992dc36f6d7629ac, type: 3}
+  - {fileID: 8300000, guid: 0fd0b68860a57724cbec859645499e9a, type: 3}
+  - {fileID: 8300000, guid: cba932ba791eab549be3f5f78f2a08bc, type: 3}
+  lift:
+  - {fileID: 8300000, guid: 566bd2932ccec9840b7911235d0b14d6, type: 3}
+  - {fileID: 8300000, guid: 4bb5bb93f43dabd4e8f20be8a236e001, type: 3}
+  - {fileID: 8300000, guid: 45862fac777745845a3bcd1bd09efdf6, type: 3}
+  - {fileID: 8300000, guid: 4fdceff72ee54bd4aafccf73feea51d3, type: 3}
+  - {fileID: 8300000, guid: 22f2ade9d9546e3478f6d365ba1810f9, type: 3}
+  maneuver:
+  - {fileID: 8300000, guid: 915eb6dc1ad30b344a45bf3ef8af8bbd, type: 3}
+  - {fileID: 8300000, guid: 2963beb09d226b1458c89e64e3783bd9, type: 3}
+  - {fileID: 8300000, guid: 20a1bce754ad3e04d90fc75ae6faa7c5, type: 3}
+  - {fileID: 8300000, guid: 06d80d09ca211844b98a596a48a4c458, type: 3}
+  - {fileID: 8300000, guid: 8871119f7d4bf6041817450a4768f29a, type: 3}
+  enterWaterClip: {fileID: 8300000, guid: d054d36892d86444d998d48d52ebf5fd, type: 3}
+  exitWaterClip: {fileID: 8300000, guid: 2d25a7387036df94c98c381b35d5a05f, type: 3}
+  glideStartedClip: {fileID: 8300000, guid: 5731886b24a083d4b96f52451958df11, type: 3}
+  glideEndedClip: {fileID: 8300000, guid: c5c638c18ba02a04fa51ad14b3f318e3, type: 3}
+  spin: {fileID: 8300000, guid: 82dec7b293dee164ea65df69a0359f39, type: 3}
+  pickup: {fileID: 8300000, guid: 41650ffaf0fdca24f9c18c3a24ac04be, type: 3}
+  drop: {fileID: 8300000, guid: 75d0d69ba8d50834c92ff6e6ab73d522, type: 3}
+  airDive: {fileID: 8300000, guid: b6bc414dd5dffd742a4342b8023c2289, type: 3}
+  stompSpin: {fileID: 8300000, guid: 97befe4b2c7d72240a3152d69cd48060, type: 3}
+  stompLanding: {fileID: 8300000, guid: c33448aaa1d45234590045f56f82c472, type: 3}
+  ledgeGrabbing: {fileID: 8300000, guid: 41650ffaf0fdca24f9c18c3a24ac04be, type: 3}
+  dash: {fileID: 8300000, guid: e767569068fd6c8459c9c782d5d58ebe, type: 3}
+  startRailGrind: {fileID: 8300000, guid: 9d81e49a83cae4b4689a0b4aca032110, type: 3}
+  railGrind: {fileID: 8300000, guid: 09788b1b7db5d234b9412b193468fc85, type: 3}
 --- !u!1 &3145912364195743504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2381,7 +2439,6 @@ GameObject:
   - component: {fileID: 366533005304380307}
   - component: {fileID: 4976374141811709760}
   - component: {fileID: 7667990122837610678}
-  - component: {fileID: 3524208002686878910}
   - component: {fileID: 1402120652201112515}
   - component: {fileID: 3217527921189329986}
   m_Layer: 0
@@ -2462,6 +2519,9 @@ MonoBehaviour:
     StompStarted:
       m_PersistentCalls:
         m_Calls: []
+    StompLanded:
+      m_PersistentCalls:
+        m_Calls: []
     StompEnded:
       m_PersistentCalls:
         m_Calls: []
@@ -2471,7 +2531,7 @@ MonoBehaviour:
     SpinEnded:
       m_PersistentCalls:
         m_Calls: []
-    Dived:
+    AirDived:
       m_PersistentCalls:
         m_Calls: []
     GlideStarted:
@@ -2593,22 +2653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673af8f253823a24190ace64b8878061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3524208002686878910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6650432633027884458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 262e0455e2729324dbcfe39fb81e0d83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enterWaterClip: {fileID: 8300000, guid: d054d36892d86444d998d48d52ebf5fd, type: 3}
-  exitWaterClip: {fileID: 8300000, guid: 2d25a7387036df94c98c381b35d5a05f, type: 3}
-  glideStartedClip: {fileID: 8300000, guid: 5731886b24a083d4b96f52451958df11, type: 3}
-  glideEndedClip: {fileID: 8300000, guid: c5c638c18ba02a04fa51ad14b3f318e3, type: 3}
 --- !u!114 &1402120652201112515
 MonoBehaviour:
   m_ObjectHideFlags: 0
