@@ -176,4 +176,12 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         VerticalVelocity = Vector3.Max(VerticalVelocity, Vector3.zero);
         entityEvents.ExitGround?.Invoke();
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.TryGetComponent<IEntityContact>(out var other))
+        {
+            other.OnEntityContact(this);
+        }
+    }
 }

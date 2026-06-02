@@ -6,7 +6,6 @@ public class FallPlayerState : PlayerState
     protected override void OnContact(Player player, ControllerColliderHit hit)
     {
         player.PushRigidBody(hit);
-        TryHitBox(player, hit);
     }
 
     protected override void OnEnter(Player player)
@@ -58,16 +57,5 @@ public class FallPlayerState : PlayerState
         {
             player.VerticalVelocity = Vector3.up * player.Stats.Current.minJumpSpeed;
         }
-    }
-
-    private void TryHitBox(Player player, ControllerColliderHit hit)
-    {
-        if (!hit.collider.TryGetComponent<CoinBox>(out CoinBox box)) return;
-
-        if (player.Velocity.y > 0 && box.transform.position.y > player.transform.position.y)
-        {
-            box.Trigger();
-        }
-        player.VerticalVelocity = Vector3.zero;
     }
 }

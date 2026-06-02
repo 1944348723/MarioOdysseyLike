@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CoinBox : MonoBehaviour
+public class CoinBox : MonoBehaviour, IEntityContact
 {
     [SerializeField] private Coin[] coins;
     [SerializeField] private MeshRenderer meshRenderer;
@@ -49,6 +49,17 @@ public class CoinBox : MonoBehaviour
         {
             valid = false;
             meshRenderer.sharedMaterial = emptyBoxMaterial;
+        }
+    }
+
+    public void OnEntityContact(EntityBase entity)
+    {
+        if (!entity.TryGetComponent<Player>(out var player)) return;
+
+        if (player.Velocity.y > 0 && transform.position.y > player.transform.position.y)
+        {
+            Trigger();
+            player.VerticalVelocity = Vector3.zero;
         }
     }
 }
