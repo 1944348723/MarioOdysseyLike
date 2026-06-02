@@ -6,6 +6,8 @@ public class Coin : MonoBehaviour
     [SerializeField] private GameObject visual;
     [SerializeField] private AudioClip collectSound;
     [SerializeField] private ParticleSystem collectEffect;
+    [SerializeField] private bool hideOnCollect = true;
+    [SerializeField] private bool collectOnContact = true;
 
     private AudioSource audioSource;
     private bool collected = false;
@@ -23,11 +25,9 @@ public class Coin : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Collect()
     {
         if (collected) return;
-        if (!other.GetComponent<Player>()) return;
-
         collected = true;
         LevelManager.Instance.AddCoin(value);
         
@@ -41,6 +41,16 @@ public class Coin : MonoBehaviour
             collectEffect.Play();
         }
 
-        visual.SetActive(false);
+        if (hideOnCollect)
+        {
+            visual.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!collectOnContact) return;
+        if (!other.GetComponent<Player>()) return;
+        Collect();
     }
 }
