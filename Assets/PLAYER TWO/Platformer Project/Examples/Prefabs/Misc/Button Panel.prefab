@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 8408361727782729909}
   - component: {fileID: 1680779631437092008}
   - component: {fileID: 8408361727782729908}
+  - component: {fileID: 2919839454508939664}
+  - component: {fileID: 7399448801682255858}
+  - component: {fileID: 67884204466760329}
   m_Layer: 0
   m_Name: Button Panel
   m_TagString: Untagged
@@ -153,6 +156,72 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &2919839454508939664
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408361727782729910}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!135 &7399448801682255858
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408361727782729910}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.8
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &67884204466760329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408361727782729910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009de3a00070af24d816a3a1c2ff5f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 3034501376341686209}
+  pressedOffset: {x: 0, y: -0.1, z: 0}
+  animationDuration: 0.1
+  activateClip: {fileID: 0}
+  deactivateClip: {fileID: 0}
+  autoResetTime: 0
 --- !u!1001 &8408361727614718141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -230,6 +299,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3603018693360171123}
   m_SourcePrefab: {fileID: 100100000, guid: 4cda29d24979aac47af3ec8fb449a1f5, type: 3}
+--- !u!1 &3034501376341686209 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6821887585681450876, guid: 4cda29d24979aac47af3ec8fb449a1f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 8408361727614718141}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8303011588387534678 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4cda29d24979aac47af3ec8fb449a1f5,
