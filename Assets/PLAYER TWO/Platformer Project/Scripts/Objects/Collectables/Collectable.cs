@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Collectable : MonoBehaviour
 {
-    [SerializeField] private int value = 1;
+    [SerializeField] protected int value = 1;
     [SerializeField] private GameObject visual;
     [SerializeField] private AudioClip collectSound;
     [SerializeField] private ParticleSystem collectEffect;
@@ -25,11 +25,10 @@ public class Coin : MonoBehaviour
         }
     }
 
-    public void Collect()
+    public virtual void Collect()
     {
         if (collected) return;
         collected = true;
-        LevelManager.Instance.AddCoin(value);
         
         if (collectSound)
         {
@@ -46,11 +45,16 @@ public class Coin : MonoBehaviour
             visual.SetActive(false);
         }
     }
+    protected virtual bool CanCollect(Collider other)
+    {
+        return collectOnContact && !collected;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!collectOnContact) return;
-        if (!other.GetComponent<Player>()) return;
-        Collect();
+        if (CanCollect(other))
+        {
+            Collect();
+        }
     }
 }

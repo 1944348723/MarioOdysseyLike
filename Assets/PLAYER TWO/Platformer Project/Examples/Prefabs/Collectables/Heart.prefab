@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8378897265690657006}
   - component: {fileID: 8378897265690657004}
+  - component: {fileID: 5314319741602005694}
   m_Layer: 0
   m_Name: Heart
   m_TagString: Untagged
@@ -81,12 +82,30 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5314319741602005694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8378897265690657007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb4fb479306d213428c767cc658b1ebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 1
+  visual: {fileID: 8378897265419419363}
+  collectSound: {fileID: 8300000, guid: 7ef55b15281e988459be4b38e36962d9, type: 3}
+  collectEffect: {fileID: 1002508344575542776}
+  hideOnCollect: 1
+  collectOnContact: 1
 --- !u!1001 &2279807260962140214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -269,6 +288,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9d0836e579f9dc4880e6418e79c2aad, type: 3}
+--- !u!198 &1002508344575542776 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8993793817210872422, guid: e9d0836e579f9dc4880e6418e79c2aad,
+    type: 3}
+  m_PrefabInstance: {fileID: 8158833488024250270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7788226914947449656 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2102240711556162726, guid: e9d0836e579f9dc4880e6418e79c2aad,

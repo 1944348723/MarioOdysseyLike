@@ -75,7 +75,6 @@ public class Health : MonoBehaviour
         return true;
     }
 
-    // 目前治疗值为负数直接抛异常
     // 死亡状态无法治疗
     public bool Heal(int value)
     {
