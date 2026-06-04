@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 8378897265690657006}
   - component: {fileID: 8378897265690657004}
   - component: {fileID: 5314319741602005694}
+  - component: {fileID: 4403229498574776766}
+  - component: {fileID: 5131945722731919438}
   m_Layer: 0
   m_Name: Heart
   m_TagString: Untagged
@@ -106,6 +108,35 @@ MonoBehaviour:
   collectEffect: {fileID: 1002508344575542776}
   hideOnCollect: 1
   collectOnContact: 1
+--- !u!114 &4403229498574776766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8378897265690657007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa6e27f6cba7a344b8df309fb211dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axis: {x: 0, y: 1, z: 0}
+  speed: 60
+--- !u!114 &5131945722731919438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8378897265690657007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ef1f0d18f469e4a9d132825b3ed20d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset1: {x: 0, y: 0.3, z: 0}
+  offset2: {x: 0, y: -0.3, z: 0}
+  speed: 0.3
 --- !u!1001 &2279807260962140214
 PrefabInstance:
   m_ObjectHideFlags: 0
