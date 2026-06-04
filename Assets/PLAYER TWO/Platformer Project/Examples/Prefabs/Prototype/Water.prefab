@@ -170,3 +170,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be88099a6e4c8074b8c254c51f8e90ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enterWaterClip: {fileID: 8300000, guid: d054d36892d86444d998d48d52ebf5fd, type: 3}
+  exitWaterClip: {fileID: 8300000, guid: 2d25a7387036df94c98c381b35d5a05f, type: 3}

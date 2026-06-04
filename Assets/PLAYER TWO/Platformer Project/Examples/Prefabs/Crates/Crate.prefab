@@ -167,6 +167,8 @@ GameObject:
   - component: {fileID: 1823927978882705625}
   - component: {fileID: 6511097019638275744}
   - component: {fileID: 4259901410965373747}
+  - component: {fileID: 9136859795706835872}
+  - component: {fileID: 4091913011289914845}
   m_Layer: 12
   m_Name: Crate
   m_TagString: Untagged
@@ -281,3 +283,33 @@ MonoBehaviour:
     type: 3}
   breakSound: {fileID: 8300000, guid: 3299815386b58864ab1eac9e1853399f, type: 3}
   dropItem: {fileID: 0}
+--- !u!114 &9136859795706835872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4151346648260422249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8205b08de62ecd4c843630496c570d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxForce: 20
+  maxForceDepth: 0.5
+  waterDrag: 2
+  waterAngularDrag: 0.2
+--- !u!114 &4091913011289914845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4151346648260422249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af99d73c0500a741b75159eb3cfea15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterWaterClip: {fileID: 8300000, guid: d054d36892d86444d998d48d52ebf5fd, type: 3}
+  exitWaterClip: {fileID: 8300000, guid: 2d25a7387036df94c98c381b35d5a05f, type: 3}
