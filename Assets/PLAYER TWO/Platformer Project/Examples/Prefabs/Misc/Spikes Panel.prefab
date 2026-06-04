@@ -100,6 +100,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: spikes_panel
       objectReference: {fileID: 0}
+    - target: {fileID: 4535775860052851933, guid: d1d049da5e539aa45b7a1cc1fc908c22,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -112,6 +117,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2340648703040761535}
+    - targetCorrespondingSourceObject: {fileID: 4535775860052851933, guid: d1d049da5e539aa45b7a1cc1fc908c22,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8402295984191093058}
+    - targetCorrespondingSourceObject: {fileID: 4535775860052851933, guid: d1d049da5e539aa45b7a1cc1fc908c22,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6044521783778937683}
   m_SourcePrefab: {fileID: 100100000, guid: d1d049da5e539aa45b7a1cc1fc908c22, type: 3}
 --- !u!1 &5609776061605700766 stripped
 GameObject:
@@ -168,9 +181,50 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 0.8, z: 2}
   m_Center: {x: 0, y: 0.44999996, z: 0}
+--- !u!54 &8402295984191093058
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611182437015651671}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &6044521783778937683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611182437015651671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f430ecd853a754c8aa625098c9ec76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  hitCollider: {fileID: 0}
