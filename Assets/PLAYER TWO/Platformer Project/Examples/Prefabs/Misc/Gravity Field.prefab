@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6115039651565371230}
   - component: {fileID: 6860753819017940767}
+  - component: {fileID: 4360148573256311280}
   m_Layer: 0
   m_Name: Gravity Field
   m_TagString: Untagged
@@ -48,12 +49,26 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 6, z: 2}
   m_Center: {x: 0, y: 3, z: 0}
+--- !u!114 &4360148573256311280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6115039651565371218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1a978b60f278664996ec743f01f1ff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 1, z: 0}
+  force: 75
 --- !u!1001 &6115039652320427667
 PrefabInstance:
   m_ObjectHideFlags: 0
