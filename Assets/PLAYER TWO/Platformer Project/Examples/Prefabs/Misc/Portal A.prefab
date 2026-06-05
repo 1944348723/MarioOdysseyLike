@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7843370674092939970}
   - component: {fileID: 7843370674092939973}
   - component: {fileID: 7843370674092939968}
+  - component: {fileID: 8715582972077328153}
   m_Layer: 0
   m_Name: Portal A
   m_TagString: Untagged
@@ -49,7 +50,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -152,6 +153,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8715582972077328153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7843370674092939972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e326bebbba2a5146af8392a5cf1da28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exit: {fileID: 0}
+  exitOffset: {x: 0, y: 0, z: 0}
+  portalCollider: {fileID: 0}
+  clip: {fileID: 8300000, guid: b785139a0e9136c428a9e64553a1ceeb, type: 3}
 --- !u!1001 &7843370672269704451
 PrefabInstance:
   m_ObjectHideFlags: 0
