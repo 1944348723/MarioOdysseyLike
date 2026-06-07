@@ -85,7 +85,7 @@ public class Player : Entity<Player>
             float speed = Velocity.y;
             // 上升时用正常重力，下落时用下落重力
             float gravity = speed > 0 ? Stats.Current.gravity : Stats.Current.fallGravity;
-            speed -= gravity * GravityMultiplier * Time.deltaTime;
+            speed -= gravity * ModifierController.GravityMultiplier * Time.deltaTime;
             speed = Mathf.Max(speed, -Stats.Current.maxFallingSpeed);
             VerticalVelocity = new Vector3(0, speed, 0);
         }
@@ -97,7 +97,7 @@ public class Player : Entity<Player>
 
         if (!IsGrounded)
         {
-            VerticalVelocity += gravity * GravityMultiplier * Time.deltaTime * Vector3.down;
+            VerticalVelocity += gravity * ModifierController.GravityMultiplier * Time.deltaTime * Vector3.down;
         }
     }
 

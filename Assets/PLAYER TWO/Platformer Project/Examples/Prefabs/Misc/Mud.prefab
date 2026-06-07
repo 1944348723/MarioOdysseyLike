@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2091592689068177103}
   - component: {fileID: 2091592689068177088}
   - component: {fileID: 2091592689068177089}
+  - component: {fileID: 183194376286747417}
   m_Layer: 0
   m_Name: Mud
   m_TagString: Untagged
@@ -101,9 +102,28 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &183194376286747417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091592689068177091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5112db2b272ed9644b2456ad3302afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modifier:
+    velocityMultiplier: 0.25
+    accelerationMultiplier: 0.5
+    maxSpeedMultiplier: 0.5
+    decelerationMultiplier: 1
+    turningDragMultiplier: 0.8
+    gravityMultiplier: 3

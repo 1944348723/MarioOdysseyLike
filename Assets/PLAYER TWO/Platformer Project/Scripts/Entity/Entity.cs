@@ -6,21 +6,8 @@ public abstract class EntityBase: MonoBehaviour
     public bool IsOnSlope => groundDetector.IsOnSlope;
     public float LastGoundedTime => groundDetector.LastGoundedTime;
     public RaycastHit GroundHit => groundDetector.GroundHit;
-
-    public EntityEvents entityEvents;
-
     public GroundDetector groundDetector;
-}
-
-/// <summary>
-/// CRTP(Curiously Recurring Template Pattern)
-/// 子类继承时必须把自己作为泛型参数传递给父类
-/// 该类负责提供移动相关功能以及驱动状态机
-/// </summary>
-public abstract class Entity<T>: EntityBase where T : Entity<T>
-{
-    public EntityStateManager<T> StateMachine { get; private set; }
-    public CharacterController CharacterController { get; private set; }
+    public EntityModifierController ModifierController { get; protected set; }
     public Vector3 Velocity { get; set; }
     public Vector3 PlanarVelocity
     {
@@ -32,21 +19,28 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         get { return new Vector3(0, Velocity.y, 0); }
         set { Velocity = new Vector3(Velocity.x, value.y, Velocity.z); }
     }
+
+    public EntityEvents entityEvents;
+}
+
+/// <summary>
+/// CRTP(Curiously Recurring Template Pattern)
+/// 子类继承时必须把自己作为泛型参数传递给父类
+/// 该类负责提供移动相关功能以及驱动状态机
+/// </summary>
+public abstract class Entity<T>: EntityBase where T : Entity<T>
+{
+    public EntityStateManager<T> StateMachine { get; private set; }
+    public CharacterController CharacterController { get; private set; }
     public Vector3 UnsizedPosition => transform.position;
     public float OriginalHeight { get; protected set; }
-    // 倍率
-    public float AccelerationMultiplier { get; set; } = 1f;
-    public float DecelerationMultiplier { get; set; } = 1f;
-    public float MaxSpeedMultiplier { get; set; } = 1f;
-    public float TurningDragMultiplier { get; set; } = 1f;
-    public float GravityMultiplier { get; set; } = 1f;
-    
 
     protected virtual void Awake()
     {
         StateMachine = GetComponent<EntityStateManager<T>>();
         CharacterController = GetComponent<CharacterController>();
         groundDetector = GetComponent<GroundDetector>();
+        ModifierController = gameObject.AddComponent<EntityModifierController>();
     }
 
     protected virtual void Start()
@@ -75,12 +69,12 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         Vector3 turningVelocity = PlanarVelocity - forwardVelocity;
 
         // 沿输入方向加速
-        float finalMaxSpeed = maxSpeed * MaxSpeedMultiplier;
-        forwardSpeed += acceleration * AccelerationMultiplier * Time.deltaTime;
+        float finalMaxSpeed = maxSpeed * ModifierController.MaxSpeedMultiplier;
+        forwardSpeed += acceleration * ModifierController.AccelerationMultiplier * Time.deltaTime;
         forwardSpeed = Mathf.Clamp(forwardSpeed, -finalMaxSpeed, finalMaxSpeed);
 
         // 逐渐消除侧向速度
-        turningVelocity = Vector3.MoveTowards(turningVelocity, Vector3.zero, turningDrag * TurningDragMultiplier * Time.deltaTime);
+        turningVelocity = Vector3.MoveTowards(turningVelocity, Vector3.zero, turningDrag * ModifierController.TurningDragMultiplier * Time.deltaTime);
 
         // 合成并限速
         Vector3 newPlanarVelocity = forwardSpeed * planarDir + turningVelocity;
@@ -104,7 +98,7 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
 
     public void Decelerate(float deceleration)
     {
-        float deltaSpeed = deceleration * DecelerationMultiplier * Time.deltaTime;
+        float deltaSpeed = deceleration * ModifierController.DecelerationMultiplier * Time.deltaTime;
         PlanarVelocity = Vector3.MoveTowards(PlanarVelocity, Vector3.zero, deltaSpeed);
     }
 
