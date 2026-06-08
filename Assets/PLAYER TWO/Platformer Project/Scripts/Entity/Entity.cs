@@ -56,6 +56,11 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         groundDetector.Tick(transform.position + CharacterController.center, Velocity.y <= 0);
     }
 
+    protected virtual void LateUpdate()
+    {
+        MoveWithPlatform();
+    }
+
     public void Accelerate(Vector3 direction, float acceleration, float turningDrag, float maxSpeed)
     {
         Vector3 planarDir = Vector3.ProjectOnPlane(direction, Vector3.up);
@@ -156,6 +161,14 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         } else
         {
             transform.position += Velocity * Time.deltaTime;
+        }
+    }
+
+    private void MoveWithPlatform()
+    {
+        if (IsGrounded && GroundHit.collider.TryGetComponent<MovingPlatform>(out var platform))
+        {
+            CharacterController.Move(platform.DeltaPosition);
         }
     }
 

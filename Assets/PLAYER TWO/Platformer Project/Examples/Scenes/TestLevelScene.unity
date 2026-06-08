@@ -78723,6 +78723,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 807777443}
     m_Modifications:
+    - target: {fileID: 733042317966436006, guid: 1311f483dfc239946b216b6927e28db2,
+        type: 3}
+      propertyPath: points.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 733042317966436006, guid: 1311f483dfc239946b216b6927e28db2,
+        type: 3}
+      propertyPath: 'points.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1446546788}
+    - target: {fileID: 733042317966436006, guid: 1311f483dfc239946b216b6927e28db2,
+        type: 3}
+      propertyPath: 'points.Array.data[1]'
+      value: 
+      objectReference: {fileID: 533043352}
+    - target: {fileID: 733042317966436006, guid: 1311f483dfc239946b216b6927e28db2,
+        type: 3}
+      propertyPath: 'points.Array.data[2]'
+      value: 
+      objectReference: {fileID: 594526747}
     - target: {fileID: 3652379756442723319, guid: 1311f483dfc239946b216b6927e28db2,
         type: 3}
       propertyPath: mode
