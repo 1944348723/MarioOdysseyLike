@@ -9,7 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1824014398455109896}
+  - component: {fileID: 8648117518643327828}
   - component: {fileID: 1824014398455109903}
+  - component: {fileID: 727928735896090691}
+  - component: {fileID: 3609432745100397216}
+  - component: {fileID: 698990389715468579}
+  - component: {fileID: 2882483242653654388}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -34,6 +39,32 @@ Transform:
   - {fileID: 3496237102795974350}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8648117518643327828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824014398455109895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f6b48393ff3c147897e573e7f708e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundDetector: {fileID: 0}
+  entityEvents:
+    EnterGround:
+      m_PersistentCalls:
+        m_Calls: []
+    ExitGround:
+      m_PersistentCalls:
+        m_Calls: []
+    EnterRails:
+      m_PersistentCalls:
+        m_Calls: []
+    ExitRails:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!143 &1824014398455109903
 CharacterController:
   m_ObjectHideFlags: 0
@@ -60,6 +91,70 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &727928735896090691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824014398455109895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c2114959dad755459e5fc60cb176e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max: 1
+  init: 1
+--- !u!114 &3609432745100397216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824014398455109895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 673af8f253823a24190ace64b8878061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &698990389715468579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824014398455109895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ddd5d97d2ab264196b572ce80d77ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+  - {fileID: 11400000, guid: 4498a8de3ba9a8d458987985239838a6, type: 2}
+--- !u!114 &2882483242653654388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824014398455109895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc74162521950ab459952d546ceb69fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+    Entered:
+      m_PersistentCalls:
+        m_Calls: []
+    Changed:
+      m_PersistentCalls:
+        m_Calls: []
+    Exited:
+      m_PersistentCalls:
+        m_Calls: []
+  states:
+  - IdleEnemyState
 --- !u!1 &5810393170191810984
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfe2638a8d3295b4b9ff1b38392339de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageReceiver: {fileID: 0}
+  damageReceiver: {fileID: 3609432745100397216}
   hitResponseType: 1
 --- !u!1001 &1824014397888379810
 PrefabInstance:
