@@ -32,17 +32,16 @@ public class PathFollower : MonoBehaviour
 
     private void Move()
     {
-        Vector3 target = route.Current();
+        Vector3 target = route.Current;
         if (transform.position == target)
         {
             route.Advance();
-            target = route.Current();
         }
         
         // TODO: 支持其他移动方式
         transform.position = Vector3.MoveTowards(
             transform.position,
-            target,
+            route.Current,
             speed * Time.deltaTime
         );
     }

@@ -5,6 +5,7 @@ public class DeathEnemyState : EnemyState
     protected override void OnEnter(Enemy enemy)
     {
         enemy.DisableHitBox();
+        enemy.PlanarVelocity = Vector3.zero;
     }
 
     protected override void OnExit(Enemy enemy)

@@ -23,7 +23,7 @@ public class WaypointRoute : MonoBehaviour
         return points[index].position;
     }
 
-    public Vector3 Current() => points[targetIndex].position;
+    public Vector3 Current => points[targetIndex].position;
 
     public void Advance()
     {

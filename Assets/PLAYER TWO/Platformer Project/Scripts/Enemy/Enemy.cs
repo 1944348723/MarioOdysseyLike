@@ -3,11 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(EnemyStatsManager))]
 [RequireComponent(typeof(DamageReceiver))]
+[RequireComponent(typeof(WaypointRoute))]
 public class Enemy : Entity<Enemy>
 {
     [SerializeField] private GameObject hitBox;
 
     public EnemyStatsManager Stats { get; protected set; }
+    public WaypointRoute Route { get; protected set; }
 
     private Health health;
     private DamageReceiver damageReceiver;
@@ -18,6 +20,7 @@ public class Enemy : Entity<Enemy>
         health = GetComponent<Health>();
         Stats = GetComponent<EnemyStatsManager>();
         damageReceiver = GetComponent<DamageReceiver>();
+        Route = GetComponent<WaypointRoute>();
     }
 
     protected override void Start()

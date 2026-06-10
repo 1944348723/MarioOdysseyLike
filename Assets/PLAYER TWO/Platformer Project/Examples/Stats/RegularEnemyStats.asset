@@ -12,3 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75301611387f88b4fb46d9ebe3c98fb4, type: 3}
   m_Name: RegularEnemyStats
   m_EditorClassIdentifier: 
+  gravity: 38
+  fallGravity: 65
+  snapSpeed: 15
+  rotationSpeed: 970
+  deceleration: 28
+  friction: 16
+  turningDrag: 28
+  maxFallingSpeed: 50
+  patrolAcceleration: 10
+  patrolMaxSpeed: 1
+  checkDistance: 0.5
+  followAcceleration: 10
+  followMaxSpeed: 2
