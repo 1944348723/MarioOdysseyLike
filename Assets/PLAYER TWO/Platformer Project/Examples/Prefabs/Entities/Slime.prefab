@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4889611974482821470}
   - component: {fileID: 4333201777331556293}
   - component: {fileID: 131414130732488594}
+  - component: {fileID: 6708854809805377711}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -162,6 +163,7 @@ MonoBehaviour:
   - PatrolEnemyState
   - IdleEnemyState
   - DeathEnemyState
+  - ChaseEnemyState
 --- !u!114 &4889611974482821470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +214,27 @@ MonoBehaviour:
   route: {fileID: 4333201777331556293}
   speed: 1
   moveType: 2
-  characterController: {fileID: 1824014398455109903}
+--- !u!114 &6708854809805377711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824014398455109895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419c2905d4aad964da5afebbe649f5b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  target: {fileID: 0}
+  viewDistance: 8
+  viewAngle: 90
 --- !u!1 &5810393170191810984
 GameObject:
   m_ObjectHideFlags: 0

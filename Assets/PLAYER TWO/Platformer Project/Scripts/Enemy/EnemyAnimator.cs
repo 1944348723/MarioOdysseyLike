@@ -66,6 +66,7 @@ public class EnemyAnimator : MonoBehaviour
         animator.SetInteger(lastStateHash, enemy.StateMachine.LastStateIndex);
         animator.SetFloat(planarSpeedHash, planarSpeed);
         animator.SetFloat(verticalSpeedHash, verticalSpeed);
+        animator.SetInteger(healthHash, enemy.CurrentHealth);
         animator.SetBool(isGroundedHash, enemy.IsGrounded);
     }
 }

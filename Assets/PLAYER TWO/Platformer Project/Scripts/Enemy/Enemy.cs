@@ -4,12 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyStatsManager))]
 [RequireComponent(typeof(DamageReceiver))]
 [RequireComponent(typeof(WaypointRoute))]
+[RequireComponent(typeof(Vision))]
 public class Enemy : Entity<Enemy>
 {
     [SerializeField] private GameObject hitBox;
 
     public EnemyStatsManager Stats { get; protected set; }
     public WaypointRoute Route { get; protected set; }
+    public Vision Vision { get; protected set; }
 
     private Health health;
     private DamageReceiver damageReceiver;
@@ -21,6 +23,7 @@ public class Enemy : Entity<Enemy>
         Stats = GetComponent<EnemyStatsManager>();
         damageReceiver = GetComponent<DamageReceiver>();
         Route = GetComponent<WaypointRoute>();
+        Vision = GetComponent<Vision>();
     }
 
     protected override void Start()
@@ -53,6 +56,8 @@ public class Enemy : Entity<Enemy>
     {
         hitBox.SetActive(false);
     }
+
+    public int CurrentHealth => health.Current;
 
     private void OnDeath()
     {

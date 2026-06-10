@@ -17,7 +17,7 @@ public class EnemyStats : EntityStats<EnemyStats>
     public float patrolMaxSpeed = 1f;
     public float checkDistance = 0.5f;
 
-    [Header("Follow Stats")]
-    public float followAcceleration = 10f;
-    public float followMaxSpeed = 4f;
+    [Header("Chase Stats")]
+    public float ChaseAcceleration = 10f;
+    public float ChaseMaxSpeed = 4f;
 }

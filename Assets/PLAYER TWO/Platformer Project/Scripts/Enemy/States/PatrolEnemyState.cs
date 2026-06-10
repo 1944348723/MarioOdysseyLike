@@ -14,6 +14,11 @@ public class PatrolEnemyState : EnemyState
     {
         enemy.Gravity();
         enemy.SnapToGround();
+        if (enemy.Vision.CanSeeTarget)
+        {
+            enemy.StateMachine.Change<ChaseEnemyState>();
+            return;
+        }
 
         UpdateDestination(enemy);
 

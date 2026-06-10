@@ -121864,6 +121864,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb3be2ed7c6178d409f93fd247a7e19f, type: 3}
+--- !u!1 &1990483871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6650432633027884458, guid: eb0f77ac3ce65a04db54ff55e59b0815,
+    type: 3}
+  m_PrefabInstance: {fileID: 1479944703}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1991102505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6621960204342526388, guid: c463a13ee976dc347ab64fb20858e706,
@@ -122387,6 +122393,21 @@ PrefabInstance:
       propertyPath: 'points.Array.data[2]'
       value: 
       objectReference: {fileID: 1251860707}
+    - target: {fileID: 6708854809805377711, guid: 07f1be6ccb495ac43a33cdf46352e4c0,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1990483871}
+    - target: {fileID: 6708854809805377711, guid: 07f1be6ccb495ac43a33cdf46352e4c0,
+        type: 3}
+      propertyPath: targetLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708854809805377711, guid: 07f1be6ccb495ac43a33cdf46352e4c0,
+        type: 3}
+      propertyPath: obstacleLayers.m_Bits
+      value: 16193
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
