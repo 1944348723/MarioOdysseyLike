@@ -6,7 +6,6 @@ public abstract class EntityBase: MonoBehaviour
     public bool IsOnSlope => groundDetector.IsOnSlope;
     public float LastGoundedTime => groundDetector.LastGoundedTime;
     public RaycastHit GroundHit => groundDetector.GroundHit;
-    public GroundDetector groundDetector;
     public EntityModifierController ModifierController { get; protected set; }
     public Vector3 Velocity { get; set; }
     public Vector3 PlanarVelocity
@@ -21,6 +20,8 @@ public abstract class EntityBase: MonoBehaviour
     }
 
     public EntityEvents entityEvents;
+    
+    protected GroundDetector groundDetector;
 }
 
 /// <summary>
@@ -53,7 +54,7 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
     {
         StateMachine.Step();
         Move();
-        groundDetector.Tick(transform.position + CharacterController.center, Velocity.y <= 0);
+        DetectGround();
     }
 
     protected virtual void LateUpdate()
@@ -122,6 +123,11 @@ public abstract class Entity<T>: EntityBase where T : Entity<T>
         CharacterController.height = height;
         CharacterController.center += 0.5f * delta * Vector3.up;
         groundDetector.Height = height;
+    }
+
+    protected void DetectGround()
+    {
+        groundDetector.Tick(transform.position + CharacterController.center, Velocity.y <= 0);
     }
 
     private void InitializeCharacterController()

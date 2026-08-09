@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpikeTrap : MonoBehaviour
 {
-    [SerializeField] private Button button;
+    [SerializeField] private Button3D button;
     [SerializeField] private Collider spikeCollider;
     [SerializeField] private Vector3 deactivateOffset = new(0, -1, 0);
     [SerializeField] private float animationDuration = 0.2f;

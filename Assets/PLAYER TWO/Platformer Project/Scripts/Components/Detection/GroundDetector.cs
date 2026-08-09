@@ -38,10 +38,11 @@ public class GroundDetector : MonoBehaviour
     }
     public RaycastHit GroundHit => groundHit;
 
-    public Action GroundEntered;
-    public Action GroundExited;
+    public event Action GroundEntered;
+    public event Action GroundExited;
 
     // 运行时数据
+    private bool enableEvents = true;
     private Vector3 stepPosition;
     private RaycastHit groundHit;
     private float groundAngle;
@@ -97,6 +98,16 @@ public class GroundDetector : MonoBehaviour
         }
     }
 
+    public void DisableEvents()
+    {
+        enableEvents = false;
+    }
+
+    public void EnableEvents()
+    {
+        enableEvents = true;
+    }
+
     private bool SphereCast(Vector3 origin, Vector3 direction, float detectDistance,
         out RaycastHit hit, int layer = Physics.DefaultRaycastLayers,
         QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Ignore)
@@ -125,7 +136,11 @@ public class GroundDetector : MonoBehaviour
         {
             IsGrounded = true;
             UpdateGround(hit);
-            GroundEntered?.Invoke();
+            if (enableEvents)
+            {
+                Debug.Log("---------------GroundEntered-------------");
+                GroundEntered?.Invoke();
+            }
         }
     }
     
@@ -134,7 +149,10 @@ public class GroundDetector : MonoBehaviour
         if (IsGrounded)
         {
             IsGrounded = false;
-            GroundExited?.Invoke();
+            if (enableEvents)
+            {
+                GroundExited?.Invoke();
+            }
         }
     }
     

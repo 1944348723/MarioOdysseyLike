@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class CheckPoint : MonoBehaviour
 {
-    [SerializeField] private Transform respawn;
+    [SerializeField] private Transform respawnPoint;
     [SerializeField] private AudioClip clip;
 
     public UnityEvent Activated;
@@ -28,6 +28,8 @@ public class CheckPoint : MonoBehaviour
         {
             audioSource.PlayOneShot(clip);
         }
+
+        LevelManager.Instance.SetRespawnPoint(respawnPoint);
 
         Activated?.Invoke();
     }

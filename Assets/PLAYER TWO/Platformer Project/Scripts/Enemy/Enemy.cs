@@ -62,6 +62,5 @@ public class Enemy : Entity<Enemy>
     private void OnDeath()
     {
         StateMachine.Change<DeathEnemyState>();
-        DOVirtual.DelayedCall(1, () => gameObject.SetActive(false));
     }
 }

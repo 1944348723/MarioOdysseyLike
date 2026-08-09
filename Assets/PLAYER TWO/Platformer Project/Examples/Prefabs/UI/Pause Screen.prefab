@@ -674,6 +674,7 @@ GameObject:
   - component: {fileID: 8445504859008648246}
   - component: {fileID: 6477080202934272648}
   - component: {fileID: 6038323074692149101}
+  - component: {fileID: 338097598707479838}
   m_Layer: 0
   m_Name: Pause Screen
   m_TagString: Untagged
@@ -737,6 +738,25 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &338097598707479838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3823247989021449601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17cbd07a18e41cc4980e26717e972a70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6477080202934272648}
+  showTrigger: Show
+  hideTrigger: Hide
+  resumeButton: {fileID: 7186583409572514210}
+  respawnButton: {fileID: 7700130498700864}
+  restartButton: {fileID: 7079375422406121692}
+  exitButton: {fileID: 8886978369919341952}
 --- !u!1 &5698061514212532931
 GameObject:
   m_ObjectHideFlags: 0

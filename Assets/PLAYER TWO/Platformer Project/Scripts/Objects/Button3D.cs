@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Button : MonoBehaviour
+public class Button3D : MonoBehaviour
 {
     [SerializeField] private GameObject button;
     [SerializeField] private Vector3 pressedOffset = new(0, -0.1f, 0);

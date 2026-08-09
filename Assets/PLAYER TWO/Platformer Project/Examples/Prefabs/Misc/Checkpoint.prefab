@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23f5409b908fcc49a9f800bb242a80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawn: {fileID: 2791622383104161241}
+  respawnPoint: {fileID: 2791622383104161241}
   clip: {fileID: 8300000, guid: 949d6f89a1ec12b4db2baf685288459d, type: 3}
   Activated:
     m_PersistentCalls:

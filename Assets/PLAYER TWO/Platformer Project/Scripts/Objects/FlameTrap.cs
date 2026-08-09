@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FlameTrap : MonoBehaviour
 {
-    [SerializeField] private Button button;
+    [SerializeField] private Button3D button;
     [SerializeField] private Collider flameCollider;
     [SerializeField] private ParticleSystem effect;
 

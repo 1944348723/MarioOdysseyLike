@@ -296,6 +296,21 @@ public class Player : Entity<Player>
         LastPoleExitTime = Time.time;
     }
 
+    public void Respawn(Vector3 position, Quaternion rotation)
+    {
+        transform.SetPositionAndRotation(position, rotation);
+        Velocity = Vector3.zero;
+
+        groundDetector.DisableEvents();
+        DetectGround();
+        groundDetector.EnableEvents();
+        StateMachine.Change<IdlePlayerState>();
+
+        ResetJumps();
+        ResetAirSpinCounter();
+        health.ResetToInit();
+    }
+
     public void ResetJumps() => JumpCouter = 0;
     private void ResetAirSpinCounter() => airSpinCounter = 0;
     
